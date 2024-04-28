@@ -16,7 +16,7 @@ const HeaderTop = () => {
                   <div className="content">
                     <span className="rainbow-badge">Limited Time Offer</span>
                     <span className="news-text">
-                      Intro price. Get ChatenAI for Big Sale -95% off.
+                      Intro price. Get Cre8teGPT for Big Sale -95% off.
                     </span>
                   </div>
                   <div className="right-button">

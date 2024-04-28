@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import DashboardItem from "../../data/header.json";
 
-import menuImg from "../../public/images/menu-img/menu-img-2.png";
+import menuImg from "../../public/images/menu-img/menu-img-2.webp";
 import { useAppContext } from "@/context/Context";
 
 const Nav = () => {
@@ -64,7 +64,7 @@ const Nav = () => {
           <Link href="/pricing">Pricing</Link>
         </li>
         <li>
-          <Link href="/AuthPage">Sign In</Link>
+          <Link href="/auth/signin">Sign In</Link>
         </li>
       </ul>
     </>

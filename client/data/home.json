@@ -187,18 +187,18 @@
   ],
   "accordion": [
     {
-      "title": "What is ChatenAI ? How does it work?",
-      "desc": "ChatenAI is an AI-powered messaging platform that understands and responds to your natural language queries. Ask anything you'd typically ask a human assistant—get weather updates, news, restaurant recommendations, and more!",
+      "title": "What is Cre8teGPT ? How does it work?",
+      "desc": "Cre8teGPT is an AI-powered messaging platform that understands and responds to your natural language queries. Ask anything you'd typically ask a human assistant—get weather updates, news, restaurant recommendations, and more!",
       "isExpand": true
     },
     {
-      "title": "What kind of questions can I ask ChatenAI?",
-      "desc": "ChatenAI, an AI-driven messaging platform, adeptly communicates with users using natural language understanding. It delivers helpful responses to your inquiries and requests.",
+      "title": "What kind of questions can I ask Cre8teGPT?",
+      "desc": "Cre8teGPT, an AI-driven messaging platform, adeptly communicates with users using natural language understanding. It delivers helpful responses to your inquiries and requests.",
       "isExpand": false
     },
     {
       "title": "Can I get update regularly and For how long do I get updates?",
-      "desc": "Yes, We will get update the ChatenAI. And you can get it any time. Next time we will comes with more feature. You can be get update for unlimited times. Our dedicated team works for update.",
+      "desc": "Yes, We will get update the Cre8teGPT. And you can get it any time. Next time we will comes with more feature. You can be get update for unlimited times. Our dedicated team works for update.",
       "isExpand": false
     },
     {
@@ -207,13 +207,13 @@
       "isExpand": false
     },
     {
-      "title": "HIs my data safe with ChatenAI?",
+      "title": "HIs my data safe with Cre8teGPT?",
       "desc": "Feel free to toss any questions at chatenAI, just like you would with a human helper—whether it's about the weather, the latest news, restaurant suggestions, or anything else you fancy!",
       "isExpand": false
     },
     {
-      "title": "Is ChatenAI available in multiple languages?",
-      "desc": "Yes, ChatenAI is designed to support multiple languages, offering a versatile and inclusive communication experience for users worldwide.",
+      "title": "Is Cre8teGPT available in multiple languages?",
+      "desc": "Yes, Cre8teGPT is designed to support multiple languages, offering a versatile and inclusive communication experience for users worldwide.",
       "isExpand": false
     }
   ]

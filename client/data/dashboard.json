@@ -117,7 +117,7 @@
         },
         {
           "status": "fixed",
-          "text": "ChatenAI Core"
+          "text": "Cre8teGPT Core"
         },
         {
           "status": "improve",
@@ -157,7 +157,7 @@
         },
         {
           "status": "update",
-          "text": "ChatenAI Core"
+          "text": "Cre8teGPT Core"
         },
         {
           "status": "improve",
@@ -342,7 +342,7 @@
     {
       "today": [
         {
-          "title": "ChatenAI Defination",
+          "title": "Cre8teGPT Defination",
           "isActive": true,
           "list": [
             {
@@ -546,7 +546,7 @@
           ]
         },
         {
-          "title": "ChatenAI Defination",
+          "title": "Cre8teGPT Defination",
           "list": [
             {
               "icon": "refresh-cw",
@@ -748,7 +748,7 @@
           ]
         },
         {
-          "title": "ChatenAI Defination",
+          "title": "Cre8teGPT Defination",
           "list": [
             {
               "icon": "refresh-cw",
@@ -1062,7 +1062,7 @@
           "img": "/images/icons/loader-one.gif",
           "text": "Generating answers for you…",
           "aiImg": "/images/team/avater.png",
-          "title": "ChatenAI",
+          "title": "Cre8teGPT",
           "badge": "Bot",
           "desc": "A chat AI, or chatAi, is a type of artificial intelligence designed to simulate conversation with human users, especially through natural language processing. These systems are often used in various applications, including customer service, virtual assistants, and online interactions."
         }
@@ -1077,7 +1077,7 @@
           "img": "/images/icons/loader-one.gif",
           "text": "Generating answers for you…",
           "aiImg": "/images/team/avater.png",
-          "title": "ChatenAI",
+          "title": "Cre8teGPT",
           "badge": "Bot",
           "desc": "ChatAi boost operational efficiency and bring cost savings to businesses while offering convenience and added services to internal employees and external customers. They allow companies to easily resolve many types of customer queries and issues while reducing the need for human interaction."
         }
@@ -1092,7 +1092,7 @@
           "img": "/images/icons/loader-one.gif",
           "text": "Generating answers for you…",
           "aiImg": "/images/team/avater.png",
-          "title": "ChatenAI",
+          "title": "Cre8teGPT",
           "badge": "Bot",
           "desc": "You're already talking to a chat AI right now! You can ask me anything or discuss various topics. Just type your questions or statements, and I'll do my best to provide helpful and informative responses.",
           "desc2": "If you have a specific topic in mind or if there's something you'd like to know or discuss, feel free to let me know!"
@@ -1108,9 +1108,9 @@
           "img": "/images/icons/loader-one.gif",
           "text": "Generating answers for you…",
           "aiImg": "/images/team/avater.png",
-          "title": "ChatenAI",
+          "title": "Cre8teGPT",
           "badge": "Bot",
-          "desc": "While ChatenAI is a powerful language model that has been trained on a diverse range of internet text, it doesn't know everything. It has limitations"
+          "desc": "While Cre8teGPT is a powerful language model that has been trained on a diverse range of internet text, it doesn't know everything. It has limitations"
         }
       ]
     }

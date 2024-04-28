@@ -63,7 +63,7 @@ const Form = () => {
       <form onSubmit={onSubmit} className="new-chat-form border-gradient">
         <textarea name="message" rows="1" placeholder="Send a message..."></textarea>
         <div className="left-icons">
-          <div title="ChatenAI" className="form-icon icon-gpt">
+          <div title="Cre8teGPT" className="form-icon icon-gpt">
             <i className="feather-aperture"></i>
           </div>
         </div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import "venobox/dist/venobox.min.css";
 
-import bannerImg from "../../public/images/banner/banner-image-03.png";
+import bannerImg from "../../public/images/banner/banner-image-03.webp";
 import separator from "../../public/images/separator/separator-top.svg";
 
 const Home = () => {
@@ -28,7 +28,7 @@ const Home = () => {
               <div className="inner text-center mt--60">
                 <h1 className="title display-one">
                   Unlock The Power Of <br />
-                  <span className="theme-gradient">ChatenAI AI</span> With{" "}
+                  <span className="theme-gradient">Cre8teGPT AI</span> With{" "}
                   <br />
                   <span className="color-off">Smartest AI</span>
                 </h1>
@@ -65,7 +65,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="chatenai-separator has-position-bottom">
+        <div className="cre8tegpt-separator has-position-bottom">
           <Image className="w-100" src={separator} alt="" />
         </div>
       </div>

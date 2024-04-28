@@ -22,7 +22,7 @@ const SinglePrice = ({ data, incresePrice, parentClass }) => {
     <>
       <div className={`${parentClass} ${!incresePrice ? "mt--30" : ""}`}>
         <div
-          className={`rainbow-pricing style-chatenai ${
+          className={`rainbow-pricing style-cre8tegpt ${
             data.price > 50 ? "active" : ""
           }`}
         >

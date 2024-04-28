@@ -2,14 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import avatar from "../../public/images/team/team-01.jpg";
+import avatar from "../../public/images/team/team-01.webp";
 
 import UserMenuItems from "../Header/HeaderProps/UserMenuItems";
 
 import HeaderData from "../../data/header.json";
 import { useAppContext } from "@/context/Context";
 
+import { useSession } from "next-auth/react";
+
 const LeftpanelDashboard = () => {
+  const { data: session } = useSession();
   const router = useRouter();
   const { shouldCollapseLeftbar } = useAppContext();
 
@@ -43,7 +46,7 @@ const LeftpanelDashboard = () => {
                         href="/plans-billing"
                       >
                         <i className="feather-briefcase"></i>
-                        <span>Manage Subsription</span>
+                        <span>Manage Subscription</span>
                       </Link>
                     </li>
                   </ul>
@@ -141,13 +144,13 @@ const LeftpanelDashboard = () => {
                     className="w-100"
                     width={40}
                     height={40}
-                    src={avatar}
+                    src={session?.user?.user.avatar || avatar}
                     alt="Author"
                   />
                 </div>
                 <div className="author-desc">
-                  <h6>Rafi Dev</h6>
-                  <p>trentadam@net</p>
+                  <h6>{session?.user?.user.full_name}</h6>
+                  <p>{session?.user?.user.email}</p>
                 </div>
                 <div className="author-badge">Free</div>
               </Link>

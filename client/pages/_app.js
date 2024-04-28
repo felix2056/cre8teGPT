@@ -15,7 +15,9 @@ import "react-tooltip/dist/react-tooltip.css";
 import "../public/scss/style.scss";
 import Loading from "@/components/Loading/Loading";
 
-export default function App({ Component, pageProps }) {
+import { SessionProvider } from "next-auth/react"
+
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -35,5 +37,9 @@ export default function App({ Component, pageProps }) {
     };
   }, []);
 
-  return <>{loading ? <Loading /> : <Component {...pageProps} />}</>;
+  return <>
+    <SessionProvider session={session}>
+      {loading ? <Loading /> : <Component {...pageProps} />}
+    </SessionProvider>
+  </>;
 }

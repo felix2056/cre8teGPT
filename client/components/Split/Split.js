@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import splitImg from "../../public/images/split/split-8.png";
+import splitImg from "../../public/images/split/split-8.webp";
 import Link from "next/link";
 
 const Split = () => {

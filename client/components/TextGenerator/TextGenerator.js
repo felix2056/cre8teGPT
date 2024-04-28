@@ -82,7 +82,7 @@ const TextGenerator = () => {
                         src={innerData.aiImg}
                         width={40}
                         height={40}
-                        alt="ChatenAI"
+                        alt="Cre8teGPT"
                       />
                     </div>
                     <div className="chat-content">

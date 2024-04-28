@@ -15,7 +15,7 @@ const TermsPolicy = () => {
             <div className="content-page pb--50">
               <div className="chat-box-list">
                 <div className="content">
-                  <h4>Welcome to ChatenAI Privacy Policy</h4>
+                  <h4>Welcome to Cre8teGPT Privacy Policy</h4>
                   <ol>
                     <li>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,

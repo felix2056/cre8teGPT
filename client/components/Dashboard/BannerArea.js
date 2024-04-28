@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Slider from "react-slick";
 
-import img1 from "../../public/images/slider-bg/slider-sm-01.png";
-import img2 from "../../public/images/slider-bg/slider-sm-02.png";
-import img3 from "../../public/images/slider-bg/slider-sm-03.png";
+import img1 from "../../public/images/slider-bg/slider-sm-01.webp";
+import img2 from "../../public/images/slider-bg/slider-sm-02.webp";
+import img3 from "../../public/images/slider-bg/slider-sm-03.webp";
 
 const BannerArea = () => {
   var settings = {
@@ -21,7 +21,7 @@ const BannerArea = () => {
         {...settings}
         className="rainbow-slider-section slick-grid-15 rainbow-slick-dot sm-slider-carosel-activation"
       >
-        <div className="chatenai-small-slider slide-single-layout">
+        <div className="cre8tegpt-small-slider slide-single-layout">
           <div className="inner bg-one">
             <div className="content">
               <h4 className="title">Frequently Asked Questions</h4>
@@ -32,7 +32,7 @@ const BannerArea = () => {
             </div>
           </div>
         </div>
-        <div className="chatenai-small-slider slide-single-layout">
+        <div className="cre8tegpt-small-slider slide-single-layout">
           <div className="inner bg-three">
             <div className="content">
               <h4 className="title">Cognitive Services Hub</h4>
@@ -45,7 +45,7 @@ const BannerArea = () => {
             </div>
           </div>
         </div>
-        <div className="chatenai-small-slider slide-single-layout">
+        <div className="cre8tegpt-small-slider slide-single-layout">
           <div className="inner bg-four">
             <div className="content">
               <h4 className="title">Best Quantum AI Services</h4>

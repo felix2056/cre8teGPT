@@ -62,7 +62,7 @@ const PricingTwo = ({
                     ""
                   )}
 
-                  <nav className="chatenai-tab">
+                  <nav className="cre8tegpt-tab">
                     <div
                       className="tab-btn-grp nav nav-tabs mb-3 text-center justify-content-center"
                       id="nav-tab"

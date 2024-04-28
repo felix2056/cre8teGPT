@@ -6,7 +6,13 @@ import BannerArea from "./BannerArea";
 import Form from "@/pages/Form";
 import Items from "./items";
 
+import { useSession } from "next-auth/react";
+
 const Dashboard = () => {
+  const { data: session } = useSession();
+  console.log(session?.user?.user)
+  console.log(session?.accessToken)
+
   useEffect(() => {
     sal();
   }, []);
@@ -22,7 +28,7 @@ const Dashboard = () => {
               <div className="chat-box-list">
                 <div className="welcome-wrapper">
                   <div className="content-section">
-                    <h4 className="title">👋 Welcome, Rafi</h4>
+                    <h4 className="title">👋 Welcome, { session?.user?.user.full_name }</h4>
                   </div>
                   <div className="btn-section">
                     <a
@@ -45,7 +51,7 @@ const Dashboard = () => {
                     data-sal-delay="100"
                   >
                     <h4 className="subtitle ">
-                      <span className="theme-gradient">ChaetenAI</span>
+                      <span className="theme-gradient">Cre8teGPT</span>
                     </h4>
                     <h2 className="title w-600 mb--20">
                       Unleashing the Power of ChatAI

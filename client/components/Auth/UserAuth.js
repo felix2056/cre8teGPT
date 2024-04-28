@@ -1,70 +1,41 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useAppContext } from "@/context/Context";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 import sal from "sal.js";
 
 import boxedLogo from "../../public/images/logo/boxed-logo.png";
 import google from "../../public/images/sign-up/google.png";
+import apple from "../../public/images/sign-up/apple.png";
 import facebook from "../../public/images/sign-up/facebook.png";
+import twitter from "../../public/images/sign-up/twitter.png";
 import PageHead from "@/pages/Head";
+
+import axios from 'axios';
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.withCredentials = true;
+
+// import { getProviders } from "next-auth/react"
+import { getCsrfToken } from "next-auth/react"
+import { signIn } from "next-auth/react"
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 const UserAuth = () => {
   const router = useRouter();
   const { toggleAuth, setToggleAuth } = useAppContext();
-  const [formData, setFormData] = useState({
-    // State to manage form data
-    login_email: "",
-    login_password: "",
-    register_name: "",
-    register_email: "",
-    register_password: "",
-    register_confirm_password: "",
-  });
-
-  const onSubmitLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("/api/login", {
-        email: formData.login_email,
-        password: formData.login_password,
-      });
-      // Handle successful login, e.g., store user token in local storage
-      router.push("/dashboard"); // Redirect to dashboard after successful login
-    } catch (error) {
-      setError(error.response.data.message); // Display login error message
-    }
-  };
-
-  const onSubmitRegister = async (e) => {
-    e.preventDefault();
-    if (formData.register_password !== formData.register_confirm_password) {
-      setError("Passwords do not match");
-      return;
-    }
-    try {
-      const res = await axios.post("/api/register", {
-        name: formData.register_name,
-        email: formData.register_email,
-        password: formData.register_password,
-      });
-      // Handle successful registration, e.g., show success message
-      setToggleAuth(true); // Switch to login form after successful registration
-    } catch (error) {
-      setError(error.response.data.message); // Display registration error message
-    }
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const [csrfToken, setCsrfToken] = useState("");
+  const [providers, setProviders] = useState({});
+  let [isLoading, setIsLoading] = useState(false);
+  let [error, setError] = useState("");
 
   useEffect(() => {
     sal();
 
     const cards = document.querySelectorAll(".bg-flashlight");
-
     cards.forEach((bgflashlight) => {
       bgflashlight.onmousemove = function (e) {
         let x = e.pageX - bgflashlight.offsetLeft;
@@ -74,7 +45,121 @@ const UserAuth = () => {
         bgflashlight.style.setProperty("--y", y + "px");
       };
     });
+
+    async function fetchProviders() {
+      const providersData = await getProviders();
+      setProviders(providersData);
+    }
+    // fetchProviders();
+
+    const fetchCsrfToken = async () => {
+      const token = await getCsrfToken();
+      setCsrfToken(token ?? "");
+    };
+    fetchCsrfToken();
   }, []);
+
+  const handleOauthLogin = (providerId) => {
+    signIn(providerId);
+  };
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const email = formData.get("login_email");
+    const password = formData.get("login_password");
+
+    setIsLoading(true);
+
+    signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    }).then((response) => {
+      if (response.ok) {
+        setIsLoading(false);
+
+        //check for callback url in query params
+        const urlParams = new URLSearchParams(window.location.search);
+        const callbackUrl = urlParams.get("callbackUrl");
+        
+        if (callbackUrl) {
+          // strip out host from callbackUrl
+          if (callbackUrl.includes("http")) {
+            const url = new URL(callbackUrl);
+            router.push(url.pathname);
+          } else {
+            router.push(callbackUrl);
+          }
+        }
+        
+        router.push("/dashboard");
+      } else {
+        setError(response.error);
+        setIsLoading(false);
+      }
+    }).catch((error) => {
+      setError("Something went wrong. Please try again later.");
+      setIsLoading(false);
+    });
+  };
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const first_name = formData.get("register_first_name");
+    const last_name = formData.get("register_last_name");
+    const email = formData.get("register_email");
+    const password = formData.get("register_password");
+    const confirm_password = formData.get("register_confirm_password");
+
+    setIsLoading(true);
+
+    if (password !== confirm_password) {
+      alert("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
+
+    // get sanctum cookie
+    await axios.get('/sanctum/csrf-cookie', { 
+      withCredentials: true 
+    }).then(response => {
+      console.log(response);
+    });
+    
+    const data = {
+      first_name,
+      last_name,
+      email,
+      password,
+      confirm_password,
+    };
+
+    await axios.post('/api/register', data, {
+      withCredentials: true,
+    }).then(response => {
+      signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      }).then((response) => {
+        if (response.ok) {
+          setIsLoading(false);
+          router.push("/dashboard");
+        } else {
+          setError(response.error);
+          setIsLoading(false);
+        }
+      }).catch((error) => {
+        setError("Something went wrong. Please try again later.");
+        setIsLoading(false);
+      });
+    }).catch(error => {
+      setError(error.response.data.message);
+      setIsLoading(false);
+    });
+  }
 
   return (
     <>
@@ -98,7 +183,7 @@ const UserAuth = () => {
               <div className="signup-box-content">
                 <h4 className="title">{toggleAuth ? "Welcome Back!" : "Get Started"}</h4>
                 <div className="social-btn-grp">
-                  <Link className="btn-default btn-border" href="#">
+                  <Link className="btn-default btn-border" href="#" onClick={() => handleOauthLogin("google")}>
                     <span className="icon-left">
                       <Image
                         src={google}
@@ -109,7 +194,20 @@ const UserAuth = () => {
                     </span>
                     Login with Google
                   </Link>
-                  <Link className="btn-default btn-border" href="#">
+                  <Link className="btn-default btn-border" href="#" onClick={() => handleOauthLogin("apple")}>
+                    <span className="icon-left">
+                      <Image
+                        src={apple}
+                        width={18}
+                        height={18}
+                        alt="Apple Icon"
+                      />
+                    </span>
+                    Login with Apple
+                  </Link>
+                </div>
+                <div className="social-btn-grp">
+                  <Link className="btn-default btn-border" href="#" onClick={() => handleOauthLogin("facebook")}>
                     <span className="icon-left">
                       <Image
                         src={facebook}
@@ -120,6 +218,17 @@ const UserAuth = () => {
                     </span>
                     Login with Facebook
                   </Link>
+                  <Link className="btn-default btn-border" href="#" onClick={() => handleOauthLogin("twitter")}>
+                    <span className="icon-left">
+                      <Image
+                        src={twitter}
+                        width={18}
+                        height={18}
+                        alt="Twitter Icon"
+                      />
+                    </span>
+                    Login with Twitter
+                  </Link>
                 </div>
                 <div className="text-social-area">
                   <hr />
@@ -127,7 +236,8 @@ const UserAuth = () => {
                   <hr />
                 </div>
                 {toggleAuth ? (
-                  <form onSubmit={onSubmitLogin}>
+                  <form action="/api/auth/callback/credentials" onSubmit={handleLogin}>
+                    <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
                     <div className="input-section mail-section">
                       <div className="icon">
                         <i className="feather-mail"></i>
@@ -147,21 +257,28 @@ const UserAuth = () => {
                     </div>
                     <button type="submit" className="btn-default">
                       Sign In
+                      {isLoading ? <i className="fa fa-spinner fa-spin ms-2"></i> : <i className="feather-arrow-right"></i>}
                     </button>
                   </form>
                 ) : (
-                  <form onSubmit={onSubmitRegister}>
+                  <form action="/api/auth/callback/credentials" onSubmit={handleRegister}>
                     <div className="input-section mail-section">
                       <div className="icon">
                         <i className="feather-user"></i>
                       </div>
-                      <input type="text" name="register_name" placeholder="Enter Your Name" />
+                      <input type="text" name="register_first_name" placeholder="Enter Your First Name" />
+                    </div>
+                    <div className="input-section mail-section">
+                      <div className="icon">
+                        <i className="feather-user"></i>
+                      </div>
+                      <input type="text" name="register_last_name" placeholder="Enter Your Last Name" />
                     </div>
                     <div className="input-section mail-section">
                       <div className="icon">
                         <i className="feather-mail"></i>
                       </div>
-                      <input type="email" name="register-email" placeholder="Enter email address" />
+                      <input type="email" name="register_email" placeholder="Enter email address" />
                     </div>
                     <div className="input-section password-section">
                       <div className="icon">
@@ -177,16 +294,18 @@ const UserAuth = () => {
                     </div>
                     <button type="submit" className="btn-default">
                       Sign Up
+                      {isLoading ? <i className="fa fa-spinner fa-spin ms-2"></i> : <i className="feather-arrow-right"></i>}
                     </button>
                   </form>
                 )}
               </div>
               <div className="signup-box-footer">
                 <div className="bottom-text">
+                  { error && <p className="text-danger">{error}</p> }
                   Don&apos;t have an account?
                   <Link
                     className="btn-read-more ps-2"
-                    href="#"
+                    href="javascript:void(0)"
                     onClick={() => setToggleAuth(!toggleAuth)}
                   >
                     {toggleAuth ? <span>Sign Up</span> : <span>Sign In</span>}

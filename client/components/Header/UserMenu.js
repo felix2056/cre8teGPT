@@ -4,7 +4,19 @@ import Link from "next/link";
 import avatar from "../../public/images/team/team-01.jpg";
 import UserMenuItems from "./HeaderProps/UserMenuItems";
 
+import { useSession, signIn, signOut } from "next-auth/react";
+
 const UserMenu = () => {
+  const { data: session } = useSession();
+
+  const handleSignIn = () => {
+    signIn();
+  };
+  
+  const handleSignOut = () => {
+    signOut();
+  };
+
   return (
     <>
       <div className="inner">
@@ -13,7 +25,7 @@ const UserMenu = () => {
             <Image src={avatar} alt="User Images" />
           </div>
           <div className="admin-info">
-            <span className="name">Rafi Dev</span>
+            <span className="name">{ session?.user?.user.full_name }</span>
             <Link
               className="rbt-btn-link color-primary"
               href="/profile-details"
@@ -41,7 +53,7 @@ const UserMenu = () => {
         <hr className="mt--10 mb--10" />
         <ul className="user-list-wrapper">
           <li>
-            <Link href="/AuthPage">
+            <Link href="/auth/signout">
               <i className="feather-log-out"></i>
               <span>Logout</span>
             </Link>

@@ -8,11 +8,11 @@ const Separator = ({ top }) => {
   return (
     <>
       {top ? (
-        <div className="chatenai-separator">
+        <div className="cre8tegpt-separator">
           <Image className="w-100" src={separatorTop} alt="" />
         </div>
       ) : (
-        <div className="chatenai-separator">
+        <div className="cre8tegpt-separator">
           <Image className="w-100" src={separatorBottom} alt="" />
         </div>
       )}

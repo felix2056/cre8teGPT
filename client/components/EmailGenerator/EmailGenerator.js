@@ -64,7 +64,7 @@ const EmailGenerator = () => {
                     </div>
                     <div className="chat-content">
                       <h6 className="title">
-                        ChatenAI <span className="rainbow-badge-card">Bot</span>
+                        Cre8teGPT <span className="rainbow-badge-card">Bot</span>
                       </h6>
                       <p className="mb--20">{innerData.subjext}</p>
                       <p className="mb--20">{innerData.dear}</p>
