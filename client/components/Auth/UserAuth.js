@@ -24,6 +24,9 @@ import { signIn } from "next-auth/react"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const UserAuth = () => {
   const router = useRouter();
   const { toggleAuth, setToggleAuth } = useAppContext();
@@ -70,6 +73,16 @@ const UserAuth = () => {
     const password = formData.get("login_password");
 
     setIsLoading(true);
+    const login_toast = toast.loading("Logging you in... ⏳", {
+      position: "top-center",
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
 
     signIn("credentials", {
       email,
@@ -79,28 +92,52 @@ const UserAuth = () => {
       if (response.ok) {
         setIsLoading(false);
 
-        //check for callback url in query params
-        const urlParams = new URLSearchParams(window.location.search);
-        const callbackUrl = urlParams.get("callbackUrl");
-        
-        if (callbackUrl) {
-          // strip out host from callbackUrl
-          if (callbackUrl.includes("http")) {
-            const url = new URL(callbackUrl);
-            router.push(url.pathname);
-          } else {
-            router.push(callbackUrl);
+        toast.update(login_toast, {
+          render: "You have successfully logged in 👨🏻‍💻✅. Welcome back! 🎉",
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+        });
+
+        // set timeout to allow toast to show
+        setTimeout(() => {
+          //check for callback url in query params
+          const urlParams = new URLSearchParams(window.location.search);
+          const callbackUrl = urlParams.get("callbackUrl");
+          
+          if (callbackUrl) {
+            // strip out host from callbackUrl
+            if (callbackUrl.includes("http")) {
+              const url = new URL(callbackUrl);
+              router.push(url.pathname);
+            } else {
+              router.push(callbackUrl);
+            }
           }
-        }
-        
-        router.push("/dashboard");
+          
+          router.push("/dashboard");
+        }, 3000);
       } else {
         setError(response.error);
         setIsLoading(false);
+
+        toast.update(login_toast, {
+          render: response.error,
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
       }
     }).catch((error) => {
-      setError("Something went wrong. Please try again later.");
+      setError("Something went wrong ⛔. Please try again later.");
       setIsLoading(false);
+
+      toast.update(login_toast, {
+        render: "Something went wrong ⛔. Please try again later.",
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+      });
     });
   };
 
@@ -114,10 +151,29 @@ const UserAuth = () => {
     const confirm_password = formData.get("register_confirm_password");
 
     setIsLoading(true);
+    const register_toast = toast.loading("Registering your account... ⏳", {
+      position: "top-center",
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      width: "100%",
+    });
+
 
     if (password !== confirm_password) {
-      alert("Passwords do not match");
+      setError("Passwords don't match 🔐. Please try again.");
       setIsLoading(false);
+      toast.update(register_toast, {
+        render: "Passwords don't match 🔐. Please try again.",
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+      });
+
       return;
     }
 
@@ -146,14 +202,55 @@ const UserAuth = () => {
       }).then((response) => {
         if (response.ok) {
           setIsLoading(false);
+
+          toast.update(register_toast, {
+            render: "You have successfully registered 👨🏻‍💻✅. Welcome to Cre8teGPT! 🎉",
+            type: "success",
+            isLoading: false,
+            autoClose: 3000,
+          });
+
+          // set timeout to allow toast to show
+          setTimeout(() => {
+            //check for callback url in query params
+            const urlParams = new URLSearchParams(window.location.search);
+            const callbackUrl = urlParams.get("callbackUrl");
+            
+            if (callbackUrl) {
+              // strip out host from callbackUrl
+              if (callbackUrl.includes("http")) {
+                const url = new URL(callbackUrl);
+                router.push(url.pathname);
+              } else {
+                router.push(callbackUrl);
+              }
+            }
+            
+            router.push("/dashboard");
+          }, 3000);
+
           router.push("/dashboard");
         } else {
           setError(response.error);
           setIsLoading(false);
+
+          toast.update(register_toast, {
+            render: response.error,
+            type: "error",
+            isLoading: false,
+            autoClose: 5000,
+          });
         }
       }).catch((error) => {
-        setError("Something went wrong. Please try again later.");
+        setError("Something went wrong ⛔. Please try again later.");
         setIsLoading(false);
+
+        toast.update(register_toast, {
+          render: "Something went wrong ⛔. Please try again later.",
+          type: "error",
+          isLoading: false,
+          autoClose: 5000,
+        });
       });
     }).catch(error => {
       setError(error.response.data.message);
@@ -163,6 +260,8 @@ const UserAuth = () => {
 
   return (
     <>
+      <ToastContainer />
+
       <PageHead title={`${toggleAuth ? "Log In" : "SignUp"}`} />
       <div
         className="signup-area rainbow-section-gapTop-big"

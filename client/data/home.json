@@ -2,53 +2,53 @@
   "service": [
     {
       "title": "Effortless Content AI",
-      "desc": "Let our AI-powered service take the hard work out of content creation. Get started today with AI.",
+      "desc": "Instantly create captivating content with AI magic—effortless creativity at your fingertips.",
       "icon": "activity",
       "delay": 100
     },
     {
       "title": "Your Words, Our Tech",
-      "desc": "Discover how AI can transform your ideas into engaging with our qualitifull service for a better content.",
+      "desc": "Transform your ideas into polished content with our AI-powered writing assistant — your words, our innovation.",
       "icon": "cast",
       "delay": 100
     },
     {
       "title": "AI-Powered Writing",
-      "desc": "Access AI-generated content for your blogs, websites, and more with our qualitifull convenient service.",
+      "desc": "Unlock the power of AI for seamless content creation—innovative technology shaping your words.",
       "icon": "map",
       "delay": 200
     },
     {
       "title": "AI Generation Simple",
-      "desc": "Experience the ease of content creation with our AI service. Write less, achieve more.",
+      "desc": "Simplify content creation with AI magic — effortless generation, infinite possibilities, boundless creativity.",
       "icon": "loader",
       "delay": 100
     },
     {
       "title": "Quality AI Content",
-      "desc": "Get professionally written content in no time with our AI service. Quality meets speed.",
+      "desc": "Craft quality content with AI precision—unleash the potential of technology for your writing needs.",
       "icon": "speaker",
       "delay": 100
     },
     {
       "title": "Your Writing Assistant",
-      "desc": "Collaborate with AI to generate content that resonates with your audience. Try it now.",
+      "desc": "Your trusted AI companion for writing success—let technology elevate your creativity effortlessly.",
       "icon": "terminal",
       "delay": 200
     }
   ],
   "timeline": [
     {
-      "title": "1.Select template",
-      "desc": "Easily Select Templates for Website Content."
+      "title": "1. Describe Your Needs",
+      "desc": "Share your requirements: text, images, videos, or more. Cre8teGPT understands and kicks off the creative process."
     },
     {
-      "title": "2.Describe topic",
-      "desc": "All Feature available features in Essentials."
+      "title": "2. Let AI Get to Work",
+      "desc": "Watch as our AI crafts personalized content tailored to your specs. Experience the magic of quality and creativity in action."
     },
     {
-      "title": "3.Generate content",
-      "desc": "Popular Feature available features in Essentials."
+      "title": "3. Perfect Your Creation",
+      "desc": "Review and download your content. Cre8teGPT ensures your creations are polished and ready to captivate your audience."
     }
   ],
   "pricing": [

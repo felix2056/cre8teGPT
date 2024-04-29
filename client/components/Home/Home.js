@@ -27,21 +27,33 @@ const Home = () => {
             <div className="col-lg-12">
               <div className="inner text-center mt--60">
                 <h1 className="title display-one">
-                  Unlock The Power Of <br />
-                  <span className="theme-gradient">Cre8teGPT AI</span> With{" "}
+                  Unlock Your Inner Creative Powerhouse with 
                   <br />
-                  <span className="color-off">Smartest AI</span>
+                  <span className="theme-gradient">Cre8teGPT AI</span>
+                  {/* <br />
+                  <span className="color-off">Discover 100+ AI Tools In 1 Place!</span> */}
                 </h1>
+
                 <p className="b1 desc-text">
-                  AI-Powered Copywriting A Game-Changer in Content Creation.
+                  AI-Powered Game Changer designed to empower content creators, marketers, students and businesses of all sizes. <br /> Your All-in-One AI Assistant — <span className="theme-gradient">Discover 100+ AI Tools In 1 Place.</span>
                 </p>
+
+                <div className="button-group">
+                  <form>
+                    <div class="small-search search-section mb--20 m-0-auto w-sm-80 w-75">
+                      <input className="text-center" type="search" placeholder="Tell me your goal, I'll list the AI tools you need to make it happen." />
+                      <i class="feather-search"></i>
+                    </div>
+                  </form>
+                </div>
+                
                 <div className="button-group">
                   <Link
                     className="btn-default bg-light-gradient btn-large"
                     href="/text-generator"
                   >
                     <div className="has-bg-light"></div>
-                    <span>Start writing for free</span>
+                    <span>Start Cre8ting for Free</span>
                   </Link>
                 </div>
                 <p className="color-gray mt--5">💳 No credit card required!</p>

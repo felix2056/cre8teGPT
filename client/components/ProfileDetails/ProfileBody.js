@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useSession, update } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProfileBody = () => {
-  const { data: session } = useSession();
+  const { data: session, status, update } = useSession();
 
   let [isLoading, setIsLoading] = useState(false);
 
@@ -19,9 +19,86 @@ const ProfileBody = () => {
     const phone = event.target.phone.value;
 
     setIsLoading(true);
-    
+    const update_toast = toast.loading("Updating profile... ⏳", {
+      position: "top-center",
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+
     // validate for empty fields
-    if (!first_name || !last_name || !email || !phone) {
+    if (!first_name || !last_name || !email) {
+      // show error message
+      toast.update(update_toast, {
+        render: "You can't leave *️⃣ fields empty ⚠️",
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+      });
+
+      setIsLoading(false);
+      return;
+    }
+
+    let data = {
+      first_name,
+      last_name,
+      // email,
+      phone,
+    };
+
+    // make api call to update user profile
+    axios.put(process.env.NEXT_PUBLIC_SERVER_URL + "/api/user/update", data, {
+      headers: {
+        "Authorization": `Bearer ${session?.accessToken}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      }
+    }).then((response) => {
+      const user = response.data.user;
+      update({
+        ...session,
+        user: {
+          ...session.user,
+          user,
+        }
+      });
+
+      setIsLoading(false);
+
+      toast.update(update_toast, {
+        render: response.data.message,
+        type: "success",
+        isLoading: false,
+        autoClose: 5000,
+      });
+    }).catch((error) => {
+      setIsLoading(false);
+      console.log(error);
+
+      toast.update(update_toast, {
+        render: error.response.data.message,
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+      });
+    });
+  };
+
+  const handleChangePassword = (event) => {
+    event.preventDefault();
+    const current_password = event.target.currentpassword.value;
+    const new_password = event.target.newpassword.value;
+    const retype_new_password = event.target.retypenewpassword.value;
+
+    setIsLoading(true);
+
+    // validate for empty fields
+    if (!current_password || !new_password || !retype_new_password) {
       // show error message
       toast.error("All fields are required", {
         position: "top-center",
@@ -38,58 +115,135 @@ const ProfileBody = () => {
       return;
     }
 
+    // validate for password match
+    if (new_password !== retype_new_password) {
+      // show error message
+      toast.error("Passwords do not match", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      setIsLoading(false);
+      return;
+    }
+
     let data = {
-      first_name,
-      last_name,
-      // email,
-      phone,
+      current_password,
+      new_password,
+      retype_new_password,
     };
 
-    // make api call to update user profile
-    axios.put(process.env.NEXT_PUBLIC_SERVER_URL + "/api/user/update", data, {
-        headers: {
-          "Authorization": `Bearer ${session?.accessToken}`,
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        }
-      }).then((response) => {
-        update();
-        setIsLoading(false);
-        
-        toast.success(response.data.message, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-      })
-      .catch((error) => {
-        setIsLoading(false);
+    // make api call to update user password
+    axios.put(process.env.NEXT_PUBLIC_SERVER_URL + "/api/user/update/password", data, {
+      headers: {
+        "Authorization": `Bearer ${session?.accessToken}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      }
+    }).then((response) => {
+      setIsLoading(false);
 
-        toast.error(error.response.data.message, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+      toast.success(response.data.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
       });
+    }).catch((error) => {
+      setIsLoading(false);
+      console.log(error);
+
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    });
   };
 
-  const handleChangePassword = (event) => {
+  const handleDeleteAccount = (event) => {
     event.preventDefault();
-    const currentpassword = event.target.currentpassword.value;
-    const newpassword = event.target.newpassword.value;
-    const retypenewpassword = event.target.retypenewpassword.value;
+    const password = event.target.enterpassword.value;
 
-  };
+    setIsLoading(true);
+
+    // validate for empty fields
+    if (!password) {
+      // show error message
+      toast.error("Your password is required to delete your account", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      setIsLoading(false);
+      return;
+    }
+
+    let data = {
+      password,
+    };
+
+    // make api call to delete user account
+    axios.delete(process.env.NEXT_PUBLIC_SERVER_URL + "/api/user/delete", {
+      headers: {
+        "Authorization": `Bearer ${session?.accessToken}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      data,
+    }).then((response) => {
+      setIsLoading(false);
+
+      toast.success(response.data.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      signOut({ callbackUrl: "/auth/signin" });
+    }).catch((error) => {
+      setIsLoading(false);
+      console.log(error);
+
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    });
+  }
+
   return (
     <>
       <ToastContainer />
@@ -161,24 +315,24 @@ const ProfileBody = () => {
               >
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                   <div className="form-group">
-                    <label htmlFor="firstname">First Name</label>
-                    <input name="first_name" id="firstname" type="text" defaultValue={ session?.user?.user.first_name } />
+                    <label htmlFor="firstname">First Name *</label>
+                    <input name="first_name" id="firstname" type="text" defaultValue={session?.user?.user.first_name} />
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                   <div className="form-group">
-                    <label htmlFor="lastname">Last Name</label>
-                    <input name="last_name" id="lastname" type="text" defaultValue={ session?.user?.user.last_name } />
+                    <label htmlFor="lastname">Last Name *</label>
+                    <input name="last_name" id="lastname" type="text" defaultValue={session?.user?.user.last_name} />
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                   <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">Email *</label>
                     <input
                       name="email"
                       id="email"
                       type="email"
-                      defaultValue={ session?.user?.user.email }
+                      defaultValue={session?.user?.user.email}
                       readOnly
                     />
                   </div>
@@ -190,7 +344,7 @@ const ProfileBody = () => {
                       name="phone"
                       id="phonenumber"
                       type="tel"
-                      defaultValue={ session?.user?.user.phone }
+                      defaultValue={session?.user?.user.phone}
                     />
                   </div>
                 </div>
@@ -208,8 +362,7 @@ const ProfileBody = () => {
                 <div className="col-12 mt--20">
                   <div className="form-group mb--0">
                     <button className="btn-default" type="submit">
-                      Save changes
-                      { isLoading ? <i className="fa fa-spinner fa-spin ms-2"></i> : <i className="fa fa-save ms-2"></i> }
+                      {isLoading ? <i className="fa fa-spinner fa-spin ms-2"></i> : <i className="fa fa-save ms-2"></i>} Save changes
                     </button>
                   </div>
                 </div>
@@ -264,9 +417,10 @@ const ProfileBody = () => {
                 </div>
                 <div className="col-12 mt--20">
                   <div className="form-group mb--0">
-                    <a className="btn-default" href="#">
+                    <button className="btn-default" type="submit">
+                      {isLoading ? <i className="fa fa-spinner fa-spin ms-2"></i> : <i className="fa fa-save ms-2"></i>}
                       Update Password
-                    </a>
+                    </button>
                   </div>
                 </div>
               </form>
@@ -279,12 +433,13 @@ const ProfileBody = () => {
               aria-labelledby="del-account-tab"
             >
               <form
+                onSubmit={handleDeleteAccount}
                 action="#"
                 className="rbt-profile-row rbt-default-form row row--15"
               >
                 <div className="col-11 text-Center">
                   <p className="mb--20">
-            
+
                     <strong>Warning: </strong>Deleting your account will
                     permanently erase all your data and cannot be reversed. This
                     includes your profile, conversations, comments, and any
@@ -306,9 +461,10 @@ const ProfileBody = () => {
                 </div>
                 <div className="col-12 mt--20">
                   <div className="form-group mb--0">
-                    <a className="btn-default" href="#">
-                      <i className="feather-trash-2"></i> Delete Account
-                    </a>
+                    <button className="btn-default" type="submit">
+                      {isLoading ? <i className="fa fa-spinner fa-spin ms-2"></i> : <i className="fa fa-trash ms-2"></i>}
+                      Delete Account
+                    </button>
                   </div>
                 </div>
               </form>

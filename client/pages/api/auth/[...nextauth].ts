@@ -123,16 +123,25 @@ export default async function auth(req, res) {
     return await NextAuth(req, res, {
         providers,
         callbacks: {
-            async jwt({ token, account, user }) {
+            async jwt({ token, session, trigger, account, user }) {
+                console.log("jwt trigger", trigger)
+                if (trigger === "update" && session?.user) {
+                    token.user = session.user
+                }
+                
                 if (user) {
                     token.user = user
                     token.accessToken = user.access_token
                 }
                 return token
             },
-            async session({ session, token }) {
-                session.accessToken = token.accessToken
-                session.user = token.user
+            async session({ session, token, trigger }) {
+                console.log("session trigger", trigger)
+                if (token) {
+                    session.accessToken = token.accessToken
+                    session.user = token.user
+                }
+
                 return session
             },
             async redirect({ url, baseUrl }) {
