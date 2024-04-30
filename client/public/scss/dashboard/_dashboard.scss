@@ -1,57 +1,27 @@
 :root{
     --sidebar-width: 320px;
 }
-
-/*===========================
-    section separation
-===========================*/
-.rn-section-gap {
-    padding: 90px 0;
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-    .rn-section-gap {
-      padding: 80px 0;
-    }
-  }
-  @media only screen and (max-width: 767px) {
-    .rn-section-gap {
-      padding: 60px 0;
-    }
-  }
   
-  .rn-section-gapBottom {
-    padding-bottom: 90px;
-  }
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .rn-section-gapBottom {
-      padding-bottom: 80px;
-    }
-  }
-  @media only screen and (max-width: 767px) {
-    .rn-section-gapBottom {
-      padding-bottom: 60px;
-    }
-  }
-  
-  .rn-section-gapTop {
-    padding-top: 90px;
-  }
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .rn-section-gapTop {
-      padding-top: 80px;
-    }
-  }
-  @media only screen and (max-width: 767px) {
-    .rn-section-gapTop {
-      padding-top: 60px;
-    }
-  }
-  
-  /* Small devices (landscape phones, 576px and up)*/
-  @media (min-width: 576px) {
+/* Small devices (landscape phones, 576px and up)*/
+@media #{$small-mobile} {
     .w-sm-100 {
         width: 100% !important;
+    }
+
+    .w-sm-95 {
+        width: 95% !important;
+    }
+
+    .w-sm-90 {
+        width: 90% !important;
+    }
+
+    .w-sm-85 {
+        width: 85% !important;
+    }
+
+    .w-sm-80 {
+        width: 80% !important;
     }
   
     .w-sm-75 {
@@ -81,11 +51,11 @@
     .h-sm-25 {
         height: 25% !important;
     }
-  }
+}
   
   
-  /* Medium devices (tablets, 768px and up)*/
-  @media (min-width: 768px) {
+/* Medium devices (tablets, 768px and up)*/
+@media #{$md-layout} {
     .w-md-100 {
         width: 100% !important;
     }
@@ -117,10 +87,10 @@
     .h-md-25 {
         height: 25% !important;
     }
-  }
+}
   
-  /* Large devices (desktops, 992px and up)*/
-  @media (min-width: 992px) {
+/* Large devices (desktops, 992px and up)*/
+@media #{$laptop-device} {
     .w-lg-100 {
         width: 100% !important;
     }
@@ -152,10 +122,10 @@
     .h-lg-25 {
         height: 25% !important;
     }
-  }
+}
   
-  /* Extra large devices (large desktops, 1200px and up)*/
-  @media (min-width: 1200px) {
+/* Extra large devices (large desktops, 1200px and up)*/
+@media #{$lg-layout} {
     .w-xl-100 {
         width: 100% !important;
     }
@@ -187,11 +157,11 @@
     .h-xl-25 {
         height: 25% !important;
     }
-  }
+}
   
-  .m-0-auto {
+.m-0-auto {
     margin: 0 auto;
-  }
+}
 
 .rbt-left-panel {
     width: var(--sidebar-width);

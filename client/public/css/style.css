@@ -436,6 +436,52 @@ ol ul {
   padding-left: 30px;
 }
 
+/*===========================
+    section separation
+===========================*/
+.rn-section-gap {
+  padding: 90px 0;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .rn-section-gap {
+    padding: 80px 0;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .rn-section-gap {
+    padding: 60px 0;
+  }
+}
+
+.rn-section-gapBottom {
+  padding-bottom: 90px;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .rn-section-gapBottom {
+    padding-bottom: 80px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .rn-section-gapBottom {
+    padding-bottom: 60px;
+  }
+}
+
+.rn-section-gapTop {
+  padding-top: 90px;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .rn-section-gapTop {
+    padding-top: 80px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .rn-section-gapTop {
+    padding-top: 60px;
+  }
+}
+
 .pl--0 {
   padding-left: 0 !important;
 }
