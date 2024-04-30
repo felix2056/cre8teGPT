@@ -10,7 +10,12 @@ import ToolsData from "../../data/header.json";
 import Nav from "./Nav";
 import GridMenu from "./GridMenu";
 
+import UserMenu from "./UserMenu";
+
+import { useSession } from "next-auth/react";
+
 const Header = ({ headerTransparent, headerSticky, btnClass }) => {
+  const { data: session } = useSession();
   const { activeMobileMenu, setActiveMobileMenu } = useAppContext();
   const [isSticky, setIsSticky] = useState(false);
 
@@ -58,16 +63,40 @@ const Header = ({ headerTransparent, headerSticky, btnClass }) => {
                   <Nav />
                 </nav>
 
+                {!session?.user?.user ? (
                 <div className="header-btn">
                   <Link
                     className={`btn-default ${btnClass}`}
                     href="/text-generator"
                   >
-                    Get Started Free
+                    Get Started FREE
                   </Link>
                 </div>
+                ) : (
+                  <div className="header-btn">
+                    <Link
+                      className="btn-default btn-small round"
+                      href="/plans-billing"
+                    >
+                      Upgrade <i className="feather-zap"></i>
+                    </Link>
+                  </div>
+                )}
 
                 <GridMenu ToolsData={ToolsData} />
+                
+                {session?.user?.user ? (
+                <div className="account-access rbt-user-wrapper right-align-dropdown">
+                  <div className="rbt-user ml--0">
+                    <a className="admin-img" href="#">
+                      <Image src={session?.user?.user?.avatar} alt={session?.user?.user?.full_name} width={128} height={128} />
+                    </a>
+                  </div>
+                  <div className="rbt-user-menu-list-wrapper">
+                    <UserMenu />
+                  </div>
+                </div>
+                ) : ''}
 
                 <div className="mobile-menu-bar ml--5 d-block d-lg-none">
                   <div className="hamberger">

@@ -22,7 +22,7 @@ const UserMenu = () => {
       <div className="inner">
         <div className="rbt-admin-profile">
           <div className="admin-thumbnail">
-            <Image src={avatar} alt="User Images" />
+            <Image src={session?.user?.user?.avatar} alt={session?.user?.user?.full_name} width={128} height={128} />
           </div>
           <div className="admin-info">
             <span className="name">{ session?.user?.user.full_name }</span>
