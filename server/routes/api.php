@@ -23,8 +23,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             return $request->user();
         });
 
-        Route::get('/{id}', 'UserController@show');
-        Route::put('/{id}', 'UserController@update');
-        Route::delete('/{id}', 'UserController@destroy');
+        Route::put('update', 'UserController@update');
+        Route::put('update/password', 'UserController@updatePassword');
+        Route::delete('delete', 'UserController@destroy');
     });
 });

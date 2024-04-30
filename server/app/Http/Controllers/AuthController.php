@@ -34,7 +34,8 @@ class AuthController extends Controller
         $user->save();
 
         return response()->json([
-            'user' => $user
+            'user' => $user,
+            'message' => 'You have successfully registered 👨🏻‍💻✅. Welcome to Cre8teGPT! 🎉'
         ]);
     }
 
@@ -64,12 +65,13 @@ class AuthController extends Controller
 
             return response()->json([
                 'user' => $user,
-                'access_token' => $token
+                'access_token' => $token,
+                'message' => 'You have successfully logged in 👨🏻‍💻✅. Welcome back❗🎉'
             ]);
         }
 
         return response()->json([
-            'message' => 'The provided credentials do not match our records.'
+            'message' => 'The provided credentials do not match our records. 👨🏻‍💻⛔. Try again⏳'
         ], 401);
     }
 

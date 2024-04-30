@@ -65,31 +65,14 @@ class User extends Authenticatable
             $colors = [
                 'EF4444', 'F59E0B', '10B981', '3B82F6', '6366F1',
                 '8B5CF6', 'EC4899', 'F43F5E', 'F97316', '22C55E',
-                '4F46E5', '818CF8', '34D399', '6EE7B7', '93C5FD',
-                'A5B4FC', 'FBCFE8', 'F9A8D4', 'FECACA', 'FED7AA',
-                'FDE68A', 'A7F3D0', '6EE7B7', '93C5FD', 'A5B4FC',
-                '818CF8', 'FBCFE8', 'F9A8D4', 'FECACA', 'FED7AA',
-                'FDE68A', 'A7F3D0', '6EE7B7', '93C5FD', 'A5B4FC',
-                '818CF8', 'FBCFE8', 'F9A8D4', 'FECACA', 'FED7AA',
-                'FDE68A', 'A7F3D0', '6EE7B7', '93C5FD', 'A5B4FC',
-                '818CF8', 'FBCFE8', 'F9A8D4', 'FECACA', 'FED7AA',
-                'FDE68A', 'A7F3D0', '6EE7B7', '93C5FD', 'A5B4FC',
-                '818CF8', 'FBCFE8', 'F9A8D4', 'FECACA', 'FED7AA',
-                'FDE68A', 'A7F3D0', '6EE7B7', '93C5FD', 'A5B4FC',
-                '818CF8', 'FBCFE8', 'F9A8D4', 'FECACA', 'FED7AA',
-                'FDE68A', 'A7F3D0', '6EE7B7', '93C5FD', 'A5B4FC',
             ];
 
             $backgrounds = [
                 'F87171', 'FBBF24', 'FACC15', '90CDF4', '4F46E5',
                 '818CF8', '34D399', '6EE7B7', '93C5FD', 'A5B4FC',
-                'FBCFE8', 'F9A8D4', 'FECACA', 'FED7AA', 'FDE68A',
-                'A7F3D0', '6EE7B7', '93C5FD', 'A5B4FC', '818CF8',
-                'FBCFE8', 'F9A8D4', 'FECACA', 'FED7AA', 'FDE68A',
-                'A7F3D0', '6EE7B7', '93C5FD', 'A5B4FC', '818CF8',
             ];
 
-            return 'https://ui-avatars.com/api/?name=' . urlencode($this->full_name) . '&color=' . $colors[rand(0, 79)] . '&background=' . $backgrounds[rand(0, 29)] . '&size=128&rounded=true&bold=true&font-size=0.33&length=2';
+            return 'https://ui-avatars.com/api/?name=' . urlencode($this->full_name) . '&color=' . $colors[rand(0, 9)] . '&background=' . $backgrounds[rand(0, 9)] . '&size=128&rounded=true&bold=true&font-size=0.33&length=2';
         }
 
         return $avatar;

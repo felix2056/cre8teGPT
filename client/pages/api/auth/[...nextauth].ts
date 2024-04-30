@@ -124,7 +124,7 @@ export default async function auth(req, res) {
         providers,
         callbacks: {
             async jwt({ token, session, trigger, account, user }) {
-                console.log("jwt trigger", trigger)
+                // console.log("jwt trigger", trigger)
                 if (trigger === "update" && session?.user) {
                     token.user = session.user
                 }
@@ -136,16 +136,16 @@ export default async function auth(req, res) {
                 return token
             },
             async session({ session, token, trigger }) {
-                console.log("session trigger", trigger)
+                // console.log("session trigger", trigger)
                 if (token) {
-                    session.accessToken = token.accessToken
-                    session.user = token.user
+                    session.accessToken = String(token.accessToken);
+                    session.user = token.user;
                 }
 
-                return session
+                return session;
             },
             async redirect({ url, baseUrl }) {
-                return url.startsWith(baseUrl) ? url : baseUrl
+                return url.startsWith(baseUrl) ? url : baseUrl;
             },
         },
         pages: {
