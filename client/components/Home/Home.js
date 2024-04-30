@@ -35,13 +35,13 @@ const Home = () => {
                 </h1>
 
                 <p className="b1 desc-text">
-                  AI-Powered Game Changer designed to empower content creators, marketers, students and businesses of all sizes. <br /> Your All-in-One AI Assistant — <span className="theme-gradient">Discover 100+ AI Tools In 1 Place.</span>
+                  Your <strong>All-in-One AI-Powered Game Changer</strong> designed to empower content creators, marketers, students and businesses of all sizes. <br /> <span className="theme-gradient"><strong>Discover 100+ AI Tools In 1 Place!</strong></span>
                 </p>
 
                 <div className="button-group">
                   <form>
                     <div class="small-search search-section mb--20 m-0-auto w-sm-95 w-75">
-                      <input className="text-left" type="search" placeholder="Tell me your goal, I'll list the AI tools you need to make it happen." />
+                      <input className="text-md-center" type="search" placeholder="Tell me your goal, I'll list the AI tools you need to make it happen." />
                       <i class="feather-search"></i>
                     </div>
                   </form>
