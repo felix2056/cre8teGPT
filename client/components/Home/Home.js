@@ -40,7 +40,7 @@ const Home = () => {
 
                 <div className="button-group">
                   <form>
-                    <div class="small-search search-section mb--20 m-0-auto w-sm-80 w-75">
+                    <div class="small-search search-section mb--20 m-0-auto w-sm-95 w-75">
                       <input className="text-left" type="search" placeholder="Tell me your goal, I'll list the AI tools you need to make it happen." />
                       <i class="feather-search"></i>
                     </div>
