@@ -28,7 +28,7 @@ const Home = () => {
                             <div className="col-lg-12">
                                 <div className="content-main-wrapper">
                                     <h1 className="title">
-                                        Unlock Your Inner Creative Powerhouse with  <br />
+                                        Unlock Your Inner Cre8tive Powerhouse with  <br />
                                         <span className="wrap">Cre8teGPT AI</span>
                                     </h1>
 
