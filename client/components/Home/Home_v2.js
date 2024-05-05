@@ -72,19 +72,19 @@ const Home = () => {
                     <div className="usefull-for-ani">
                         <div className="single">
                             <img src="/images/banner/user/06.png" alt="img" loading="lazy" />
-                            <span>Content Writer</span>
+                            <span>Influencers</span>
                         </div>
                         <div className="single blog">
                             <img src="/images/banner/user/05.png" alt="img" loading="lazy" />
-                            <span>Blog Writer</span>
+                            <span>Content Cre8tors</span>
                         </div>
                         <div className="single copy">
                             <img src="/images/banner/user/03.png" alt="img" loading="lazy" />
-                            <span>Copy Writer</span>
+                            <span>Startups</span>
                         </div>
                         <div className="single freelancer">
                             <img src="/images/banner/user/04.png" alt="img" loading="lazy" />
-                            <span>Freelancer </span>
+                            <span>Students</span>
                         </div>
                     </div>
 
