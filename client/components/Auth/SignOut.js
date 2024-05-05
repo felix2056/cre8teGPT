@@ -11,7 +11,7 @@ import PageHead from "@/pages/Head";
 
 import { signOut } from "next-auth/react";
 
-const Error = () => {
+const SignOut = () => {
     useEffect(() => {
         sal();
 
@@ -70,4 +70,4 @@ const Error = () => {
   );
 };
 
-export default Error;
+export default SignOut;

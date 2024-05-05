@@ -58,10 +58,12 @@ class User extends Authenticatable
         return "{$this->first_name} {$this->last_name}";
     }
 
-    public function getAvatarAttribute($avatar)
+    public function getAvatarAttribute()
     {
+        $avatar = $this->attributes['avatar'];
+
         // return image with first and last name initials if avatar is null
-        if (is_null($avatar)) {
+        if (empty($avatar)) {
             $colors = [
                 'EF4444', 'F59E0B', '10B981', '3B82F6', '6366F1',
                 '8B5CF6', 'EC4899', 'F43F5E', 'F97316', '22C55E',

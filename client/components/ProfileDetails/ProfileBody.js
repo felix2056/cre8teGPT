@@ -316,13 +316,13 @@ const ProfileBody = () => {
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                   <div className="form-group">
                     <label htmlFor="firstname">First Name *</label>
-                    <input name="first_name" id="firstname" type="text" defaultValue={session?.user?.user.first_name} />
+                    <input name="first_name" id="firstname" type="text" defaultValue={session?.user?.first_name} />
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                   <div className="form-group">
                     <label htmlFor="lastname">Last Name *</label>
-                    <input name="last_name" id="lastname" type="text" defaultValue={session?.user?.user.last_name} />
+                    <input name="last_name" id="lastname" type="text" defaultValue={session?.user?.last_name} />
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12">
@@ -332,7 +332,7 @@ const ProfileBody = () => {
                       name="email"
                       id="email"
                       type="email"
-                      defaultValue={session?.user?.user.email}
+                      defaultValue={session?.user?.email}
                       readOnly
                     />
                   </div>
@@ -344,7 +344,7 @@ const ProfileBody = () => {
                       name="phone"
                       id="phonenumber"
                       type="tel"
-                      defaultValue={session?.user?.user.phone}
+                      defaultValue={session?.user?.phone}
                     />
                   </div>
                 </div>

@@ -78,6 +78,16 @@ const Footer = () => {
           </div>
         </div>
       </footer>
+
+      V2 JS Files
+      <script src="/js/vendor/jquery.min.js"></script>
+      <script src="/js/vendor/metismenu.js" defer=""></script>
+      <script src="/js/vendor/imagesloaded.pkgd.min.js" defer=""></script>
+      <script src="/js/vendor/isotope.pkgd.min.js" defer=""></script>
+      <script src="/js/vendor/magnific-popup.js" defer=""></script>
+      <script src="/js/plugins/swiper.js" defer=""></script>
+      <script src="/js/plugins/contact.form.js" defer=""></script>
+      <script src="/js/main.js"></script>
     </>
   );
 };

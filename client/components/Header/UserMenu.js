@@ -22,10 +22,10 @@ const UserMenu = () => {
       <div className="inner">
         <div className="rbt-admin-profile">
           <div className="admin-thumbnail">
-            <Image src={session?.user?.user?.avatar} alt={session?.user?.user?.full_name} width={128} height={128} />
+            <Image src={session?.user?.avatar} alt={session?.user?.full_name} width={128} height={128} />
           </div>
           <div className="admin-info">
-            <span className="name">{ session?.user?.user.full_name }</span>
+            <span className="name">{ session?.user?.full_name }</span>
             <Link
               className="rbt-btn-link color-primary"
               href="/profile-details"

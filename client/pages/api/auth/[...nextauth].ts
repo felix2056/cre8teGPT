@@ -7,7 +7,10 @@ import Google from "next-auth/providers/google"
 import LinkedIn from "next-auth/providers/linkedin"
 import Twitter from "next-auth/providers/twitter"
 
-import axios from "axios"
+import axios from 'axios'
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+axios.defaults.withCredentials = true
 
 export default async function auth(req, res) {
     const providers = [
@@ -58,13 +61,13 @@ export default async function auth(req, res) {
                     headers.append("X-XSRF-TOKEN", xsrfToken)
                 }
 
-                const options = {
-                    method: "POST",
-                    headers,
-                    body: JSON.stringify(data),
-                }
-
                 try {
+                    // const options = {
+                    //     method: "POST",
+                    //     headers,
+                    //     body: JSON.stringify(data),
+                    // }
+
                     // const response = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/login', options)
                     // console.log('response', response)
                     
@@ -75,11 +78,11 @@ export default async function auth(req, res) {
 
                     // throw new Error("response: " + response.status + " | " + response.statusText)
 
-                    const response = await axios.post(process.env.NEXT_PUBLIC_SERVER_URL + '/api/login', data, { withCredentials: true })
+                    const response = await axios.post('/api/login', data, { withCredentials: true })
                     console.log('response', response)
 
                     if (response.status === 200) {
-                        const user = response.data
+                        const user = response.data.user
                         return user
                     }
 
@@ -109,6 +112,7 @@ export default async function auth(req, res) {
         Google({
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            allowDangerousEmailAccountLinking: true,
         }),
         LinkedIn({
             clientId: process.env.LINKEDIN_CLIENT_ID,
@@ -124,23 +128,74 @@ export default async function auth(req, res) {
         providers,
         callbacks: {
             async jwt({ token, session, trigger, account, user }) {
-                // console.log("jwt trigger", trigger)
-                if (trigger === "update" && session?.user) {
-                    token.user = session.user
-                }
-                
                 if (user) {
-                    token.user = user
-                    token.accessToken = user.access_token
+                    token.user = user;
+                    token.accessToken = user.access_token;
                 }
-                return token
+
+                if (trigger === "update" && session?.user) {
+                    token.user = session.user;
+                }
+
+                if (account?.provider === "google" || account?.provider === "apple"  || account?.provider === "facebook" || account?.provider === "twitter") {
+                    console.log("account", account)
+
+                    // const oauthuser = {
+                    //     email: token.email,
+                    //     name: token.name,
+                    //     image: token.picture,
+                    //     provider: account.provider,
+                    //     provider_id: account.providerAccountId,
+                    // }
+
+                    // token.user = oauthuser;
+                    // token.accessToken = account.access_token;
+
+                    // get sanctum cookie
+                    await axios.get('/sanctum/csrf-cookie', { 
+                        withCredentials: true 
+                    }).then(response => {
+                        console.log(response);
+                    });
+
+                    // confirm user exists in the database
+                    const data = {
+                        email: token.email,
+                        name: token.name,
+                        image: token.picture,
+                        provider: account.provider,
+                        provider_id: account.providerAccountId,
+                    }
+
+                    const response = await axios.post('/api/after-social-login', data, { withCredentials: true });
+
+                    console.log("response", response)
+
+                    if (response.status === 200) {
+                        const oauthuser = response.data.user;
+                        token.user = oauthuser;
+                        token.accessToken = account.access_token;
+                    } else {
+                        // sign out the user
+                        session = null
+                        token = null
+
+                        console.error("error", response)
+                        throw new Error(response.data.message)
+                    }
+                }
+
+                console.log("jwt data", [token, session, trigger, account, user])
+
+                return token;
             },
             async session({ session, token, trigger }) {
-                // console.log("session trigger", trigger)
                 if (token) {
                     session.accessToken = String(token.accessToken);
                     session.user = token.user;
                 }
+
+                console.log("session data", [session, token, trigger])
 
                 return session;
             },

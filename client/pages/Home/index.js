@@ -1,7 +1,10 @@
 import Header from "@/components/Header/Header";
 import HeaderTop from "@/components/Header/HeaderTop/Header-Top";
 import PopupMobileMenu from "@/components/Header/PopupMobileMenu";
-import Home from "@/components/Home/Home";
+
+// import Home from "@/components/Home/Home";
+import Home from "@/components/Home/Home_v2";
+
 import Service from "@/components/Service/Service";
 import Context from "@/context/Context";
 import Separator from "../separator";

@@ -38,9 +38,8 @@ const Header = ({ headerTransparent, headerSticky, btnClass }) => {
   return (
     <>
       <header
-        className={`rainbow-header header-default ${headerTransparent} ${headerSticky} ${
-          isSticky ? "sticky" : ""
-        }`}
+        className={`rainbow-header header-default ${headerTransparent} ${headerSticky} ${isSticky ? "sticky" : ""
+          }`}
       >
         <div className="container position-relative">
           <div className="row align-items-center row--0">
@@ -63,15 +62,15 @@ const Header = ({ headerTransparent, headerSticky, btnClass }) => {
                   <Nav />
                 </nav>
 
-                {!session?.user?.user ? (
-                <div className="header-btn">
-                  <Link
-                    className={`btn-default ${btnClass}`}
-                    href="/text-generator"
-                  >
-                    Get Started FREE
-                  </Link>
-                </div>
+                {!session?.user ? (
+                  <div className="header-btn">
+                    <Link
+                      className={`btn-default ${btnClass}`}
+                      href="/text-generator"
+                    >
+                      Get Started FREE
+                    </Link>
+                  </div>
                 ) : (
                   <div className="header-btn">
                     <Link
@@ -84,19 +83,19 @@ const Header = ({ headerTransparent, headerSticky, btnClass }) => {
                 )}
 
                 <GridMenu ToolsData={ToolsData} />
-                
-                {session?.user?.user ? (
-                <div className="account-access rbt-user-wrapper right-align-dropdown">
-                  <div className="rbt-user ml--0">
-                    <a className="admin-img" href="#">
-                      <Image src={session?.user?.user?.avatar} alt={session?.user?.user?.full_name} width={128} height={128} />
-                    </a>
+
+                {session?.user && (
+                  <div className="account-access rbt-user-wrapper right-align-dropdown">
+                    <div className="rbt-user ml--0">
+                      <a className="admin-img" href="#">
+                        <Image src={session?.user?.avatar} alt={session?.user?.full_name} width={128} height={128} />
+                      </a>
+                    </div>
+                    <div className="rbt-user-menu-list-wrapper">
+                      <UserMenu />
+                    </div>
                   </div>
-                  <div className="rbt-user-menu-list-wrapper">
-                    <UserMenu />
-                  </div>
-                </div>
-                ) : ''}
+                )}
 
                 <div className="mobile-menu-bar ml--5 d-block d-lg-none">
                   <div className="hamberger">

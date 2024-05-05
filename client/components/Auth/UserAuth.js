@@ -62,8 +62,8 @@ const UserAuth = () => {
     fetchCsrfToken();
   }, []);
 
-  const handleOauthLogin = (providerId) => {
-    signIn(providerId);
+  const handleOauthLogin = (provider) => {
+    signIn(provider, { callbackUrl: `${window.location.origin}/dashboard` });
   };
 
   const handleLogin = async (event) => {
@@ -277,10 +277,13 @@ const UserAuth = () => {
                 alt="sign-up logo"
               />
             </div>
+            
             <div className="separator-animated animated-true"></div>
+            
             <div className="signup-box-bottom">
               <div className="signup-box-content">
                 <h4 className="title">{toggleAuth ? "Welcome Back!" : "Get Started"}</h4>
+                
                 <div className="social-btn-grp">
                   <Link className="btn-default btn-border" href="#" onClick={() => handleOauthLogin("google")}>
                     <span className="icon-left">
@@ -293,19 +296,7 @@ const UserAuth = () => {
                     </span>
                     Login with Google
                   </Link>
-                  <Link className="btn-default btn-border" href="#" onClick={() => handleOauthLogin("apple")}>
-                    <span className="icon-left">
-                      <Image
-                        src={apple}
-                        width={18}
-                        height={18}
-                        alt="Apple Icon"
-                      />
-                    </span>
-                    Login with Apple
-                  </Link>
-                </div>
-                <div className="social-btn-grp">
+                  
                   <Link className="btn-default btn-border" href="#" onClick={() => handleOauthLogin("facebook")}>
                     <span className="icon-left">
                       <Image
@@ -316,6 +307,20 @@ const UserAuth = () => {
                       />
                     </span>
                     Login with Facebook
+                  </Link>
+                </div>
+
+                <div className="social-btn-grp">
+                  <Link className="btn-default btn-border" href="#" onClick={() => handleOauthLogin("apple")}>
+                    <span className="icon-left">
+                      <Image
+                        src={apple}
+                        width={18}
+                        height={18}
+                        alt="Apple Icon"
+                      />
+                    </span>
+                    Login with Apple
                   </Link>
                   <Link className="btn-default btn-border" href="#" onClick={() => handleOauthLogin("twitter")}>
                     <span className="icon-left">
@@ -329,6 +334,7 @@ const UserAuth = () => {
                     Login with Twitter
                   </Link>
                 </div>
+                
                 <div className="text-social-area">
                   <hr />
                   <span>Or continue with</span>

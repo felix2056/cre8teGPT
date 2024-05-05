@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
+Route::post('/after-social-login', 'AuthController@afterSocialLogin');
+
+Route::get('/tools', 'ToolController@index');
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::prefix('user')->group(function () {

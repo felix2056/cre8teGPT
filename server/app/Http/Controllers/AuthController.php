@@ -61,11 +61,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = User::find(Auth::id());
-            $token = $user->createToken('authToken')->plainTextToken;
+            $user->access_token = $user->createToken('authToken')->plainTextToken;
 
             return response()->json([
                 'user' => $user,
-                'access_token' => $token,
                 'message' => 'You have successfully logged in 👨🏻‍💻✅. Welcome back❗🎉'
             ]);
         }
@@ -73,6 +72,61 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'The provided credentials do not match our records. 👨🏻‍💻⛔. Try again⏳'
         ], 401);
+    }
+
+    public function afterSocialLogin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required',
+            'name' => 'required',
+            'image' => 'nullable', // 'avatar' from social media
+            'provider' => 'required', // 'google', 'apple', 'facebook', 'twitter'
+            'provider_id' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors()->first()
+            ], 400);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            $user = new User();
+            $user->email = $request->email;
+            $user->email_verified_at = now();
+            $user->password = Hash::make($request->provider_id);
+        }
+
+        $user->avatar = $request->image;
+        $user->first_name = explode(' ', $request->name)[0];
+        $user->last_name = explode(' ', $request->name)[1] ?? null;
+
+        switch ($request->provider) {
+            case 'google':
+                $user->google_id = $request->provider_id;
+                break;
+            case 'apple':
+                $user->apple_id = $request->provider_id;
+                break;
+            case 'facebook':
+                $user->facebook_id = $request->provider_id;
+                break;
+            case 'twitter':
+                $user->twitter_id = $request->provider_id;
+                break;
+        }
+
+        $user->save();
+
+        $token = $user->createToken('authToken')->plainTextToken;
+
+        return response()->json([
+            'user' => $user,
+            'access_token' => $token,
+            'message' => 'You have successfully logged in 👨🏻‍💻✅. Welcome back❗🎉'
+        ]);
     }
 
     public function logout(Request $request)

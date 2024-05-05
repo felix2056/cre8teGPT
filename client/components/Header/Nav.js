@@ -24,17 +24,17 @@ const Nav = () => {
           <Link href="/">Home</Link>
         </li>
 
-        {session?.user?.user ? (
+        {session?.user && (
         <li>
           <Link href="/dashboard">Dashboard</Link>
         </li>
-        ) : ''}
+        )}
         
         <li>
           <Link href="/dashboard">100+ AI Tools</Link>
         </li>
 
-        {session?.user?.user ? (
+        {session?.user && (
         <li className="with-megamenu has-menu-child-item position-relative">
           <a
             href="#"
@@ -75,7 +75,7 @@ const Nav = () => {
             </div>
           </div>
         </li>
-        ) : ''}
+        )}
         
         <li>
           <Link href="/pricing">Pricing</Link>
@@ -89,11 +89,11 @@ const Nav = () => {
           <Link href="/contact">Contact</Link>
         </li>
         
-        {!session?.user?.user ? (
+        {!session?.user && (
         <li>
           <Link href="/auth/signin">Sign In</Link>
         </li>
-        ) : ''}
+        )}
       </ul>
     </>
   );

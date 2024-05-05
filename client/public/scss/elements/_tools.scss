@@ -1,0 +1,95 @@
+.tool-genearate-section {
+    margin-top: 90px;
+    margin-bottom: -150px;
+    position: relative;
+
+    @media #{$smlg-device} {
+        margin-top: 0;
+        margin-bottom: 50px;
+    }
+
+    @media #{$small-mobile} {
+        margin-bottom: 40px;
+    }
+
+    .genarator-section .genarator-card-group {
+        flex-wrap: nowrap;
+
+        @media #{$smlg-device} {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+    .genarator-section .genarator-card-group li {
+        padding: 0;
+        position: relative;
+        transition: var(--transition);
+
+        @media #{$smlg-device} {
+            top: 0 !important;
+            margin: 10px;
+        }
+
+        @media #{$lg-layout} {
+            flex-basis: 30% !important;
+        }
+
+        @media #{$md-layout} {
+            flex-basis: 45% !important;
+        }
+
+        @media #{$sm-layout} {
+            flex-basis: 45% !important;
+        }
+
+        @media #{$small-mobile} {
+            flex-basis: 95% !important;
+        }
+
+        &:hover {
+            transform: translateY(-5px);
+
+            .rainbow-demo-btn {
+                background: var(--color-primary);
+                color: var(--color-white);
+                border-color: var(--color-primary);
+            }
+        }
+
+        // &:nth-child(1) {
+        //     top: 0;
+        // }
+
+        // &:nth-child(2) {
+        //     top: -30px;
+        // }
+
+        // &:nth-child(3) {
+        //     top: -60px;
+        // }
+
+        // &:nth-child(4) {
+        //     top: -30px;
+        // }
+
+        // &:nth-child(5) {
+        //     top: 0;
+        // }
+
+        a {
+            -webkit-backdrop-filter: blur(21px);
+            backdrop-filter: blur(21px);
+            background: var(--color-blackest);
+            border: none;
+            border-radius: var(--radius);
+            padding: 24px;
+            // padding-bottom: 80px;
+            overflow: hidden;
+
+            @media #{$smlg-device} {
+                padding-bottom: 24px;
+            }
+        }
+    }
+}

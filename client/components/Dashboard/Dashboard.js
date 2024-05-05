@@ -10,12 +10,13 @@ import { useSession } from "next-auth/react";
 
 const Dashboard = () => {
   const { data: session } = useSession();
-  console.log(session?.user?.user)
-  console.log(session?.accessToken)
+  
+  console.log('session', session)
 
   useEffect(() => {
     sal();
   }, []);
+
   return (
     <>
       <div className="rbt-main-content mr--0">
@@ -28,7 +29,7 @@ const Dashboard = () => {
               <div className="chat-box-list">
                 <div className="welcome-wrapper">
                   <div className="content-section">
-                    <h4 className="title">👋 Welcome, { session?.user?.user.full_name }</h4>
+                    <h4 className="title">👋 Welcome, { session?.user?.full_name }</h4>
                   </div>
                   <div className="btn-section">
                     <a
