@@ -94,6 +94,20 @@
 @import 'default/sal';
 @import 'default/text-animation';
 
+/**************************************
+    Default Styles V2
+***************************************/
+// @import 'default/v2/variables';
+@import 'default/v2/mixins';
+@import 'default/v2/reset';
+// @import 'default/v2/typography';
+@import 'default/v2/animations';
+@import 'default/v2/shortcode';
+@import 'default/v2/spacing';
+@import 'default/v2/forms';
+@import 'default/v2/sal';
+@import 'default/v2/text-animation';
+
 
 /**************************************
     Theme Styles
@@ -149,7 +163,9 @@
 @import 'elements/signup';
 @import 'elements/release-notes';
 
-// styles from V2 theme
+/**************************************
+            Elements V2
+***************************************/
 @import 'elements/v2/banner';
 @import 'elements/v2/blog';
 @import 'elements/v2/breadcrumb';
@@ -166,6 +182,7 @@
 @import 'elements/v2/nav';
 @import 'elements/v2/pricing';
 @import 'elements/v2/service';
+@import 'elements/v2/search-generator';
 @import 'elements/v2/side-bar';
 @import 'elements/v2/steps';
 @import 'elements/v2/team';

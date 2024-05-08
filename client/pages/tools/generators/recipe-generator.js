@@ -1,10 +1,11 @@
 import Header from "@/components/Header/Header";
 import HeaderTop from "@/components/Header/HeaderTop/Header-Top";
 import PopupMobileMenu from "@/components/Header/PopupMobileMenu";
-import AITools from "@/components/AITools/AITools";
+import Recipe from "@/components/AITools/Generators/RecipeGenerator";
+
 import Service from "@/components/Service/Service";
 import Context from "@/context/Context";
-import Separator from "../separator";
+import Separator from "../../separator";
 import Timeline from "@/components/Timeline/Timeline";
 import Split from "@/components/Split/Split";
 import Pricing from "@/components/Pricing/Pricing";
@@ -13,12 +14,12 @@ import Brands from "@/components/Brands/Brands";
 import CallToAction from "@/components/CallToAction/CallToAction";
 import Footer from "@/components/Footer/Footer";
 import Copyright from "@/components/Footer/Copyright";
-import PageHead from "../Head";
+import PageHead from "../../Head";
 
-const HomePage = () => {
+const RecipeGenerator= () => {
   return (
     <>
-      <PageHead title="Home" />
+      <PageHead title="Recipe Generator - Discover Delicious Recipes with Cre8teGPT" />
 
       <main className="page-wrapper">
         <Context>
@@ -31,7 +32,7 @@ const HomePage = () => {
           />
           <PopupMobileMenu />
 
-          <AITools />
+          <Recipe />
           <Separator top={false} />
           <Split />
           <Separator top={true} />
@@ -45,4 +46,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default RecipeGenerator;
