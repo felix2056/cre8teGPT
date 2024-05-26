@@ -16,15 +16,17 @@ const Home = () => {
             });
         });
     }, []);
+
     return (
         <>
             <div
                 className="slider-area slider-style-1 variation-default slider-bg-image bg-banner1"
                 data-black-overlay="1"
             >
-                <div className="rts-banner-area-one bg_image--1 bg_image rts-section-gap">
+                {/* v2 class: rts-banner-area-one bg_image--1 bg_image rts-section-gap */}
+                <div className="slider-area slider-style-1 variation-default slider-bg-image bg-banner1">
                     <div className="container mt--50">
-                        <div className="row">
+                        <div className="row justify-content-center">
                             <div className="col-lg-12">
                                 <div className="content-main-wrapper">
                                     <h1 className="title">
@@ -39,14 +41,14 @@ const Home = () => {
                                     <div className="button-group">
                                         <form>
                                             <div className="small-search search-section mb--20 m-0-auto w-sm-95 w-50">
-                                                <input className="text-md-center" type="search" placeholder="Tell me your goal, I'll list the AI tools you need to make it happen." />
+                                                <input className="text-md-center w-100" type="search" placeholder="Tell me your goal, I'll list the AI tools you need to make it happen." />
                                                 <i className="feather-search"></i>
                                             </div>
                                         </form>
                                     </div>
 
                                     <div className="button-area">
-                                        <a href="log-in.html" className="rts-btn btn-primary text-white">Start Cre8ting for Free</a>
+                                        <Link href="/dashboard" className="rts-btn btn-primary text-white">Start Cre8ting for Free</Link>
                                         <a href="contact.html" className="rts-btn btn-blur">Request demo</a>
                                     </div>
 
@@ -62,12 +64,33 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
+
+                            <div className="col-lg-10 col-xl-10 order-1 order-lg-2">
+                                <div className="frame-image frame-image-bottom bg-flashlight video-popup icon-center">
+                                    <Image src={bannerImg} alt="Banner Images" />
+                                    <div className="video-icon">
+                                    <Link
+                                        className="btn-default rounded-player popup-video border bg-white-dropshadow"
+                                        href="https://youtu.be/ThRYF96HIzA?si=Yz-Yc5HSf8uLPv-G"
+                                        data-vbtype="video"
+                                    >
+                                        <span>
+                                        <i className="feather-play"></i>
+                                        </span>
+                                    </Link>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="bottom-mid-img">
-                        <img src="/images/banner/01.png" alt="banenr mimage" loading="lazy" />
+                    <div className="cre8tegpt-separator has-position-bottom">
+                        <Image className="w-100" src={separator} alt="" />
                     </div>
+
+                    {/* <div className="bottom-mid-img">
+                        <img src="/images/banner/01.png" alt="banenr mimage" loading="lazy" />
+                    </div> */}
 
                     <div className="usefull-for-ani">
                         <div className="single">
@@ -86,10 +109,6 @@ const Home = () => {
                             <img src="/images/banner/user/04.png" alt="img" loading="lazy" />
                             <span>Students</span>
                         </div>
-                    </div>
-
-                    <div className="cre8tegpt-separator has-position-bottom">
-                        <Image className="w-100" src={separator} alt="" />
                     </div>
                 </div>
             </div>
