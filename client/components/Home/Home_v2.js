@@ -30,8 +30,7 @@ const Home = () => {
                             <div className="col-lg-12">
                                 <div className="content-main-wrapper">
                                     <h1 className="title">
-                                        Unlock Your Inner Cre8tive Powerhouse with  <br />
-                                        <span className="wrap">Cre8teGPT AI</span>
+                                        Unlock Your Inner Cre8tive Powerhouse with <span className="wrap">Cre8teGPT AI</span>
                                     </h1>
 
                                     <p className="disc">
@@ -54,7 +53,7 @@ const Home = () => {
 
                                     <div className="user-area">
                                         <p>10,000+ Cre8tors saving 100s of hours</p>
-                                        <div className="image-wrapper">
+                                        <div className="image-wrapper mb--10">
                                             <img className="one" src="/images/banner/user/01.png" alt="user" loading="lazy" />
                                             <img className="two" src="/images/banner/user/02.png" alt="user" loading="lazy" />
                                             <img className="three" src="/images/banner/user/04.png" alt="user" loading="lazy" />
