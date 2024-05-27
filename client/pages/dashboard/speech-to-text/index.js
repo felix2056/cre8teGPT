@@ -10,7 +10,7 @@ import SpeechToTextGenerator from "@/components/AITools/Generators/SpeechToText"
 const SpeechToTextGeneratorPage = () => {
   return (
     <>
-      <PageHead title="Vedio Generator" />
+      <PageHead title="Speech To Text Generator" />
 
       <main className="page-wrapper rbt-dashboard-page">
         <Context>

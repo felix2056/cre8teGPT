@@ -5,12 +5,12 @@ import HeaderDashboard from "@/components/Header/HeaderDashboard";
 import PopupMobileMenu from "@/components/Header/PopupMobileMenu";
 import LeftpanelDashboard from "@/components/Common/LeftpanelDashboard";
 import Modal from "@/components/Common/Modal";
-import TextToSpeechGenerator from "@/components/AITools/Generators/TextToSpeech";
+import LyricsGenerator from "@/components/AITools/Generators/LyricsGenerator";
 
-const TextToSpeechGeneratorPage = () => {
+const LyricsGeneratorPage = () => {
   return (
     <>
-      <PageHead title="Text To Speech Generator" />
+      <PageHead title="Lyics Generator" />
 
       <main className="page-wrapper rbt-dashboard-page">
         <Context>
@@ -22,7 +22,7 @@ const TextToSpeechGeneratorPage = () => {
 
             <div className="rbt-main-content">
               <div className="rbt-daynamic-page-content">
-                <TextToSpeechGenerator />
+                <LyricsGenerator />
               </div>
             </div>
           </div>
@@ -32,4 +32,4 @@ const TextToSpeechGeneratorPage = () => {
   );
 };
 
-export default TextToSpeechGeneratorPage;
+export default LyricsGeneratorPage;

@@ -169,8 +169,8 @@
 }
 
 
-.audio-main-generator-start{
-    .ask-for-audio{
+.audio-main-generator-start, .lyrics-main-generator-start{
+    .ask-for-audio, .ask-for-lyrics{
         position: relative;
         i.fa-pen-to-square{
             position: absolute;

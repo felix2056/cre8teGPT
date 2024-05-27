@@ -273,7 +273,7 @@
       "badge": "NEW"
     },
     {
-      "link": "/code-generator",
+      "link": "/dashboard/code-generator",
       "isDisable": false,
       "title": "Code Generator",
       "img": "/images/generator-icon/code-editor.png",
@@ -294,7 +294,7 @@
       "badge": ""
     },
     {
-      "link": "/email-generator",
+      "link": "/dashboard/email-generator",
       "isDisable": false,
       "title": "Email Writer",
       "img": "/images/generator-icon/email.png",
@@ -308,18 +308,18 @@
       "badge": "Coming"
     },
     {
-      "link": "/code-generator",
+      "link": "/dashboard/code-generator",
       "isDisable": false,
       "title": "HTML Generator",
       "img": "/images/generator-icon/code-editor.png",
       "badge": ""
     },
     {
-      "link": "#",
-      "isDisable": true,
+      "link": "/dashboard/lyrics-generator",
+      "isDisable": false,
       "title": "Lyrics Generator",
       "img": "/images/generator-icon/lyrics.png",
-      "badge": "Coming"
+      "badge": ""
     },
     {
       "link": "#",
