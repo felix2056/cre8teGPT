@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('slug')->unique();
             $table->string('icon')->nullable();
-            $table->enum('pricing', ['free', 'premium'])->default('free');
+            $table->string('url')->nullable();
+            $table->enum('badge', ['new', 'hot', 'coming', 'free', 'popular', 'featured'])->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

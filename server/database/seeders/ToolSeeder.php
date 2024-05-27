@@ -67,7 +67,7 @@ class ToolSeeder extends Seeder
             ],
             [
                 'name' => 'Recipe Generator',
-                'description' => 'Generate recipes for your website or project.',
+                'description' => 'Our recipe generator suggests delicious dishes based on your available ingredients, helping you cook with what you have at home.',
                 'slug' => 'recipe-generator',
                 'icon' => '/images/generator-icon/recipe_line.png',
             ],
