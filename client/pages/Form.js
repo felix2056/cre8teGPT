@@ -1,59 +1,83 @@
 import React from "react";
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
-import OpenAI from "openai";
+import axios from "axios";
 
-// PostgreSQL
-
-/******
-BEGIN;
-
-CREATE TABLE text_threads ( title varchar(255), content text, user_id int, created_at timestamp, updated_at timestamp );
-
-ALTER TABLE image_threads ADD FOREIGN KEY (user_id) REFERENCES users(id);
-
-COMMIT;
-******/
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Form = () => {
-  const [isGenerating, setIsGenerating] = useState(false)
+  const router = useRouter();
+  const { data: session, status } = useSession();
+
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  async function onSubmit(e) {
-    e.preventDefault();
-    setIsGenerating(true)
-    setError(null)
-
-    const form = e.target;
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const thread_id = router.query.thread_id || null;
+    
+    const formData = new FormData(event.target);
+    const data = {
+      thread_id: thread_id,
+      assistant: "Text Generator",
+      message: formData.get("message"),
+      file: formData.get("file"),
+    };
 
     try {
-      const formData = new FormData(form);
-      
-      let file = formData.get("file");
-      let message = formData.get("message");
-
-      if (!message.trim()) {
-        alert("Please enter a message");
+      if (!data.message) {
+        toast.error("Please enter a message.");
         return;
       }
 
-      // OpenAI API
-      const openai = new OpenAI(process.env.OPENAI_API_KEY);
+      if (data.file) {
+        const file_size = data.file.size / 1024 / 1024;
+        if (file_size > 10) {
+          toast.error("File size must be less than 10MB.");
+          return;
+        }
+      }
 
-      const response = await openai.chat({
-        messages: [
-          { role: "system", content: "You are a helpful assistant." },
-          { role: "user", content: message },
-        ],
-      });
+      if (!session) {
+        toast.error("Please sign in to send a message.");
+        setTimeout(() => {
+          router.push("/auth/signin/");
+        }, 2000);
+      }
 
-      console.log(response.data.choices[0].message.content);
+      setIsLoading(true);
+      setError(null);
+
+      // empty the form
+      event.target.reset();
+
+      const response = await axios.post("/api/threads/messages/create", { data });
+      if (response.data) {
+        setIsLoading(false)
+        console.log(response.data);
+
+        // save thread to db if needed
+        if (response.data.save_thread) {
+          const headers = {
+            "Authorization": `Bearer ${session?.accessToken}`,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          };
+
+          await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/threads/create`, { assistant_id: response.data.assistant.id, thread_id: response.data.thread.id, title: data.message }, { headers });
+
+          // redirect to thread
+          router.push(`/dashboard/chat/${response.data.thread.id}`, null, { shallow: true });
+        }
+      }
     } catch (error) {
+      setIsLoading(false)
       setError(error.message)
       console.error(error)
-    } finally {
-      setIsGenerating(false)
     }
   }
 
@@ -61,12 +85,13 @@ const Form = () => {
     <>
       <Tooltip id="my-tooltip" className="custom-tooltip tooltip-inner" />
       <form onSubmit={onSubmit} className="new-chat-form border-gradient">
-        <textarea name="message" rows="1" placeholder="Send a message..."></textarea>
+        <textarea name="message" rows="1" placeholder="Send a message..." onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { onSubmit(e) } }}></textarea>
         <div className="left-icons">
           <div title="Cre8teGPT" className="form-icon icon-gpt">
             <i className="feather-aperture"></i>
           </div>
         </div>
+
         <div className="right-icons">
           <div
             className="form-icon icon-plus"

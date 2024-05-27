@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 import sal from "sal.js";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import axios from "axios";
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-axios.defaults.withCredentials = true;
 
 const RecipeGenerator = () => {
+    const { data: session } = useSession();
+    const router = useRouter();
+
+    let [isLoading, setIsLoading] = useState(false);
     let [tool, setTool] = useState([]);
+    let [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
         // apply class to body
         document.body.classList.add("case-details-2");
 
         // fetch all AI tools
-        axios.get("/api/tools/recipe-generator")
+        axios.get(process.env.NEXT_PUBLIC_SERVER_URL + "/api/tools/recipe-generator")
             .then((res) => {
                 setTool(res.data.tool);
             }).catch((err) => {
@@ -36,7 +43,107 @@ const RecipeGenerator = () => {
                 bgflashlight.style.setProperty("--y", y + "px");
             };
         });
+
+        // setRecipes([
+        //     {
+        //         "title": "Beef and Bean Chili",
+        //         "description": "A hearty and flavorful chili that is perfect for a cozy night in.",
+        //         "ingredients": [
+        //             "1 lb beef, cubed",
+        //             "1 onion, diced",
+        //             "1 can of beans, drained and rinsed"
+        //         ],
+        //         "steps": [
+        //             "Step 1: In a large pot, brown the beef over medium heat.",
+        //             "Step 2: Add the diced onions and cook until they are translucent.",
+        //             "Step 3: Stir in the beans and any additional seasonings (such as chili powder, cumin, and paprika) and simmer for 20-30 minutes."
+        //         ],
+        //         "image": "https://assets.epicurious.com/photos/578d20a00103fcdb27360fe8/master/pass/beef-and-bean-chili.jpg"
+        //     },
+        //     {
+        //         "title": "Beef and Bean Burritos",
+        //         "description": "A simple and delicious meal that the whole family will love.",
+        //         "ingredients": [
+        //             "1 lb beef, cooked and shredded",
+        //             "1 onion, diced",
+        //             "1 can of beans, drained and rinsed",
+        //             "Tortillas"
+        //         ],
+        //         "steps": [
+        //             "Step 1: Heat the tortillas in a skillet or microwave.",
+        //             "Step 2: Fill each tortilla with beef, onions, and beans.",
+        //             "Step 3: Roll up the tortillas and serve with your favorite toppings (such as salsa, cheese, and avocado)."
+        //         ],
+        //         "image": "https://www.thespruceeats.com/thmb/Cg945UW4HaqDtMigGILsCMok_DA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/beef-and-bean-burritos-3057244-hero-01-19b9e15579e74f04ad5de73d0ac47ed9.jpg"
+        //     }
+        // ]);
     }, []);
+    
+    const generate = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const ingredients = formData.get("ingredients");
+
+        if (!session) {
+            toast.error("Please sign in to use the recipe generator tool 🍳.", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            
+            // redirect to sign in page
+            setTimeout(() => {
+                router.push("/auth/signin?redirect=/ai-tools/generators/recipe-generator");
+            }, 2000);
+
+        }
+
+        if (!ingredients || ingredients.trim() === "") {
+            toast.error("Please enter some ingredients to generate recipes 🥘.", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+
+        if (!ingredients.includes(",")) {
+            toast.error("Please enter ingredients separated by commas 🥘.", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+
+        setIsLoading(true);
+
+        try {
+            const response = await axios.post("/api/tools/recipe-generator", { ingredients });
+            console.log(response.data);
+            setRecipes(response.data.response);
+            setIsLoading(false);
+        } catch (error) {
+            console.error(error);
+            setRecipes([]);
+            setIsLoading(false);
+        }
+    }
 
     return (
         <>
@@ -64,9 +171,10 @@ const RecipeGenerator = () => {
                                                 </button>
                                             </li>
                                             <li className="nav-item" role="presentation">
-                                                <button className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                                <button className="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" tooltip="Pro users only">
                                                     <img src="/images/icons/by-image.png" alt="icons" />
                                                     By Image
+                                                    <i class="feather-zap"></i>
                                                 </button>
                                             </li>
                                             <li className="nav-item" role="presentation">
@@ -80,59 +188,17 @@ const RecipeGenerator = () => {
                                         <div className="tab-content mt--50" id="pills-tabContent">
                                             <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                                 <div className="searchoptopn-area mb--30">
-                                                    <input type="text" placeholder="Enter ingredients you have on hand and get personalized recipes..." />
-                                                    <button>Generate <img src="/images/icons/13.png" alt="" /></button>
-                                                </div>
-                                            
-                                                <div className="row g-5">
-                                                    <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                                                        <div className="single-image-generator">
-                                                            <a href="#" className="thumbnail">
-                                                                <img src="/images/generator/01.jpg" alt="images" />
-                                                            </a>
-                                                            <div className="inner-content">
-                                                                <div className="left-content-area">
-                                                                    <h5 className="title">Create Image</h5>
-                                                                    <p className="disc">
-                                                                        Our text-to-image feature turns your words into beautiful AI visuals.
-                                                                    </p>
-                                                                </div>
-                                                                <button className="rts-btn btn-primary">Generate</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                                                        <div className="single-image-generator">
-                                                            <a href="#" className="thumbnail">
-                                                                <img src="/images/generator/02.jpg" alt="images" />
-                                                            </a>
-                                                            <div className="inner-content">
-                                                                <div className="left-content-area">
-                                                                    <h5 className="title">Create Image</h5>
-                                                                    <p className="disc">
-                                                                        Our text-to-image feature turns your words into beautiful AI visuals.
-                                                                    </p>
-                                                                </div>
-                                                                <button className="rts-btn btn-primary">Generate</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                                                        <div className="single-image-generator">
-                                                            <a href="#" className="thumbnail">
-                                                                <img src="/images/generator/03.jpg" alt="images" />
-                                                            </a>
-                                                            <div className="inner-content">
-                                                                <div className="left-content-area">
-                                                                    <h5 className="title">Create Image</h5>
-                                                                    <p className="disc">
-                                                                        Our text-to-image feature turns your words into beautiful AI visuals.
-                                                                    </p>
-                                                                </div>
-                                                                <button className="rts-btn btn-primary">Generate</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <form action="#" onSubmit={generate}>
+                                                        <input type="text" name="ingredients" placeholder="Enter comma separated ingredients you have on hand and get personalized recipes..." />
+                                                        <button type="submit"> 
+                                                            {isLoading ? ( "Generating") : ( "Generate")}
+                                                            {isLoading ? (
+                                                            <i className="fa-solid fa-spinner-third fa-spin"></i>
+                                                            ) : (
+                                                            <img src="/images/icons/13.png" alt="" />
+                                                            )}
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                             
@@ -401,12 +467,68 @@ const RecipeGenerator = () => {
                                         </div>
                                     </div>
 
-                                    <Link className="rts-btn btn-primary" href="/contact">
+                                    {/* <Link className="rts-btn btn-primary" href="/contact">
                                         Start Writing
-                                    </Link>
+                                    </Link> */}
                                 </div>
                             </div>
                         </div>
+                    
+                        {recipes.length > 0 && (
+                            <div className="row">
+                                <div className="feature-area-start rts-section-gapBottom mt--60">
+                                    <div className="container">
+                                        <div className="row">
+                                            <div className="col-lg-12">
+                                                <div className="title-left-feature">
+                                                    <h2 className="title text-center">
+                                                        Here are some recipes you can make with the ingredients you have on hand.
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="row mt--60">
+                                            <div className="col-lg-12">
+                                                {recipes.map((recipe, index) => (
+                                                <div className="single-feature-area-main-inner">
+                                                    <div className="row">
+                                                        <div className="col-lg-6">
+                                                            <div className="feature-content-inner">
+                                                                <h3 className="title"><span>{index + 1}.</span> {recipe.title}</h3>
+
+                                                                <p className="disc">{recipe.description}</p>
+
+                                                                <h4 className="sub-title">Ingredients</h4>
+                                                                <ul className="list">
+                                                                    {recipe.ingredients.map((ingredient, index) => (
+                                                                        <li key={index}>{ingredient}</li>
+                                                                    ))}
+                                                                </ul>
+
+                                                                <h4 className="sub-title">Steps</h4>
+                                                                <ul className="list">
+                                                                    {recipe.steps.map((step, index) => (
+                                                                        <li key={index}>{step}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-lg-6">
+                                                            <div className="thumbnail-feature">
+                                                                <img src={recipe.image} alt="recipe-image" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                ), recipes)}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
                         <div className="row case-lg-img-w">
                             <div className="share-mid">
@@ -415,8 +537,8 @@ const RecipeGenerator = () => {
 
                             <div className="col-lg-6 mt--150 mt_sm--50">
                                 <div className="use-case-left-thumb">
-                                    <h3 className="title">Generate Recipes</h3>
-                                    <p className="disc">Let Cre8teGPT analyze your ingredients and generate a list of delicious recipes.</p>
+                                    <h3 className="title">Input Ingredients</h3>
+                                    <p className="disc">Enter the ingredients you have available in your kitchen.</p>
                                     <img src="/images/case/05.jpg" alt="case-images" />
                                 </div>
                             </div>
@@ -424,8 +546,8 @@ const RecipeGenerator = () => {
                             <div className="col-lg-6 mt--20">
                                 <div className="use-case-right-thumb">
                                     <div className="inner">
-                                        <h3 className="title">Input Ingredients</h3>
-                                        <p className="disc">Enter the ingredients you have available in your kitchen.</p>
+                                        <h3 className="title">Generate Recipes</h3>
+                                        <p className="disc">Let Cre8teGPT analyze your ingredients and generate a list of delicious recipes.</p>
                                         <img src="/images/case/04.jpg" alt="case-images" />
                                     </div>
                                 </div>
@@ -466,7 +588,6 @@ const RecipeGenerator = () => {
                                 </div>
 
                                 <div className="single-feature-area-start bg-red-l">
-
                                     <div className="featue-content-area">
                                         <span className="pre">02</span>
                                         <h2 className="title">Search by <br /> Food Image</h2>

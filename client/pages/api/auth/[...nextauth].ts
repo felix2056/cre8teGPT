@@ -138,7 +138,7 @@ export default async function auth(req, res) {
                 }
 
                 if (account?.provider === "google" || account?.provider === "apple"  || account?.provider === "facebook" || account?.provider === "twitter") {
-                    console.log("account", account)
+                    // console.log("account", account)
 
                     // const oauthuser = {
                     //     email: token.email,
@@ -168,8 +168,7 @@ export default async function auth(req, res) {
                     }
 
                     const response = await axios.post('/api/after-social-login', data, { withCredentials: true });
-
-                    console.log("response", response)
+                    // console.log("response", response)
 
                     if (response.status === 200) {
                         const oauthuser = response.data.user;
@@ -185,7 +184,7 @@ export default async function auth(req, res) {
                     }
                 }
 
-                console.log("jwt data", [token, session, trigger, account, user])
+                // console.log("jwt data", [token, session, trigger, account, user])
 
                 return token;
             },
@@ -195,7 +194,7 @@ export default async function auth(req, res) {
                     session.user = token.user;
                 }
 
-                console.log("session data", [session, token, trigger])
+                // console.log("session data", [session, token, trigger])
 
                 return session;
             },

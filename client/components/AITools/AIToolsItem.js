@@ -49,12 +49,10 @@ const AIToolsItem = ({ AIToolsItem }) => {
                   </span>
                 </div>
               </div>
-              {data.badge !== "" ? (
+              {data.badge !== "" && (
                 <span className="rainbow-badge-card text-capitalize">
                   {data.badge}
                 </span>
-              ) : (
-                ""
               )}
             </Link>
           </li>

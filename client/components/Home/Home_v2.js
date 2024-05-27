@@ -48,7 +48,7 @@ const Home = () => {
 
                                     <div className="button-area">
                                         <Link href="/dashboard" className="rts-btn btn-primary text-white">Start Cre8ting for Free</Link>
-                                        <a href="contact.html" className="rts-btn btn-blur">Request demo</a>
+                                        {/* <a href="contact.html" className="rts-btn btn-blur">Request demo</a> */}
                                     </div>
 
                                     <div className="user-area">

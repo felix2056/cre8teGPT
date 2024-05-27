@@ -162,15 +162,18 @@
 @import 'elements/feature';
 @import 'elements/signup';
 @import 'elements/release-notes';
+@import 'elements/skeleton.scss';
 
 /**************************************
             Elements V2
 ***************************************/
+@import 'elements/v2/audio';
 @import 'elements/v2/banner';
 @import 'elements/v2/blog';
 @import 'elements/v2/breadcrumb';
 @import 'elements/v2/button';
 @import 'elements/v2/case';
+@import 'elements/v2/chatbot';
 @import 'elements/v2/common';
 @import 'elements/v2/contact';
 @import 'elements/v2/cta';
@@ -180,6 +183,8 @@
 @import 'elements/v2/header';
 @import 'elements/v2/marquree';
 @import 'elements/v2/nav';
+@import 'elements/v2/new-chat-sidebar';
+@import 'elements/v2/nice-select';
 @import 'elements/v2/pricing';
 @import 'elements/v2/service';
 @import 'elements/v2/search-generator';

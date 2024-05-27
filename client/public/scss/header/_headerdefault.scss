@@ -20,7 +20,10 @@
             line-height: 80px;
             align-items: center;
             img {
-                max-height: 35px;
+                max-height: 50px;
+                @media #{$sm-layout} {
+                    max-height: 40px;
+                }
             }
         }
     }

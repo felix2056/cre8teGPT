@@ -259,14 +259,14 @@
   ],
   "leftPanel": [
     {
-      "link": "/text-generator",
+      "link": "/dashboard/chat",
       "isDisable": false,
       "title": "Text Generator",
       "img": "/images/generator-icon/text.png",
       "badge": ""
     },
     {
-      "link": "/image-generator",
+      "link": "/dashboard/image-generator",
       "isDisable": false,
       "title": "Image Generator",
       "img": "/images/generator-icon/photo.png",
@@ -280,14 +280,14 @@
       "badge": ""
     },
     {
-      "link": "/image-editor",
+      "link": "/dashboard/photo-editor",
       "isDisable": false,
       "title": "Photo Editor",
       "img": "/images/generator-icon/photo-editor.png",
       "badge": ""
     },
     {
-      "link": "/vedio-generator",
+      "link": "/dashboard/video-generator",
       "isDisable": false,
       "title": "Video Generator",
       "img": "/images/generator-icon/video-camera.png",

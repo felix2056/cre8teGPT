@@ -1,6 +1,4 @@
 // search generator
-
-
 .search__generator{
     margin: auto;
     .nav-pills{
@@ -178,7 +176,7 @@
             position: absolute;
             left: 18px;
             top: 21px;
-            color: #001C42;
+            color: var(--color-white);
         }
     }
     textarea{
@@ -187,7 +185,7 @@
         border: 1px solid #E5E4FF;
         border-radius: 4px;
         padding: 15px 45px;
-        color: #001C42;
+        color: #fff;
         font-size: 14px;
     }
     .button-wrapper-generator{
@@ -207,6 +205,12 @@
             gap: 12px;
             border: 1px solid #3F3EED;
             color: var(--color-primary);
+        }
+        @media #{$small-mobile} {
+            max-width: 100%;
+            align-content: space-between;
+            justify-content: space-between;
+            align-items: center;
         }
     }
 }

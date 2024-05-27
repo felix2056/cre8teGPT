@@ -1,5 +1,6 @@
-import { Router } from "next/router";
 import React, { useEffect, useState } from "react";
+import { Router } from "next/router";
+import Script from 'next/script';
 
 import "bootstrap/scss/bootstrap.scss";
 
@@ -40,6 +41,15 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   return <>
     <SessionProvider session={session} refetchInterval={5 * 60} refetchOnWindowFocus={true}>
       {loading ? <Loading /> : <Component {...pageProps} />}
+
+      <Script src="/js/vendor/jquery.min.js" strategy="beforeInteractive" />
+      <Script src="/js/vendor/metismenu.js" strategy="lazyOnload" />
+      <Script src="/js/vendor/imagesloaded.pkgd.min.js" strategy="lazyOnload" />
+      <Script src="/js/vendor/isotope.pkgd.min.js" strategy="lazyOnload" />
+      <Script src="/js/vendor/magnific-popup.js" strategy="lazyOnload" />
+      <Script src="/js/plugins/swiper.js" strategy="lazyOnload" />
+      <Script src="/js/plugins/contact.form.js" strategy="lazyOnload" />
+      <Script src="/js/main.js" strategy="lazyOnload" />
     </SessionProvider>
   </>;
 }

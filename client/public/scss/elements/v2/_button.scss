@@ -11,6 +11,19 @@
             background: #151f39;
         }
     }
+    &.btn-secondary{
+        background: #151f39;
+        &:hover{
+            background: var(--color-secondary);
+        }
+    }
+    &.btn-danger{
+        color: var(--color-white);
+        background: var(--color-danger);
+        &:hover{
+            background: var(--color-danger);
+        }
+    }
     &.btn-blur{
         padding: 10px 31px;
         background: rgba(217, 217, 217, 0.06);

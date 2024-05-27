@@ -59,6 +59,7 @@ const Home = () => {
                 <p className="color-gray mt--5">💳 No credit card required!</p>
               </div>
             </div>
+            
             <div className="col-lg-10 col-xl-10 order-1 order-lg-2">
               <div className="frame-image frame-image-bottom bg-flashlight video-popup icon-center">
                 <Image src={bannerImg} alt="Banner Images" />
