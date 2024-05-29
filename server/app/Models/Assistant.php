@@ -5,14 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tool extends Model
+class Assistant extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'tool_categories')->withTimestamps();
-    }
 }

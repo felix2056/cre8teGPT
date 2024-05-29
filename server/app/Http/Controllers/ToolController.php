@@ -17,4 +17,13 @@ class ToolController extends Controller
             'categories' => $categories
         ]);
     }
+
+    public function show($slug)
+    {
+        $tool = Tool::where('slug', $slug)->first();
+
+        return response()->json([
+            'tool' => $tool
+        ]);
+    }
 }
