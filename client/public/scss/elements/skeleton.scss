@@ -32,10 +32,18 @@
     border-radius: 4px;
 }
 
+.loading-skeleton .text-area {
+    width: 100%;
+    height: 155px;
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
 .loading-skeleton .title,
 .loading-skeleton .message,
 .loading-skeleton .thumbnail,
-.loading-skeleton .image {
+.loading-skeleton .image 
+.loading-skeleton .text-area {
     animation: loading 1.5s infinite ease-in-out;
 }
 

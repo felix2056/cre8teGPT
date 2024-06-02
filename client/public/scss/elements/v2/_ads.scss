@@ -1,0 +1,560 @@
+.google-ad-preview {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    max-width: 600px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+
+    .ad-label {
+        color: #1a73e8;
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    
+    .ad-title {
+        a {
+            color: #1a0dab;
+            font-size: 18px;
+            font-weight: 400;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 5px;
+        }
+    }
+    
+    .ad-url {
+        a {
+            color: #006621;
+            font-size: 14px;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+    }
+    
+    .ad-description {
+        color: #545454;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+    
+    .ad-site-links {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .ad-site-links {
+        a {
+            color: #1a0dab;
+            font-size: 14px;
+            text-decoration: none;
+        }
+    }
+    
+    .ad-site-links {
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.facebook-ad-preview {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    max-width: 500px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+
+    .ad-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .profile-picture {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    
+    .ad-header-text {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .profile-name {
+        font-weight: bold;
+        font-size: 14px;
+    }
+    
+    .ad-sponsor {
+        color: #606770;
+        font-size: 12px;
+    }
+    
+    .ad-content {
+        margin-bottom: 10px;
+    }
+    
+    .ad-text {
+        font-size: 14px;
+        color: #1c1e21;
+        margin-bottom: 10px;
+    }
+    
+    .ad-image {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .ad-footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    .cta-button {
+        background-color: #1877f2;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    .cta-button:hover {
+        background-color: #1558b1;
+    }
+}
+
+.instagram-ad-preview {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+
+    .ad-header {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+    
+    .profile-pic {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+    
+    .ad-user-info {
+        flex-grow: 1;
+    }
+    
+    .ad-username {
+        font-weight: bold;
+        display: block;
+    }
+    
+    .ad-sponsored {
+        color: #8e8e8e;
+        font-size: 12px;
+    }
+    
+    .ad-menu {
+        font-size: 20px;
+        cursor: pointer;
+    }
+    
+    .ad-image {
+        width: 100%;
+        display: block;
+    }
+    
+    .ad-interactions {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+    
+    .interaction-icons span {
+        margin-right: 10px;
+        cursor: pointer;
+        font-size: 20px;
+    }
+    
+    .ad-save {
+        cursor: pointer;
+        font-size: 20px;
+    }
+    
+    .ad-likes {
+        padding: 0 10px;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+    
+    .ad-caption, .ad-comments {
+        padding: 0 10px;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+    
+    .ad-caption strong, .ad-comments strong {
+        font-weight: bold;
+    }
+    
+    .ad-add-comment {
+        border-top: 1px solid #dbdbdb;
+        padding: 10px;
+    }
+    
+    .ad-add-comment input {
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 14px;
+    }
+}
+
+.twitter-ad-preview {
+    background-color: #fff;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    padding: 15px;
+    max-width: 500px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+
+    .ad-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    
+    .ad-profile-image {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+    
+    .ad-user-info {
+        flex-grow: 1;
+    }
+    
+    .ad-user-name {
+        font-weight: bold;
+        color: #14171a;
+    }
+    
+    .ad-user-handle {
+        color: #657786;
+        font-size: 14px;
+    }
+    
+    .ad-badge {
+        color: #1da1f2;
+        font-size: 12px;
+        margin-top: 2px;
+    }
+    
+    .ad-content {
+        margin-bottom: 10px;
+    }
+    
+    .ad-content p {
+        color: #14171a;
+        margin-bottom: 10px;
+    }
+    
+    .ad-image {
+        width: 100%;
+        border-radius: 8px;
+    }
+    
+    .ad-actions {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .ad-action {
+        color: #657786;
+        font-size: 18px;
+        text-decoration: none;
+    }
+    
+    .ad-action:hover {
+        color: #1da1f2;
+    }
+}
+
+.linkedin-ad-preview {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    max-width: 600px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+
+    .ad-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    
+    .ad-logo {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+    
+    .ad-header-text {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .ad-company-name {
+        font-weight: bold;
+        color: #0073b1;
+        font-size: 16px;
+    }
+    
+    .ad-sponsored-label {
+        color: #767676;
+        font-size: 14px;
+    }
+    
+    .ad-content {
+        margin-bottom: 15px;
+    }
+    
+    .ad-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+    
+    .ad-description {
+        font-size: 14px;
+        color: #555;
+    }
+    
+    .ad-image img {
+        width: 100%;
+        border-radius: 8px;
+    }
+    
+    .ad-actions {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 15px;
+    }
+    
+    .ad-action-button {
+        background-color: #0073b1;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    
+    .ad-action-button:hover {
+        background-color: #005582;
+    }
+}
+
+.pinterest-ad-preview {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-width: 300px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+
+    .ad-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    .ad-content {
+        padding: 10px;
+    }
+    
+    .ad-label {
+        color: #555;
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    
+    .ad-title {
+        color: #000;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    
+    .ad-description {
+        color: #333;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 5px;
+    }
+    
+    .ad-url {
+        color: #006621;
+        font-size: 12px;
+        text-decoration: none;
+    }
+}
+
+.reddit-post-preview {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    .vote-section {
+        background-color: #f8f9fa;
+        border-right: 1px solid #ccc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+    
+    .vote-button {
+        background: none;
+        border: none;
+        color: #888;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    
+    .vote-button:hover {
+        color: #000;
+    }
+    
+    .vote-count {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+    
+    .post-content {
+        padding: 10px;
+        flex-grow: 1;
+    }
+    
+    .post-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 8px;
+    }
+    
+    .subreddit-name {
+        color: #0079d3;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    
+    .user-info {
+        color: #787c7e;
+        font-size: 12px;
+    }
+    
+    .post-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+    
+    .post-body {
+        font-size: 14px;
+        line-height: 1.5;
+        color: #1c1c1c;
+        margin-bottom: 10px;
+    }
+    
+    .post-footer {
+        display: flex;
+        gap: 15px;
+        font-size: 12px;
+    }
+    
+    .post-footer-link {
+        color: #0079d3;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .post-footer-link:hover {
+        text-decoration: underline;
+    }
+}
+
+.quora-ad-preview {
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 4px;
+    padding: 15px;
+    max-width: 600px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+
+    .ad-label {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 5px;
+    }
+    
+    .ad-label span {
+        color: #0070ff;
+        font-weight: bold;
+    }
+    
+    .ad-title a {
+        color: #333;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 10px;
+    }
+    
+    .ad-title a:hover {
+        text-decoration: underline;
+    }
+    
+    .ad-description {
+        color: #444;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+    
+    .ad-read-more a {
+        color: #0070ff;
+        font-size: 14px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    
+    .ad-read-more a:hover {
+        text-decoration: underline;
+    }
+}

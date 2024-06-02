@@ -76,7 +76,7 @@ const TextToSpeechGenerator = () => {
         setIsGenerating(true);
 
         try {
-            const response = await axios.post("/api/tools/text-to-speech", { data });
+            const response = await axios.post("/api/tools/generators/text-to-speech", { data });
             // const response = {
             //     data: {
             //         audio: "/audio/speech.mp3",

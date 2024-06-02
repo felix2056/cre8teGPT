@@ -15,20 +15,11 @@ const RecipeGenerator = () => {
     const router = useRouter();
 
     let [isLoading, setIsLoading] = useState(false);
-    let [tool, setTool] = useState([]);
     let [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
         // apply class to body
         document.body.classList.add("case-details-2");
-
-        // fetch all AI tools
-        axios.get(process.env.NEXT_PUBLIC_SERVER_URL + "/api/tools/recipe-generator")
-            .then((res) => {
-                setTool(res.data.tool);
-            }).catch((err) => {
-                console.log(err);
-            });
 
         sal();
 
@@ -43,40 +34,6 @@ const RecipeGenerator = () => {
                 bgflashlight.style.setProperty("--y", y + "px");
             };
         });
-
-        // setRecipes([
-        //     {
-        //         "title": "Beef and Bean Chili",
-        //         "description": "A hearty and flavorful chili that is perfect for a cozy night in.",
-        //         "ingredients": [
-        //             "1 lb beef, cubed",
-        //             "1 onion, diced",
-        //             "1 can of beans, drained and rinsed"
-        //         ],
-        //         "steps": [
-        //             "Step 1: In a large pot, brown the beef over medium heat.",
-        //             "Step 2: Add the diced onions and cook until they are translucent.",
-        //             "Step 3: Stir in the beans and any additional seasonings (such as chili powder, cumin, and paprika) and simmer for 20-30 minutes."
-        //         ],
-        //         "image": "https://assets.epicurious.com/photos/578d20a00103fcdb27360fe8/master/pass/beef-and-bean-chili.jpg"
-        //     },
-        //     {
-        //         "title": "Beef and Bean Burritos",
-        //         "description": "A simple and delicious meal that the whole family will love.",
-        //         "ingredients": [
-        //             "1 lb beef, cooked and shredded",
-        //             "1 onion, diced",
-        //             "1 can of beans, drained and rinsed",
-        //             "Tortillas"
-        //         ],
-        //         "steps": [
-        //             "Step 1: Heat the tortillas in a skillet or microwave.",
-        //             "Step 2: Fill each tortilla with beef, onions, and beans.",
-        //             "Step 3: Roll up the tortillas and serve with your favorite toppings (such as salsa, cheese, and avocado)."
-        //         ],
-        //         "image": "https://www.thespruceeats.com/thmb/Cg945UW4HaqDtMigGILsCMok_DA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/beef-and-bean-burritos-3057244-hero-01-19b9e15579e74f04ad5de73d0ac47ed9.jpg"
-        //     }
-        // ]);
     }, []);
     
     const generate = async (event) => {
@@ -134,7 +91,7 @@ const RecipeGenerator = () => {
         setIsLoading(true);
 
         try {
-            const response = await axios.post("/api/tools/recipe-generator", { ingredients });
+            const response = await axios.post("/api/tools/generators/recipe-generator", { ingredients });
             console.log(response.data);
             setRecipes(response.data.response);
             setIsLoading(false);

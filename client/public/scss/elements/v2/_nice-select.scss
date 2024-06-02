@@ -152,13 +152,11 @@
 }
 
 .generatore-content{
-
   .nice-select-wrap {
     width: 100%;
     border-radius: 4px;
-    border: 1px solid #dedfdf;
+    border: 1px solid var(--color-primary);
     overflow: hidden;
-    background-color: #f5f5f5;
     transition: background 300ms ease;
     &.down {
       background-color: white;
@@ -172,8 +170,6 @@
       display: block;
       padding: .5rem 1rem;
       text-decoration: none;
-      color: #222222;
-      font-size: 20px;
       line-height: 1.88;
     }
     
@@ -181,7 +177,6 @@
       position: relative;
       height: 50px;
       background-image: url(../../../images/generator/08.jpg);
-      color: #fff;
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -238,28 +233,21 @@
     }
   }
 
-
   .single-diamention{
     &.border-top{
-      border-top: 1px solid #E5E4FF;
-    }
-    .title{
-       font-size: 16px;
-       line-height: 1.2;
-       color: #001C42;
+      border-top: 1px solid var(--color-lighter)
     }
     .nice-select-wrap{
       .drop{
         background-image: none;
-        color: #001C42;
-        background-color: #fff;
-        border-color: #CFCFFF !important;
+        border-color: var(--color-light);
         &::after{
           color: #001C42;
         }
       }
     }
   }
+
   .range-main-wrapper{
     .container1{
       display: flex;
@@ -272,11 +260,7 @@
       }
     }
   }
-}
 
-
-.generatore-content {
-  height: calc(100vh);
   .number-image-wrapper{
     display: flex;
     align-items: center;
@@ -300,7 +284,6 @@
     }
   }
 }
-
 
 .single-form-s-wrapper.reset{
   padding:150px !important;

@@ -193,7 +193,11 @@
         border: none;
         font-size: var(--font-size-b1);
     }
-} 
+}
+
+.Toastify__toast-body {
+    width: 100%;
+}
 
 
 

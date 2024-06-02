@@ -71,7 +71,7 @@ const SpeechToTextGenerator = () => {
         setIsTranscribing(true);
 
         try {
-            const response = await axios.post('/api/tools/speech-to-text', formData, {
+            const response = await axios.post("/api/tools/generators/speech-to-text", formData, {
                 headers: {
                     'x-user-id': 'user_' + session.user.id,
                     'Content-Type': 'multipart/form-data',
