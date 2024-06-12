@@ -1,7 +1,7 @@
 import Header from "@/components/Header/Header";
 import HeaderTop from "@/components/Header/HeaderTop/Header-Top";
 import PopupMobileMenu from "@/components/Header/PopupMobileMenu";
-import YouTubeScriptAssistantSummary from "@/components/AITools/Assistants/YouTubeScriptAssistant/summary";
+import YouTubeScriptAssistantSummary from "@/components/AITools/Assistants/YouTubeScriptAssistant/Summary";
 
 import Service from "@/components/Service/Service";
 import Context from "@/context/Context";

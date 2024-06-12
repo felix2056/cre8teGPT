@@ -1228,7 +1228,7 @@
         @media #{$sm-layout} {
             flex-direction: column;
         }
-        button{
+        button, a {
             padding: 10px 35px;
             font-size: var(--font-size-b1);
             line-height: var(--line-height-b1);

@@ -325,39 +325,106 @@ const YouTubeScriptAssistantSummary = () => {
                             <div className="col-lg-12">
                                 <div className="title-conter-area top-tt">
                                     <div className="youtube-script-assistant-summary search__generator mt--50">
-                                        <div className="summary-container">
-                                            <div className="summary-header">
-                                                <h2>Summary</h2>
-                                                <button className="edit-button">Edit</button>
-                                            </div>
-                                            <div className="summary-content">
-                                                <div className="summary-row">
-                                                    <div className="summary-label">Language</div>
-                                                    <div className="summary-value">English</div>
-                                                </div>
-                                                <div className="summary-row">
-                                                    <div className="summary-label">Length</div>
-                                                    <div className="summary-value">1,300 words (~8 minutes)</div>
-                                                </div>
-                                                <div className="summary-row">
-                                                    <div className="summary-label">Format</div>
-                                                    <div className="summary-value">Review</div>
-                                                </div>
-                                                <div className="summary-row">
-                                                    <div className="summary-label">Topic</div>
-                                                    <div className="summary-value">Latest Supercar Track Performance Unveiling</div>
-                                                </div>
-                                                <div className="summary-row">
-                                                    <div className="summary-label">Unique Angle</div>
-                                                    <div className="summary-value">Exclusive first-look and hands-on track test of a newly released high-performance supercar that is rumored to redefine speed metrics and deliver groundbreaking technological advancements in the automotive industry.</div>
-                                                </div>
-                                                <div className="summary-row">
-                                                    <div className="summary-label">Audience</div>
-                                                    <div className="summary-value">The channel appeals to performance car enthusiasts who are passionate about high-speed, high-performance vehicles. This audience is drawn to the channel for its in-depth reviews, exclusive access to new car models, and thrilling racing content. They value detailed technical insights, first-hand driving experiences, and the excitement of automotive competitions. Male, age 18-34.</div>
+                                        <div className="tab-content mt--50" id="pills-tabContent">
+                                            <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                <div className="card text-center">
+                                                    <div className="card-header">
+                                                        <nav className="cre8tegpt-tab">
+                                                            <div
+                                                                className="tab-btn-grp nav nav-tabs mb-3 text-center justify-content-center"
+                                                                id="nav-tab"
+                                                                role="tablist"
+                                                            >
+                                                                <Link href="#" className="nav-link active">
+                                                                    <i className="fa fa-list-alt mr--10"></i>
+                                                                    Summary
+                                                                </Link>
+
+                                                                <Link href="#" className="nav-link with-badge">
+                                                                    <i className="fa fa-question-circle mr--10"></i>
+                                                                    Framing
+                                                                </Link>
+
+                                                                <Link href="#" className="nav-link with-badge">
+                                                                    <i className="fa fa-book-open mr--10"></i>
+                                                                    Research
+                                                                </Link>
+
+                                                                <Link href="#" className="nav-link with-badge">
+                                                                    <i className="fa fa-heading mr--10"></i>
+                                                                    Title
+                                                                </Link>
+
+                                                                <Link href="#" className="nav-link with-badge">
+                                                                    <i className="fa fa-file-alt mr--10"></i>
+                                                                    Thumbnail
+                                                                </Link>
+
+                                                                <Link href="#" className="nav-link with-badge">
+                                                                    <i className="fa fa-fishing-rod mr--10"></i>
+                                                                    Hooks
+                                                                </Link>
+
+                                                                <Link href="#" className="nav-link with-badge">
+                                                                    <i className="fa fa-microphone mr--10"></i>
+                                                                    Script
+                                                                </Link>
+
+                                                                <Link href="#" className="nav-link with-badge">
+                                                                    SEO
+                                                                </Link>
+
+                                                                <Link href="#" className="nav-link with-badge">
+                                                                    Review
+                                                                </Link>
+                                                            </div>
+                                                        </nav>
+                                                    </div>
+
+                                                    <div className="card-body">
+                                                        <h5 className="card-title">Special title treatment</h5>
+                                                        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                                        <div className="summary-container">
+                                                            <div className="summary-header">
+                                                                <button className="edit-button">
+                                                                    <i className="fas fa-edit"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div className="summary-content">
+                                                                <div className="summary-row">
+                                                                    <div className="summary-label">Topic</div>
+                                                                    <div className="summary-value">Latest Supercar Track Performance Unveiling</div>
+                                                                </div>
+                                                                <div className="summary-row">
+                                                                    <div className="summary-label">Unique Angle</div>
+                                                                    <div className="summary-value">Exclusive first-look and hands-on track test of a newly released high-performance supercar that is rumored to redefine speed metrics and deliver groundbreaking technological advancements in the automotive industry.</div>
+                                                                </div>
+                                                                <div className="summary-row">
+                                                                    <div className="summary-label">Audience</div>
+                                                                    <div className="summary-value">The channel appeals to performance car enthusiasts who are passionate about high-speed, high-performance vehicles. This audience is drawn to the channel for its in-depth reviews, exclusive access to new car models, and thrilling racing content. They value detailed technical insights, first-hand driving experiences, and the excitement of automotive competitions. Male, age 18-34.</div>
+                                                                </div>
+
+                                                                <div className="summary-row">
+                                                                    <div className="summary-label">Language</div>
+                                                                    <div className="summary-value">English</div>
+                                                                </div>
+                                                                <div className="summary-row">
+                                                                    <div className="summary-label">Length</div>
+                                                                    <div className="summary-value">1,300 words (~8 minutes)</div>
+                                                                </div>
+                                                                <div className="summary-row">
+                                                                    <div className="summary-label">Format</div>
+                                                                    <div className="summary-value">Review</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <a href="#" className="btn btn-primary">Go somewhere</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -449,6 +516,7 @@ const YouTubeScriptAssistantSummary = () => {
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
