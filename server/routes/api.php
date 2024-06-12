@@ -20,7 +20,34 @@ Route::post('/after-social-login', 'AuthController@afterSocialLogin');
 
 Route::prefix('tools')->group(function () {
     Route::get('', 'ToolController@index');
-    Route::get('/{slug}', 'ToolController@show');
+    Route::get('show/{slug}', 'ToolController@show');
+    Route::get('featured', 'ToolController@featured');
+
+    Route::prefix('generators')->group(function () {
+        Route::prefix('youtube-channel-analyzer')->group(function () {
+            Route::get('', 'Generators\YoutubeChannelAnalyzerController@index');
+            Route::get('{channel_id}/show', 'Generators\YoutubeChannelAnalyzerController@show');
+
+            Route::group(['middleware' => 'auth:sanctum'], function () {
+                Route::post('save', 'Generators\YoutubeChannelAnalyzerController@store');
+                Route::put('update/{channel_id}', 'Generators\YoutubeChannelAnalyzerController@update');
+                Route::delete('delete/{channel_id}', 'Generators\YoutubeChannelAnalyzerController@destroy');
+            });
+        });
+    });
+
+    Route::prefix('assistants')->group(function () {
+        Route::prefix('youtube-script-assistant')->group(function () {
+            Route::get('', 'Assistants\YoutubeScriptAssistantController@index');
+            Route::get('{script_id}/show', 'Assistants\YoutubeScriptAssistantController@show');
+
+            Route::group(['middleware' => 'auth:sanctum'], function () {
+                Route::post('save', 'Assistants\YoutubeScriptAssistantController@store');
+                Route::put('update/{script_id}', 'Assistants\YoutubeScriptAssistantController@update');
+                Route::delete('delete/{script_id}', 'Assistants\YoutubeScriptAssistantController@destroy');
+            });
+        });
+    });
 });
 
 Route::prefix('assistants')->group(function () {

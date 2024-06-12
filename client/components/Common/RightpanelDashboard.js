@@ -181,7 +181,7 @@ const RightpanelDashboard = ({assistant}) => {
                   <SingleRightPanel
                     {...thread}
                     key={index}
-                    thread={data}
+                    thread={thread}
                   />
                 ))}
             </ul>

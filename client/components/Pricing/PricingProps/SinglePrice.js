@@ -1,10 +1,22 @@
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import sal from "sal.js";
 
-const SinglePrice = ({ data, incresePrice, parentClass }) => {
+const SinglePrice = ({ data, increasePrice, parentClass }) => {
+  const [price, setPrice] = React.useState(data.price);
+  const [quantity, setQuantity] = React.useState(1);
+  const [tax, setTax] = React.useState(0);
+
   useEffect(() => {
     sal();
+
+    if (increasePrice) {
+      setPrice((data.price * 12 * 0.8).toFixed(0));
+      setQuantity(12);
+      setTax(2.99);
+    }
+
+    // console.log("data", [data.title, data.price, price, increasePrice]);
 
     const cards = document.querySelectorAll(".bg-flashlight");
 
@@ -18,9 +30,27 @@ const SinglePrice = ({ data, incresePrice, parentClass }) => {
       };
     });
   }, []);
+
+  const choosePlan = () => {
+    try {
+      // update price
+      data.price = price;
+      data.quantity = quantity;
+      data.tax = tax;
+
+      // save the plan on local storage
+      localStorage.setItem("plan", JSON.stringify(data));
+
+      // redirect to checkout page
+      window.location.href = "/checkout";
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <>
-      <div className={`${parentClass} ${!incresePrice ? "mt--30" : ""}`}>
+      <div className={`${parentClass} ${!increasePrice ? "mt--30" : ""}`}>
         <div
           className={`rainbow-pricing style-cre8tegpt ${
             data.price > 50 ? "active" : ""
@@ -46,12 +76,15 @@ const SinglePrice = ({ data, incresePrice, parentClass }) => {
                       <span className="price sm-text">{data.text} </span>
                     ) : (
                       <span className="price">
-                        {incresePrice
-                          ? data.price <= 50
-                            ? data.price + 250
-                            : data.price + 400
-                          : data.price}
+                        {price}
                       </span>
+                      // <span className="price">
+                      //   {increasePrice
+                      //     ? data.price <= 50
+                      //       ? data.price + 250
+                      //       : data.price + 400
+                      //     : data.price}
+                      // </span>
                     )}
                   </div>
                   <span className="subtitle">{data.subTitle}</span>
@@ -75,24 +108,24 @@ const SinglePrice = ({ data, incresePrice, parentClass }) => {
             </div>
             <div className="pricing-footer">
               {data.price === 0 ? (
-                <Link className="btn-default btn-border" href="#">
+                <button type="button" className="btn-default btn-border" onClick={choosePlan}>
                   Try it now
-                </Link>
+                </button>
               ) : data.title === "Enterprise" ? (
-                <Link className={`btn-default btn-border`} href="#">
+                <button type="button" className={`btn-default btn-border`} onClick={choosePlan}>
                   Contact Sales
-                </Link>
+                </button>
               ) : (
-                <Link
+                <button type="button"
                   className={`${
                     data.title === "Business"
                       ? "btn-default btn-border"
                       : "btn-default"
                   }`}
-                  href="#"
+                  onClick={choosePlan}
                 >
                   Purchase Now
-                </Link>
+                </button>
               )}
             </div>
           </div>

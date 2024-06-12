@@ -278,7 +278,7 @@ const YouTubeSummarizer = () => {
                                     </h2>
 
                                     <p className="disc">
-                                        Use Cre8teGPT's AI-powered YouTube video summarizer to generate high quality, SEO-friendly summaries of your favorite youtube videos in seconds.
+                                        Generate high quality, SEO-friendly summaries of your favorite youtube videos in seconds.
                                     </p>
 
                                     <div className="search__generator mt--50">

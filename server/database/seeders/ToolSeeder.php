@@ -48,6 +48,12 @@ class ToolSeeder extends Seeder
                 'icon' => '/images/generator-icon/lyrics_line.png',
             ],
             [
+                'name' => 'Text to speech',
+                'description' => 'Convert text to speech for your website or project.',
+                'slug' => 'text-to-speech',
+                'icon' => '/images/generator-icon/text-voice_line.png',
+            ],
+            [
                 'name' => 'Speech to text',
                 'description' => 'Convert speech to text for your website or project.',
                 'slug' => 'speech-to-text',
@@ -78,16 +84,28 @@ class ToolSeeder extends Seeder
                 'icon' => '/images/generator-icon/code-editor_line.png',
             ],
             [
+                'name' => 'YouTube Summarizer',
+                'description' => 'Generate high quality, SEO-friendly summaries, transcripts and word clouds of your favorite youtube videos in seconds.',
+                'slug' => 'youtube-summarizer',
+                'icon' => '/images/generator-icon/youtube-summarizer_line.png',
+            ],
+            [
+                'name' => 'YouTube Thumbnail Generator',
+                'description' => 'Generate high quality thumbnails for your YouTube videos.',
+                'slug' => 'youtube-thumbnail-generator',
+                'icon' => '/images/generator-icon/youtube-thumbnail-generator_line.png',
+            ],
+            [
+                'name' => 'YouTube Assistant',
+                'description' => 'Optimize your YouTube videos with algorithm-friendly titles, descriptions, tags, thumbnails and more. Simply paste the URL of your video, and let our AI do the rest!',
+                'slug' => 'youtube-assistant',
+                'icon' => '/images/assistant-icon/youtube-assistant_line.png',
+            ],
+            [
                 'name' => 'Email Writer',
                 'description' => 'Write emails for your website or project.',
                 'slug' => 'email-writer',
                 'icon' => '/images/generator-icon/email_line.png',
-            ],
-            [
-                'name' => 'Text to speech',
-                'description' => 'Convert text to speech for your website or project.',
-                'slug' => 'text-to-speech',
-                'icon' => '/images/generator-icon/text-voice_line.png',
             ],
             [
                 'name' => 'Chat with Documents',

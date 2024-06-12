@@ -1,0 +1,106 @@
+.tip-tap-editor {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  
+    .menu-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+      
+        .button-group {
+          display: flex;
+          gap: 5px;
+          margin: 10px;
+      
+          a {
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #333333;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s, color 0.3s;
+      
+            .fas {
+              margin-left: 5px;
+            }
+      
+            &:hover {
+              background-color: #e9ecef;
+            }
+      
+            &.is-active {
+              background-color: #007bff;
+              color: #ffffff;
+            }
+      
+            &:disabled {
+              cursor: not-allowed;
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+      
+  
+    .ProseMirror {
+      min-height: 300px;
+      padding: 16px;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      }
+  
+      p {
+        margin: 0 0 16px;
+        line-height: 1.6;
+      }
+  
+      h1, h2, h3, h4, h5, h6 {
+        margin: 16px 0 8px;
+        line-height: 1.2;
+      }
+  
+      ul, ol {
+        padding-left: 20px;
+        margin: 0 0 16px;
+  
+        li {
+          margin: 0 0 8px;
+        }
+      }
+  
+      blockquote {
+        margin: 0 0 16px;
+        padding: 16px;
+        background: #f1f1f1;
+        border-left: 4px solid #ddd;
+      }
+  
+      code {
+        background: #f1f1f1;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+    }
+  }
+  

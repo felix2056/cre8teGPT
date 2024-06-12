@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { copy } from "clipboard";
 
-const YoutubeAssistant = () => {
+const YouTubeVideoAssistant = () => {
     const { data: session } = useSession();
     const router = useRouter();
 
@@ -83,7 +83,7 @@ const YoutubeAssistant = () => {
         setThumbnails([]);
 
         try {
-            const response = await axios.post("/api/tools/assistants/youtube-assistant", { youtubeUrl }, {
+            const response = await axios.post("/api/tools/assistants/youtube-video-assistant", { youtubeUrl }, {
                 headers: {
                     'x-user-id': 'user_' + session.user.id
                 }
@@ -106,7 +106,6 @@ const YoutubeAssistant = () => {
                 progress: undefined,
                 theme: "dark",
             });
-            setTranscript("");
             setIsLoading(false);
         }
     };
@@ -117,7 +116,7 @@ const YoutubeAssistant = () => {
         console.log('video id', videoId)
 
         try {
-            const response = await axios.post("/api/tools/assistants/youtube-assistant-titles", { videoId }, {
+            const response = await axios.post("/api/tools/assistants/youtube-video-assistant-titles", { videoId }, {
                 headers: {
                     'x-user-id': 'user_' + session.user.id
                 }
@@ -150,7 +149,7 @@ const YoutubeAssistant = () => {
         setDescription("");
 
         try {
-            const response = await axios.post("/api/tools/assistants/youtube-assistant-description", { title }, {
+            const response = await axios.post("/api/tools/assistants/youtube-video-assistant-description", { title }, {
                 headers: {
                     'x-user-id': 'user_' + session.user.id
                 }
@@ -181,7 +180,7 @@ const YoutubeAssistant = () => {
         setTags([]);
 
         try {
-            const response = await axios.post("/api/tools/assistants/youtube-assistant-tags", { videoId }, {
+            const response = await axios.post("/api/tools/assistants/youtube-video-assistant-tags", { videoId }, {
                 headers: {
                     'x-user-id': 'user_' + session.user.id
                 }
@@ -210,7 +209,7 @@ const YoutubeAssistant = () => {
         setThumbnails([]);
 
         try {
-            const response = await axios.post("/api/tools/assistants/youtube-assistant-thumbnails", { title }, {
+            const response = await axios.post("/api/tools/assistants/youtube-video-assistant-thumbnails", { title }, {
                 headers: {
                     'x-user-id': 'user_' + session.user.id
                 }
@@ -261,11 +260,11 @@ const YoutubeAssistant = () => {
                                 <div className="title-conter-area top-tt">
                                     <span className="pre-title-bg">Content Assistants</span>
                                     <h2 className="title">
-                                        Youtube AI Assistant
+                                        YouTube Video AI Assistant
                                     </h2>
 
                                     <p className="disc">
-                                        Use Cre8teGPT's YouTube AI Assistant to optimize your YouTube videos with algorithm-friendly titles, descriptions, tags, thumbnails and more. Simply paste the URL of your video, and let our AI do the rest!
+                                        Optimize your YouTube videos with algorithm-friendly titles, descriptions, tags, thumbnails and more. Simply paste the URL of your video, and let our AI do the rest!
                                     </p>
 
                                     <div className="search__generator mt--50">
@@ -326,7 +325,7 @@ const YoutubeAssistant = () => {
                                                         Titles
                                                     </h4>
                                                 </div>
-                                                <table className="youtube-assistant-table table table-bordered table-hover">
+                                                <table className="youtube-video-assistant-table table table-bordered table-hover">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
@@ -433,7 +432,7 @@ const YoutubeAssistant = () => {
                                 <div className="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                     <div className="searchoptopn-area mb--30">
                                         <div className="row">
-                                            <div className="col-lg-12">
+                                            <div className="youtube-video-assistant-tags col-lg-12">
                                                 <div className="form-group">
                                                     <h4 className="title">
                                                         Tags
@@ -668,4 +667,4 @@ const YoutubeAssistant = () => {
     );
 };
 
-export default YoutubeAssistant;
+export default YouTubeVideoAssistant;

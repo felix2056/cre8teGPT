@@ -17,6 +17,7 @@ const Timeline = () => {
       });
     });
   }, []);
+  
   return (
     <>
       <div className="rainbow-timeline-area rainbow-section-gap">
@@ -29,12 +30,15 @@ const Timeline = () => {
                 data-sal-duration="700"
                 data-sal-delay="100"
               >
-                <h4 className="subtitle ">
+                <h4 className="subtitle">
                   <span className="theme-gradient">HOW IT WORKS</span>
                 </h4>
                 <h2 className="title w-600 mb--20">
-                  Guide Our AI to Create Your Copy
+                  3 Steps Content Cre8tion Journey
                 </h2>
+                <p className="description b1">
+                  Say goodbye to writer's block and hello to limitless cre8tivity!
+                </p>
               </div>
             </div>
           </div>
@@ -80,7 +84,7 @@ const Timeline = () => {
               </div>
               <div className="button-group mt--50 text-center">
                 <Link className="btn-default btn-large" href="/text-generator">
-                  Start writing for free
+                  Start cre8ting for free
                 </Link>
                 <Link
                   className="btn-default btn-large btn-border popup-video"

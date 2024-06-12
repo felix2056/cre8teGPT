@@ -10,13 +10,16 @@ import Context from "@/context/Context";
 import Separator from "../separator";
 import Timeline from "@/components/Timeline/Timeline";
 import Split from "@/components/Split/Split";
-import Pricing from "@/components/Pricing/Pricing";
+import PricingTwo from "@/components/Pricing/PricingTwo";
 import Accordion from "@/components/Accordion/Accordion";
 import Brands from "@/components/Brands/Brands";
 import CallToAction from "@/components/CallToAction/CallToAction";
 import Footer from "@/components/Footer/Footer";
 import Copyright from "@/components/Footer/Copyright";
 import PageHead from "../Head";
+import FeaturedTools from "@/components/Categories/FeaturedTools";
+// import Testimonials from "@/components/Testimonials/Testimonials";
+import Reviews from "@/components/Testimonials/Reviews";
 
 const HomePage = () => {
   return (
@@ -41,7 +44,20 @@ const HomePage = () => {
           <Separator top={false} />
           <Split />
           <Separator top={true} />
-          <Pricing />
+          <FeaturedTools />
+          <Separator top={true} />
+          {/* <Testimonials />
+          <Separator top={true} /> */}
+          <Reviews />
+          <Separator top={true} />
+          <PricingTwo
+              parentClass="col-xl-3 col-lg-6 col-md-6 col-12"
+              childClass="tab-content bg-transparent bg-light"
+              start={0}
+              end={4}
+              isHeading={false}
+              gap={false}
+          />
           <Separator top={true} />
           <Accordion isHead={true} />
           <Separator top={false} />

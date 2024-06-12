@@ -29,15 +29,15 @@ const Compare = () => {
                   <tr>
                     <th></th>
                     <th className="sm-radius-top-left">Free</th>
-                    <th className="style-prymary">Creator</th>
-                    <th className="style-prymary">Business</th>
+                    <th className="style-prymary">Starter</th>
+                    <th className="style-prymary">Cre8tor</th>
                     <th className="style-prymary sm-radius-top-right">
-                      Enterprise
+                      Business
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="heading-row">
+                  {/* <tr className="heading-row">
                     <td>
                       <h6>Price & Credits</h6>
                     </td>
@@ -53,20 +53,27 @@ const Compare = () => {
                     <td>
                       <h6>Price & Credits</h6>
                     </td>
+                  </tr> */}
+                  <tr>
+                    <td>Price</td>
+                    <td>$0.00 / month</td>
+                    <td>$14.99 / month</td>
+                    <td>$29.99 / month</td>
+                    <td>$49.99 / month</td>
                   </tr>
                   <tr>
-                    <td>Photo Avatar</td>
-                    <td>Unlimited</td>
-                    <td>Unlimited</td>
-                    <td>Unlimited</td>
-                    <td>Unlimited</td>
+                    <td>Monthly Cre8dits</td>
+                    <td>10</td>
+                    <td>149</td>
+                    <td>299</td>
+                    <td>599</td>
                   </tr>
                   <tr>
-                    <td>Instant Avatar</td>
-                    <td>Paid Add-On</td>
-                    <td>Paid Add-On</td>
-                    <td>Paid Add-On</td>
-                    <td>Customizable</td>
+                    <td>Access</td>
+                    <td>Limited</td>
+                    <td>Standard</td>
+                    <td>Full</td>
+                    <td>Full</td>
                   </tr>
                   <tr>
                     <td>Unit Price</td>

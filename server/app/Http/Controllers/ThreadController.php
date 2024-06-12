@@ -18,7 +18,7 @@ class ThreadController extends Controller
         $user = User::find(Auth::id());
         if (!$user) return response()->json([
             'message' => 'User not found'
-        ], 404);
+        ], 401);
 
         // "threads": [
         //     {

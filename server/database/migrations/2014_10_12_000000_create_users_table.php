@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone')->nullable();
             $table->string('password');
+            $table->decimal('cre8dits', 10, 2)->default(10);
             $table->string('google_id')->nullable();
             $table->string('apple_id')->nullable();
             $table->string('facebook_id')->nullable();

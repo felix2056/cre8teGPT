@@ -12,6 +12,10 @@ export default withAuth(function middleware(req) {}, {
                 return false
             }
 
+            if (req.nextUrl.pathname.startsWith("/checkout")) {
+              return false
+            }
+
             if (req.nextUrl.pathname.startsWith("/profile-details")) {
                 return false
             }

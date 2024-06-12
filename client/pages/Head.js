@@ -7,7 +7,7 @@ const PageHead = ({ title }) => {
       <Head>
         <title>{title} | Cre8teGPT - AI Content Generator</title>
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="Page Description" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

@@ -1,7 +1,7 @@
 import Header from "@/components/Header/Header";
 import HeaderTop from "@/components/Header/HeaderTop/Header-Top";
 import PopupMobileMenu from "@/components/Header/PopupMobileMenu";
-import YoutubeAssistant from "@/components/AITools/Assistants/YoutubeAssistant";
+import YouTubeVideoAssistant from "@/components/AITools/Assistants/YouTubeVideoAssistant";
 
 import Service from "@/components/Service/Service";
 import Context from "@/context/Context";
@@ -16,10 +16,10 @@ import Footer from "@/components/Footer/Footer";
 import Copyright from "@/components/Footer/Copyright";
 import PageHead from "../../Head";
 
-const YoutubeAssistantPage = () => {
+const YouTubeVideoAssistantPage = () => {
   return (
     <>
-      <PageHead title="YouTube Assistant - Optimize Your YouTube Video In 3 Mins" />
+      <PageHead title="YouTube Video Assistant - Optimize Your YouTube Videos In Seconds" />
 
       <main className="page-wrapper">
         <Context>
@@ -32,7 +32,7 @@ const YoutubeAssistantPage = () => {
           />
           <PopupMobileMenu />
 
-          <YoutubeAssistant />
+          <YouTubeVideoAssistant />
           <Separator top={false} />
           <Split />
           <Separator top={true} />
@@ -46,4 +46,4 @@ const YoutubeAssistantPage = () => {
   );
 };
 
-export default YoutubeAssistantPage;
+export default YouTubeVideoAssistantPage;

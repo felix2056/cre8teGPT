@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const SingleRightPanel = ({ thread }) => {
   const router = useRouter();
@@ -14,27 +15,29 @@ const SingleRightPanel = ({ thread }) => {
   return (
     <>
       <li className={`history-box ${thread.thread_id == router_thread_id ? "active" : ""}`}>
-        {thread.title}
-        <div className="dropdown history-box-dropdown">
-          <button
-            type="button"
-            className="more-info-icon dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <i className="feather-more-horizontal"></i>
-          </button>
-          <ul className="dropdown-menu">
-            {/* {item.list.map((innerItem, innerIndex) => (
-              <li key={innerIndex}>
-                <a className="dropdown-item" href="#">
-                  <i className={`feather-${innerItem.icon}`}></i>{" "}
-                  {innerItem.text}
-                </a>
-              </li>
-            ))} */}
-          </ul>
-        </div>
+        <Link href={`/dashboard/chat/${thread.thread_id}`}>
+          {thread.title}
+          <div className="dropdown history-box-dropdown">
+            <button
+              type="button"
+              className="more-info-icon dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i className="feather-more-horizontal"></i>
+            </button>
+            <ul className="dropdown-menu">
+              {/* {item.list.map((innerItem, innerIndex) => (
+                <li key={innerIndex}>
+                  <a className="dropdown-item" href="#">
+                    <i className={`feather-${innerItem.icon}`}></i>{" "}
+                    {innerItem.text}
+                  </a>
+                </li>
+              ))} */}
+            </ul>
+          </div>
+        </Link>
       </li>
     </>
   );

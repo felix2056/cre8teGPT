@@ -36,10 +36,11 @@ const Pricing = () => {
                   <span className="theme-gradient">Pricing</span>
                 </h4>
                 <h2 className="title w-600 mb--20">
-                  Commence Content Journey with AI
+                  Choose the best plan for you
                 </h2>
                 <p className="description b1">
-                  Collaborate with AI to generate content that resonates.
+                  Our pricing plans are designed to meet the needs of all
+                  businesses, from small to large.
                 </p>
               </div>
             </div>

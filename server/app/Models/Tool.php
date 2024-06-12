@@ -11,8 +11,16 @@ class Tool extends Model
 
     protected $guarded = [];
 
+    public $appends = ['url'];
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'tool_categories')->withTimestamps();
+    }
+
+    public function getUrlAttribute($value)
+    {
+        $category_slug = $this->categories->first()->slug;
+        return "/tools/{$category_slug}/{$this->slug}";
     }
 }

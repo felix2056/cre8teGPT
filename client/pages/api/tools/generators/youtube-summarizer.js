@@ -50,9 +50,7 @@ export default async function handler(req, res) {
             transcript = await transcribeYoutubeAudio(audioPath);
         }
 
-        if (!transcript) {
-            return res.status(500).json({ error: 'Error transcribing video audio' });
-        }
+        if (!transcript) throw new Error('Transcript not found');
 
         transcript = preprocessTranscript(transcript);
         
@@ -64,8 +62,8 @@ export default async function handler(req, res) {
             summary: summary,
         });
     } catch (error) {
-        console.error("Error generating blog post:", error);
-        res.status(500).json({ error: "Error generating blog post" });
+        console.error("Error generating summary:", error);
+        res.status(500).json({ title: "Error generating summary", message: error.message });
     }
 }
 
@@ -261,21 +259,6 @@ async function segmentSummary(videoDetails, summary) {
     if (paragraph) paragraphs.push(paragraph);
 
     return title + paragraphs.join('') + conclusion;
-}
-
-function generateBlogPost(title, videoDetails, summaries) {
-    let blogPost = `# ${title}\n\n`;
-    blogPost += `## Introduction\n\n${videoDetails.description}\n\n`;
-    blogPost += `## Key Points\n\n`;
-
-    summaries.forEach((summary, index) => {
-        blogPost += `### Segment ${index + 1}\n\n${summary}\n\n`;
-    });
-
-    blogPost += `## Conclusion\n\n`;
-    blogPost += `This blog post was generated from the [YouTube video](https://www.youtube.com/watch?v=${videoDetails.videoId}).\n`;
-
-    return blogPost;
 }
 
 

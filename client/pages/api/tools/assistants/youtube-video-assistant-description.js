@@ -29,7 +29,9 @@ async function generateDescription(title) {
     const prompt = `Generate a video description for the following title to optimize YouTube performance: "${title}"`;
     const response = await openai.chat.completions.create({
         model: "gpt-4o",
-        messages: [{ role: "user", content: prompt }],
+        messages: [
+            { role: "user", content: prompt }
+        ],
     });
 
     return response.choices[0].message.content;

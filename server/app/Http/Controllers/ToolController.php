@@ -18,6 +18,15 @@ class ToolController extends Controller
         ]);
     }
 
+    public function featured()
+    {
+        $tools = Tool::where('badge', 'featured')->get();
+
+        return response()->json([
+            'tools' => $tools
+        ]);
+    }
+
     public function show($slug)
     {
         $tool = Tool::where('slug', $slug)->first();

@@ -1,103 +1,103 @@
 {
   "service": [
     {
-      "title": "Effortless Content AI",
-      "desc": "Instantly create captivating content with AI magic—effortless creativity at your fingertips.",
-      "icon": "activity",
-      "delay": 100
-    },
-    {
-      "title": "Your Words, Our Tech",
-      "desc": "Transform your ideas into polished content with our AI-powered writing assistant — your words, our innovation.",
-      "icon": "cast",
-      "delay": 100
-    },
-    {
-      "title": "AI-Powered Writing",
-      "desc": "Unlock the power of AI for seamless content creation—innovative technology shaping your words.",
-      "icon": "map",
+      "title": "All-in-One Platform",
+      "desc": "Access a wide range of AI tools in one convenient place, reducing the need for multiple high-cost subscriptions on different platforms.",
+      "icon": "terminal",
       "delay": 200
     },
     {
-      "title": "AI Generation Simple",
-      "desc": "Simplify content creation with AI magic — effortless generation, infinite possibilities, boundless creativity.",
+      "title": "Multi-Language Support",
+      "desc": "Break language barriers with Cre8teGPT. Generate high-quality multilingual content and reach a global audience with our comprehensive language support.",
       "icon": "loader",
       "delay": 100
     },
     {
-      "title": "Quality AI Content",
-      "desc": "Craft quality content with AI precision—unleash the potential of technology for your writing needs.",
+      "title": "Improved Content Quality",
+      "desc": "Cre8teGPT doesn't just generate content, it optimizes it for success with SEO suggestions, audience personalization, and content quality improvement.",
+      "icon": "activity",
+      "delay": 100
+    },
+    {
+      "title": "Save Time & Resources",
+      "desc": "Focus on what matters most. Cre8teGPT automates tedious tasks like content ideation, research, and writing, freeing up your time for more creative endeavors.",
+      "icon": "cast",
+      "delay": 100
+    },
+    {
+      "title": "Secure & Private",
+      "desc": "Trust that your data is safe with robust security measures and privacy protections, ensuring your creative work remains confidential.",
       "icon": "speaker",
       "delay": 100
     },
     {
-      "title": "Your Writing Assistant",
-      "desc": "Your trusted AI companion for writing success—let technology elevate your creativity effortlessly.",
-      "icon": "terminal",
+      "title": "24/7 Support",
+      "desc": "Get assistance whenever you need it with our round-the-clock customer support, ensuring you never face a creative block alone.",
+      "icon": "map",
       "delay": 200
     }
   ],
   "timeline": [
     {
-      "title": "1. Describe Your Needs",
-      "desc": "Share your requirements: text, images, videos, or more. Cre8teGPT understands and kicks off the creative process."
+      "title": "1. Input Your Ideas",
+      "desc": "Begin by inputting your ideas, prompts, or requirements into Cre8teGPT's user-friendly interface."
     },
     {
       "title": "2. Let AI Get to Work",
-      "desc": "Watch as our AI crafts personalized content tailored to your specs. Experience the magic of quality and creativity in action."
+      "desc": "Sit back and watch as Cre8teGPT works its magic to produce engaging and relevant content in mere seconds."
     },
     {
-      "title": "3. Perfect Your Creation",
-      "desc": "Review and download your content. Cre8teGPT ensures your creations are polished and ready to captivate your audience."
+      "title": "3. Refine and Customize",
+      "desc": "Review the results & refine it to perfection. Cre8teGPT ensures your creations are polished and ready to captivate your audience."
     }
   ],
   "pricing": [
     {
-      "title": "Basic",
+      "title": "Free",
       "price": 0,
       "text": "",
       "subTitle": "Forever",
       "isActive": false,
       "subItem": [
         {
-          "text": "7,700 Words",
+          "text": "10 Cre8dits / month",
           "isMinus": false
         },
         {
-          "text": "6+ Templates",
+          "text": "1 Language",
           "isMinus": false
         },
         {
-          "text": "5+ Languages",
+          "text": "Basic Tools",
           "isMinus": false
         },
         {
-          "text": "AI Blog generate",
+          "text": "Content Generators",
           "isMinus": true
         },
         {
-          "text": "Advance Editor Tool",
+          "text": "Content Editors",
           "isMinus": true
         },
         {
-          "text": "Consistent support",
+          "text": "Content Assistants",
+          "isMinus": true
+        },
+        {
+          "text": "Full Access",
           "isMinus": true
         }
       ]
     },
     {
-      "title": "Business",
-      "price": 50,
+      "title": "Starter",
+      "price": 14.99,
       "text": "",
       "subTitle": "USD Per Month",
       "isActive": true,
       "subItem": [
         {
-          "text": "80,000 Words",
-          "isMinus": false
-        },
-        {
-          "text": "6+ Templates",
+          "text": "149 Cre8dits / month",
           "isMinus": false
         },
         {
@@ -105,48 +105,97 @@
           "isMinus": false
         },
         {
-          "text": "AI Blog generate",
+          "text": "Basic tools",
           "isMinus": false
         },
         {
-          "text": "Advance Editor Tool",
+          "text": "Content Generators",
           "isMinus": false
         },
         {
-          "text": "Consistent support",
+          "text": "Content Editors",
           "isMinus": false
+        },
+        {
+          "text": "Content Assistants",
+          "isMinus": true
+        },
+        {
+          "text": "Full Access",
+          "isMinus": true
         }
       ]
     },
     {
-      "title": "Advanced",
-      "price": 100,
+      "title": "Cre8tor",
+      "price": 29.99,
       "text": "",
       "subTitle": "USD Per Month",
       "isActive": false,
       "subItem": [
         {
-          "text": "100,000 Words",
+          "text": "299 Cre8dits / month",
           "isMinus": false
         },
         {
-          "text": "6+ Templates",
+          "text": "8+ Languages",
           "isMinus": false
         },
         {
-          "text": "5+ Languages",
+          "text": "Basic Tools",
           "isMinus": false
         },
         {
-          "text": "AI Blog generate",
+          "text": "Content Generators",
           "isMinus": false
         },
         {
-          "text": "Advance Editor Tool",
+          "text": "Content Editors",
           "isMinus": false
         },
         {
-          "text": "Consistent support",
+          "text": "Content Assistants",
+          "isMinus": false
+        },
+        {
+          "text": "Full Access",
+          "isMinus": false
+        }
+      ]
+    },
+    {
+      "title": "Business",
+      "price": 49.99,
+      "text": "",
+      "subTitle": "USD Per Month",
+      "isActive": false,
+      "subItem": [
+        {
+          "text": "599 Cre8dits / month",
+          "isMinus": false
+        },
+        {
+          "text": "12+ Languages",
+          "isMinus": false
+        },
+        {
+          "text": "Basic Tools",
+          "isMinus": false
+        },
+        {
+          "text": "Content Generators",
+          "isMinus": false
+        },
+        {
+          "text": "Content Editors",
+          "isMinus": false
+        },
+        {
+          "text": "Content Assistants",
+          "isMinus": false
+        },
+        {
+          "text": "Full Access",
           "isMinus": false
         }
       ]
@@ -159,27 +208,31 @@
       "isActive": false,
       "subItem": [
         {
-          "text": "3,580,000 Words",
+          "text": "Unlimited Cre8dits",
           "isMinus": false
         },
         {
-          "text": "16+ Templates",
+          "text": "Unlimited Languages",
           "isMinus": false
         },
         {
-          "text": "8+ Languages",
+          "text": "Advanced Tools",
           "isMinus": false
         },
         {
-          "text": "AI Blog generate",
+          "text": "Content Generators",
           "isMinus": false
         },
         {
-          "text": "Advance Editor Tool",
+          "text": "Content Editors",
           "isMinus": false
         },
         {
-          "text": "Consistent support",
+          "text": "Content Assistants",
+          "isMinus": false
+        },
+        {
+          "text": "Full Access",
           "isMinus": false
         }
       ]

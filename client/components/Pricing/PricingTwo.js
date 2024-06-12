@@ -117,7 +117,7 @@ const PricingTwo = ({
                             data={data}
                             key={index}
                             parentClass={parentClass}
-                            incresePrice={false}
+                            increasePrice={false}
                           />
                         ))}
                   </div>
@@ -137,16 +137,16 @@ const PricingTwo = ({
                           <SinglePrice
                             {...data}
                             data={data}
-                            key={index}
+                            key={index + 4}
                             parentClass={parentClass}
-                            incresePrice={true}
+                            increasePrice={true}
                           />
                         ))}
                   </div>
                 </div>
               </div>
             </div>
-            <Compare />
+            {/* <Compare /> */}
           </div>
         </div>
       </div>

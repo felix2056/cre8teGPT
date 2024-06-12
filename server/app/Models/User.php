@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Assistants\YoutubeScriptAssistant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -66,6 +68,16 @@ class User extends Authenticatable
     public function photoMessages()
     {
         return $this->hasMany(PhotoMessage::class);
+    }
+
+    public function videoMessages()
+    {
+        return $this->hasMany(VideoMessage::class);
+    }
+
+    public function youtubeScripts()
+    {
+        return $this->hasMany(YoutubeScriptAssistant::class);
     }
 
     public function getFullNameAttribute()
