@@ -1217,7 +1217,9 @@
 
 // Dashboard Pricing
 .cre8tegpt-tab{
-    display: flex;
+    @media #{$laptop-device} {
+        display: flex;
+    }
     justify-content: center;
     .tab-btn-grp{
         padding: 10px;
@@ -1244,7 +1246,7 @@
             @media #{$small-mobile} {
                 padding: 10px 15px;
             }
-            &.active{
+            &.active, &:hover{
                 background: var(--color-primary);
                 color: var(--color-white);
             }

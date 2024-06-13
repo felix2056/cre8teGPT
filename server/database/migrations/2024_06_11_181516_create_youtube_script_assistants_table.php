@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('length')->default(800);
             $table->string('format');
             $table->enum('research', ['basic', 'intermediate', 'comprehensive', 'exhaustive'])->default('basic');
+            $table->json('titles')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

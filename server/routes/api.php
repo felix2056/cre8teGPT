@@ -40,6 +40,7 @@ Route::prefix('tools')->group(function () {
         Route::prefix('youtube-script-assistant')->group(function () {
             Route::get('', 'Assistants\YoutubeScriptAssistantController@index');
             Route::get('{script_id}/show', 'Assistants\YoutubeScriptAssistantController@show');
+            Route::match(['get', 'post'], '{script_id}/framing', 'Assistants\YoutubeScriptAssistantController@framing');
 
             Route::group(['middleware' => 'auth:sanctum'], function () {
                 Route::post('save', 'Assistants\YoutubeScriptAssistantController@store');

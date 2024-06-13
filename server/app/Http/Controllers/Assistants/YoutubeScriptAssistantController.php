@@ -11,6 +11,58 @@ use Illuminate\Support\Facades\Auth;
 
 class YoutubeScriptAssistantController extends Controller
 {
+    public function show($id)
+    {
+        $youtubeScriptAssistant = YoutubeScriptAssistant::find($id);
+        if (!$youtubeScriptAssistant) return response()->json([
+            'message' => 'Youtube script assistant not found'
+        ], 404);
+
+        return response()->json([
+            'topic' => $youtubeScriptAssistant->topic,
+            'angle' => $youtubeScriptAssistant->angle,
+            'audience' => $youtubeScriptAssistant->audience,
+            'goal' => $youtubeScriptAssistant->goal,
+            'scriptNumber' => $youtubeScriptAssistant->number,
+            'language' => $youtubeScriptAssistant->language,
+            'length' => $youtubeScriptAssistant->length,
+            'format' => $youtubeScriptAssistant->format,
+            'research' => $youtubeScriptAssistant->research,
+        ]);
+    }
+
+    public function framing(Request $request, $id)
+    {
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'titles' => 'required|array',
+            ]);
+
+            $youtubeScriptAssistant = YoutubeScriptAssistant::find($id);
+            if (!$youtubeScriptAssistant) return response()->json([
+                'message' => 'Youtube script assistant not found'
+            ], 404);
+
+            $youtubeScriptAssistant->update([
+                'titles' => json_encode($request->titles),
+            ]);
+
+            return response()->json([
+                'message' => 'Youtube script assistant updated',
+                'youtubeScriptAssistant' => $youtubeScriptAssistant,
+            ]);
+        }
+        
+        $youtubeScriptAssistant = YoutubeScriptAssistant::find($id);
+        if (!$youtubeScriptAssistant) return response()->json([
+            'message' => 'Youtube script assistant not found'
+        ], 404);
+
+        return response()->json([
+            'titles' => $youtubeScriptAssistant->titles ?? [],
+        ]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -47,6 +99,59 @@ class YoutubeScriptAssistantController extends Controller
         return response()->json([
             'message' => 'Youtube script assistant created',
             'youtubeScriptAssistant' => $youtubeScriptAssistant,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'channel_id' => 'nullable|string',
+            'topic' => 'required|string',
+            'angle' => 'required|string',
+            'audience' => 'required|string',
+            'goal' => 'required|string',
+            'scriptNumber' => 'required|integer',
+            'language' => 'required|string',
+            'length' => 'required|integer',
+            'format' => 'required|string',
+            'research' => 'required|in:basic,intermediate,comprehensive,exhaustive',
+        ]);
+
+        $youtubeScriptAssistant = YoutubeScriptAssistant::find($id);
+        if (!$youtubeScriptAssistant) return response()->json([
+            'message' => 'Youtube script assistant not found'
+        ], 404);
+
+        $youtubeScriptAssistant->update([
+            'channel' => $request->channel_id,
+            'topic' => $request->topic,
+            'angle' => $request->angle,
+            'audience' => $request->audience,
+            'goal' => $request->goal,
+            'number' => $request->scriptNumber,
+            'language' => $request->language,
+            'length' => $request->length,
+            'format' => $request->format,
+            'research' => $request->research,
+        ]);
+
+        return response()->json([
+            'message' => 'Youtube script assistant updated',
+            'youtubeScriptAssistant' => $youtubeScriptAssistant,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $youtubeScriptAssistant = YoutubeScriptAssistant::find($id);
+        if (!$youtubeScriptAssistant) return response()->json([
+            'message' => 'Youtube script assistant not found'
+        ], 404);
+
+        $youtubeScriptAssistant->delete();
+
+        return response()->json([
+            'message' => 'Youtube script assistant deleted',
         ]);
     }
 }

@@ -1,3 +1,8 @@
+$youtube-red: #FF0000;
+$youtube-dark: #282828;
+$youtube-light: #F9F9F9;
+$youtube-gray: #606060;
+
 .h-400px {
     height: 400px;
 }
@@ -803,12 +808,11 @@
             }
         }
     }
-}
 
-.youtube-script-assistant-summary {
     .card {
         border: 1px solid #d0d0d0;
-        border-radius: 5px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         background-color: #fff;
         overflow: hidden;
         text-align: left;
@@ -832,6 +836,176 @@
 
         .card-body {
             padding: 10px;
+
+            .summary-container {
+                color: $youtube-dark;
+                padding: 20px;
+                margin: 20px auto;
+
+                .summary-header {
+                    @media #{$laptop-device} {
+                        display: flex;
+                        justify-content: flex-end;
+                    }
+
+                    .edit-button {
+                        width: 100px;
+                    }
+                }
+    
+                .summary-content {
+                    margin-top: 20px;
+
+                    .summary-row {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 20px 0;
+                        border-bottom: 1px solid $youtube-gray;
+        
+                        &:last-child {
+                            border-bottom: none;
+                        }
+                    }
+        
+                    .summary-label {
+                        font-weight: bold;
+                        color: $youtube-gray;
+                    }
+        
+                    .summary-value {
+                        max-width: 70%;
+                        text-align: left;
+                    }
+                }
+            }
+
+            .framing-container {
+                color: $youtube-dark;
+                padding: 20px;
+                margin: 20px auto;
+        
+                .framing-header {
+                    @media #{$laptop-device} {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    align-items: center;
+                    border-bottom: 1px solid #e0e0e0;
+                    padding-bottom: 10px;
+                    margin-bottom: 20px;
+        
+                    h2 {
+                        margin: 0;
+                        font-size: 2.5rem;
+                        font-weight: 800;
+                        color: #333;
+                    }
+        
+                    p {
+                        margin: 0;
+                        font-size: 1.2rem;
+                        color: #777;
+                    }
+        
+                    .refresh-button {
+                        width: 100px;
+                    }
+                }
+        
+                .framing-content {
+                    .question-row {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 10px 0;
+                        border-bottom: 1px solid #e0e0e0;
+        
+                        &:last-child {
+                            border-bottom: none;
+                        }
+
+                        &:hover {
+                            background-color: #b524aa !important;
+                            color: #fff !important;
+                        }
+
+                        .question-number {
+                            font-weight: 800;
+                            @media #{$small-mobile} {
+                                display: none;
+                            }
+                        }
+        
+                        .question-text {
+                            flex: 1;
+                            @media #{$small-mobile} {
+                                text-align: left;
+                                margin-right: 15px;
+                            }
+                        }
+        
+                        .question-actions {
+                            display: flex;
+                            gap: 10px;
+        
+                            .action-button {
+                                padding: 5px 10px;
+                                font-size: 1rem;
+                                color: #fff;
+                                border: none;
+                                border-radius: 4px;
+                                cursor: pointer;
+        
+                                &.choose {
+                                    background-color: #28a745;
+        
+                                    &:hover {
+                                        background-color: #218838;
+                                    }
+                                }
+        
+                                &.edit {
+                                    background-color: #ffc107;
+        
+                                    &:hover {
+                                        background-color: #e0a800;
+                                    }
+                                }
+        
+                                &.remove {
+                                    background-color: #dc3545;
+        
+                                    &:hover {
+                                        background-color: #c82333;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // .question-row:nth-child(even) {
+                    //     background-color: #f9f9f9;
+                    // }
+                }
+        
+                .more-button {
+                    display: block;
+                    width: 100%;
+                    padding: 10px 0;
+                    font-size: 1rem;
+                    color: #fff;
+                    background-color: #6c757d;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    text-align: center;
+                    margin-top: 20px;
+        
+                    &:hover {
+                        background-color: #5a6268;
+                    }
+                }
+            }
         }
 
         .card-footer {

@@ -14,11 +14,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import axios from "axios";
 
-const YouTubeScriptAssistantSummary = () => {
+const YouTubeScriptAssistantFraming = () => {
     const { data: session } = useSession();
     const router = useRouter();
 
     const [isLoading, setIsLoading] = useState(false);
+    const [isGenerating, setIsGenerating] = useState(false);
     const [isDBSaved, setIsDBSaved] = useState(false);
 
     const [topic, setTopic] = useState("");
@@ -31,6 +32,8 @@ const YouTubeScriptAssistantSummary = () => {
     const [format, setFormat] = useState("Other");
     const [research, setResearch] = useState("basic");
     const [links, setLinks] = useState([]);
+
+    const [titles, setTitles] = useState([]);
 
     useEffect(() => {
         // Apply class to body
@@ -95,6 +98,7 @@ const YouTubeScriptAssistantSummary = () => {
             ]);
 
             getFromDatabase(router.query.script_id);
+            getTitlesFromDatabase(router.query.script_id);
         }
     }, [router.query.script_id]);
 
@@ -135,12 +139,90 @@ const YouTubeScriptAssistantSummary = () => {
             setIsLoading(false);
         }
     };
+    
+    const getTitlesFromDatabase = async (scriptId) => {
+        setIsLoading(true);
+
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/tools/assistants/youtube-script-assistant/${scriptId}/framing`);
+
+            if (!response || !response.data) {
+                throw new Error("No response from the server");
+            }
+
+            if (!response.data.titles || response.data.titles.length === 0) await generateTitles();
+            else await setTitles(response.data.titles);
+
+            setIsLoading(false);
+        } catch (error) {
+            console.error(error);
+            toast.error(error.message, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            setIsLoading(false);
+        }
+    };
+
+    const generateTitles = async () => {
+        setIsGenerating(true);
+
+        try {
+            const response = await axios.post("/api/tools/assistants/youtube-script-assistant-titles", {
+                topic,
+                angle,
+                audience,
+                goal,
+                format,
+            }, {
+                headers: {
+                    'x-user-id': 'user_' + session.user.id
+                }
+            });
+
+            if (!response || !response.data) {
+                throw new Error("No response from the server");
+            }
+
+            await setTitles(response.data.titles);
+            setIsGenerating(false);
+
+            await saveToDatabase(response.data.titles);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const saveToDatabase = async (titles) => {
+        setIsLoading(true);
+
+        try {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/tools/assistants/youtube-script-assistant/${router.query.script_id}/framing`, {
+                titles
+            });
+
+            if (!response || !response.data) {
+                throw new Error("No response from the server");
+            }
+
+            setIsLoading(false);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
 
     const goToNextStep = (step) => () => {
         if (router.query.script_id) {
-            router.push(`/tools/assistants/youtube-script-assistant/${step}/${router.query.script_id}`);
+            router.push(`/tools/assistants/youtube-script-assistant/${router.query.script_id}/${step}`);
         }
-    }
+    };
 
     return (
         <>
@@ -175,44 +257,41 @@ const YouTubeScriptAssistantSummary = () => {
                                                     </div>
 
                                                     <div className="card-body">
-                                                        <div className="summary-container">
-                                                            <div className="summary-header">
-                                                                <h3 className="title">Summary</h3>
-                                                                <button className="btn-default btn-small round edit-button">
-                                                                    <i className="fas fa-edit"></i>
+                                                        <div className="framing-container">
+                                                            <div className="framing-header">
+                                                                <h2 className="title">Framing</h2>
+                                                                <p className="disk">Refine your topic by choosing which viewer questions the script should answer. For best results choose 3-5 questions per 10 minutes of video.</p>
+                                                                <button className="btn-default btn-small round refresh-button">
+                                                                    <i className="fas fa-sync-alt"></i>
                                                                 </button>
                                                             </div>
 
-                                                            <div className="summary-content">
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Topic</div>
-                                                                    <div className="summary-value">{topic}</div>
-                                                                </div>
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Unique Angle</div>
-                                                                    <div className="summary-value">{angle}</div>
-                                                                </div>
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Audience</div>
-                                                                    <div className="summary-value">{audience}</div>
-                                                                </div>
-
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Language</div>
-                                                                    <div className="summary-value">{language}</div>
-                                                                </div>
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Length</div>
-                                                                    <div className="summary-value">{length} words</div>
-                                                                </div>
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Format</div>
-                                                                    <div className="summary-value">{format}</div>
-                                                                </div>
+                                                            <div className="framing-content">
+                                                                {titles.map((title, index) => (
+                                                                    <div className="question-row" key={index}>
+                                                                        <div className="question-number">{index + 1}</div>
+                                                                        <div className="question-text">{title}</div>
+                                                                        <div className="question-actions">
+                                                                            <Tooltip id="my-tooltip" className="custom-tooltip tooltip-inner" />
+                                                                            <button className="action-button choose" data-tooltip-id="my-tooltip" data-tooltip-content="Choose">
+                                                                                <i className="fas fa-check"></i>
+                                                                            </button>
+                                                                            <button className="action-button edit" data-tooltip-id="my-tooltip" data-tooltip-content="Edit">
+                                                                                <i className="fas fa-pencil-alt"></i>
+                                                                            </button>
+                                                                            <button className="action-button remove" data-tooltip-id="my-tooltip" data-tooltip-content="Remove">
+                                                                                <i className="fas fa-trash-alt"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
                                                             </div>
+
+                                                            <button className="more-button">More</button>
                                                         </div>
 
-                                                        <div className="summary-footer" style={{ textAlign: "right" }}>
+
+                                                        <div className="framing-footer" style={{ textAlign: "right" }}>
                                                             <button type="button" className="btn-default btn-small round" onClick={goToNextStep("framing")}>
                                                                 Framing <i className="fas fa-arrow-right ml--10"></i>
                                                             </button>
@@ -382,4 +461,4 @@ const YouTubeScriptAssistantSummary = () => {
     );
 };
 
-export default YouTubeScriptAssistantSummary;
+export default YouTubeScriptAssistantFraming;

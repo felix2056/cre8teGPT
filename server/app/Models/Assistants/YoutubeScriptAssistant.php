@@ -17,4 +17,9 @@ class YoutubeScriptAssistant extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getTitlesAttribute($value)
+    {
+        return json_decode($value);
+    }
 }

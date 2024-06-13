@@ -205,6 +205,10 @@ const YouTubeChannelAnalyzer = () => {
                 }
             });
 
+            if (!response || !response.data) {
+                throw new Error("No response from the server");
+            }
+
             await setOverview(response.data.overview);
             setIsLoadingOverview(false);
         } catch (error) {
@@ -233,6 +237,10 @@ const YouTubeChannelAnalyzer = () => {
                     'x-user-id': 'user_' + session.user.id
                 }
             });
+
+            if (!response || !response.data) {
+                throw new Error("No response from the server");
+            }
 
             await setDemographics(response.data.demographics);
             setIsLoadingDemographics(false);
@@ -263,6 +271,10 @@ const YouTubeChannelAnalyzer = () => {
                 }
             });
 
+            if (!response || !response.data) {
+                throw new Error("No response from the server");
+            }
+
             await setPsychographics(response.data.psychographics);
             setIsLoadingPsychographics(false);
         } catch (error) {
@@ -292,6 +304,10 @@ const YouTubeChannelAnalyzer = () => {
                 }
             });
 
+            if (!response || !response.data) {
+                throw new Error("No response from the server");
+            }
+
             await setOnlineBehaviors(response.data.onlineBehaviors);
             setIsLoadingOnlineBehaviors(false);
         } catch (error) {
@@ -320,6 +336,10 @@ const YouTubeChannelAnalyzer = () => {
                     'x-user-id': 'user_' + session.user.id
                 }
             });
+
+            if (!response || !response.data) {
+                throw new Error("No response from the server");
+            }
 
             await setOfflineBehaviors(response.data.offlineBehaviors);
             setIsLoadingOfflineBehaviors(false);
