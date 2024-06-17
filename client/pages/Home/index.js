@@ -39,7 +39,7 @@ const HomePage = () => {
 
           <Home />
           <Service />
-          <Separator top={true} />
+          <Separator top={false} style={{ zIndex: 2 }} />
           <Timeline />
           <Separator top={false} />
           <Split />

@@ -3,6 +3,8 @@
 
 .easy-steps-area-wrapper{
     background-image: url(../../../images/steps/01.jpg);
+    background: linear-gradient(100deg, #ba2f9d, #6f3ce7);
+    color: #fff !important;
     padding: 50px;
     border-radius: 10px;
     @media #{$sm-layout} {
@@ -116,6 +118,7 @@
             background-clip: text;
             text-fill-color: transparent;
             z-index: -1;
+            opacity: .2;
             &.active{
                 background: linear-gradient(180deg, #C89FFC 12.56%, rgb(240 240 240) 75%);
                 -webkit-background-clip: text;
@@ -133,13 +136,15 @@
                 font-weight: 700;
                 font-size: 24px;
                 line-height: 34px;
-                color: #083A5E;
+                // color: #083A5E;
+                color: #fff;
             }
             p.disc{
                 font-weight: 400;
                 font-size: 16px;
                 line-height: 24px;
-                color: #497696;
+                // color: #497696;
+                color: #fff;
                 br{
                     @media #{$sm-layout} {
                         display: none;

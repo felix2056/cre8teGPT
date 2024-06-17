@@ -1,11 +1,11 @@
 import Header from "@/components/Header/Header";
 import HeaderTop from "@/components/Header/HeaderTop/Header-Top";
 import PopupMobileMenu from "@/components/Header/PopupMobileMenu";
-import ArticleGenerator from "@/components/AITools/Generators/ArticleGenerator";
+import YouTubeScriptAssistantTitle from "@/components/AITools/Assistants/YouTubeScriptAssistant/Title";
 
 import Service from "@/components/Service/Service";
 import Context from "@/context/Context";
-import Separator from "../../separator";
+import Separator from "../../../../separator";
 import Timeline from "@/components/Timeline/Timeline";
 import Split from "@/components/Split/Split";
 import Pricing from "@/components/Pricing/Pricing";
@@ -14,12 +14,12 @@ import Brands from "@/components/Brands/Brands";
 import CallToAction from "@/components/CallToAction/CallToAction";
 import Footer from "@/components/Footer/Footer";
 import Copyright from "@/components/Footer/Copyright";
-import PageHead from "../../Head";
+import PageHead from "../../../../Head";
 
-const ArticleGeneratorPage= () => {
+const YouTubeScriptAssistantTitlePage = () => {
   return (
     <>
-      <PageHead title="Article Generator - Generate High Quality Articles with Cre8teGPT" />
+      <PageHead title="YouTube Script Assistant Title - Cre8te YouTube Video Scripts In Seconds" />
 
       <main className="page-wrapper">
         <Context>
@@ -32,7 +32,10 @@ const ArticleGeneratorPage= () => {
           />
           <PopupMobileMenu />
 
-          <ArticleGenerator />
+          <YouTubeScriptAssistantTitle />
+          <Separator top={false} />
+          <Split />
+          <Separator top={true} />
           <CallToAction />
 
           <Footer />
@@ -43,4 +46,4 @@ const ArticleGeneratorPage= () => {
   );
 };
 
-export default ArticleGeneratorPage;
+export default YouTubeScriptAssistantTitlePage;

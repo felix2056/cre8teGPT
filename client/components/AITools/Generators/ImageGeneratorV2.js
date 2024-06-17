@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { copy } from "clipboard";
 
-const YouTubeChannelAnalyzer = () => {
+const ImageGeneratorV2 = () => {
     const { data: session } = useSession();
     const router = useRouter();
 
@@ -1302,4 +1302,4 @@ const YouTubeChannelAnalyzer = () => {
     );
 };
 
-export default YouTubeChannelAnalyzer;
+export default ImageGeneratorV2;

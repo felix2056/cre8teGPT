@@ -33,7 +33,7 @@ const YouTubeScriptAssistantFraming = () => {
     const [research, setResearch] = useState("basic");
     const [links, setLinks] = useState([]);
 
-    const [titles, setTitles] = useState([]);
+    const [framing, setFraming] = useState([]);
 
     useEffect(() => {
         // Apply class to body
@@ -59,68 +59,82 @@ const YouTubeScriptAssistantFraming = () => {
                     name: "Summary",
                     url: `/tools/assistants/youtube-script-assistant/summary/${router.query.script_id}`,
                     icon: "fa fa-list-alt",
+                    active: false,
                 },
                 {
                     name: "Framing",
                     url: `/tools/assistants/youtube-script-assistant/framing/${router.query.script_id}`,
                     icon: "fa fa-question-circle",
+                    active: true,
                 },
                 {
                     name: "Research",
                     url: `/tools/assistants/youtube-script-assistant/research/${router.query.script_id}`,
                     icon: "fa fa-book-open",
+                    active: false,
                 },
                 {
                     name: "Title",
                     url: `/tools/assistants/youtube-script-assistant/title/${router.query.script_id}`,
                     icon: "fa fa-heading",
+                    active: false,
                 },
                 {
                     name: "Thumbnail",
                     url: `/tools/assistants/youtube-script-assistant/thumbnail/${router.query.script_id}`,
                     icon: "fa fa-picture-o",
+                    active: false,
                 },
                 {
                     name: "Hooks",
                     url: `/tools/assistants/youtube-script-assistant/hooks/${router.query.script_id}`,
                     icon: "fa fa-fishing-rod",
+                    active: false,
                 },
                 {
                     name: "Script",
                     url: `/tools/assistants/youtube-script-assistant/script/${router.query.script_id}`,
                     icon: "fa fa-file-text-o",
+                    active: false,
                 },
                 {
                     name: "Review",
                     url: `/tools/assistants/youtube-script-assistant/review/${router.query.script_id}`,
                     icon: "fa fa-check-square-o",
+                    active: false,
                 },
             ]);
 
             getFromDatabase(router.query.script_id);
-            getTitlesFromDatabase(router.query.script_id);
         }
     }, [router.query.script_id]);
 
-    const getFromDatabase = async (scriptId) => {
+    useEffect(() => {
+        if (topic && angle && audience && goal && format) {
+            getFramingFromDatabase();
+        }
+    }, [topic, angle, audience, goal, format]);
+
+    const getFromDatabase = async () => {
         setIsLoading(true);
 
         try {
+            const scriptId = router.query.script_id;
             const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/tools/assistants/youtube-script-assistant/${scriptId}/show`);
 
             if (!response || !response.data) {
                 throw new Error("No response from the server");
             }
 
-            await setTopic(response.data.topic);
-            await setAngle(response.data.angle);
-            await setAudience(response.data.audience);
-            await setGoal(response.data.goal);
-            await setScriptNumber(response.data.scriptNumber);
-            await setLanguage(response.data.language);
-            await setLength(response.data.length);
-            await setFormat(response.data.format);
-            await setResearch(response.data.research);
+            setTopic(response.data.topic);
+            setAngle(response.data.angle);
+            setAudience(response.data.audience);
+            setGoal(response.data.goal);
+            setScriptNumber(response.data.scriptNumber);
+            setLanguage(response.data.language);
+            setLength(response.data.length);
+            setFormat(response.data.format);
+            setResearch(response.data.research);
 
             setIsDBSaved(true);
             setIsLoading(false);
@@ -140,18 +154,19 @@ const YouTubeScriptAssistantFraming = () => {
         }
     };
     
-    const getTitlesFromDatabase = async (scriptId) => {
+    const getFramingFromDatabase = async () => {
         setIsLoading(true);
 
         try {
+            const scriptId = router.query.script_id;
             const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/tools/assistants/youtube-script-assistant/${scriptId}/framing`);
 
             if (!response || !response.data) {
                 throw new Error("No response from the server");
             }
 
-            if (!response.data.titles || response.data.titles.length === 0) await generateTitles();
-            else await setTitles(response.data.titles);
+            if (!response.data.framing || response.data.framing.length === 0) await generateFraming();
+            else setFraming(response.data.framing);
 
             setIsLoading(false);
         } catch (error) {
@@ -170,41 +185,52 @@ const YouTubeScriptAssistantFraming = () => {
         }
     };
 
-    const generateTitles = async () => {
+    const generateFraming = async (more = false) => {
+        if (!topic || !angle || !audience || !goal || !format) {
+            toast.error("Please fill out the required fields first.", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+        
         setIsGenerating(true);
 
         try {
-            const response = await axios.post("/api/tools/assistants/youtube-script-assistant-titles", {
+            const response = await axios.post("/api/tools/assistants/youtube-script-assistant-framing", {
                 topic,
                 angle,
                 audience,
                 goal,
                 format,
-            }, {
-                headers: {
-                    'x-user-id': 'user_' + session.user.id
-                }
             });
 
             if (!response || !response.data) {
                 throw new Error("No response from the server");
             }
 
-            await setTitles(response.data.titles);
+            if (more) await setFraming([...framing, ...response.data.framing]);
+            else await setFraming(response.data.framing);
             setIsGenerating(false);
 
-            await saveToDatabase(response.data.titles);
+            await saveToDatabase(response.data.framing);
         } catch (error) {
             console.error(error);
         }
     };
 
-    const saveToDatabase = async (titles) => {
+    const saveToDatabase = async (framing) => {
         setIsLoading(true);
 
         try {
             const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/tools/assistants/youtube-script-assistant/${router.query.script_id}/framing`, {
-                titles
+                framing
             });
 
             if (!response || !response.data) {
@@ -217,6 +243,45 @@ const YouTubeScriptAssistantFraming = () => {
         }
     };
 
+    const selectFrame = (index) => {
+        if (framing.filter(frame => frame.selected).length >= 4 && !framing[index].selected) {
+            toast.error("You can only select up to 4 questions.", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+
+        const newFraming = [...framing];
+        newFraming[index].selected = !newFraming[index].selected;
+        setFraming(newFraming);
+        saveToDatabase(newFraming);
+    };
+
+    const editFrame = (index) => {
+        const newFrame = prompt("Edit the frame:", framing[index].value);
+        if (newFrame) {
+            const newFraming = [...framing];
+            newFraming[index].value = newFrame;
+            setFraming(newFraming);
+            saveToDatabase(newFraming);
+        }
+    };
+
+    const removeFrame = (index) => {
+        if (confirm("Are you sure you want to remove this frame?")) {
+            const newFraming = [...framing];
+            newFraming.splice(index, 1);
+            setFraming(newFraming);
+            saveToDatabase(newFraming);
+        }
+    };
 
     const goToNextStep = (step) => () => {
         if (router.query.script_id) {
@@ -247,7 +312,7 @@ const YouTubeScriptAssistantFraming = () => {
                                                                 role="tablist"
                                                             >
                                                                 {links.map((link, index) => (
-                                                                    <Link key={index} href={link.url} className={`nav-link ${index === 0 ? "active" : ""}`}>
+                                                                    <Link key={index} href={link.url} className={`nav-link ${link.active ? "active" : ""}`}>
                                                                         <i className={`${link.icon} mr--10`}></i>
                                                                         {link.name}
                                                                     </Link>
@@ -267,19 +332,19 @@ const YouTubeScriptAssistantFraming = () => {
                                                             </div>
 
                                                             <div className="framing-content">
-                                                                {titles.map((title, index) => (
-                                                                    <div className="question-row" key={index}>
+                                                                {framing.map((framing, index) => (
+                                                                    <div className={`question-row ${framing.selected ? "selected" : ``}`} key={index}>
                                                                         <div className="question-number">{index + 1}</div>
-                                                                        <div className="question-text">{title}</div>
+                                                                        <div className="question-text">{framing.value}</div>
                                                                         <div className="question-actions">
                                                                             <Tooltip id="my-tooltip" className="custom-tooltip tooltip-inner" />
-                                                                            <button className="action-button choose" data-tooltip-id="my-tooltip" data-tooltip-content="Choose">
+                                                                            <button className="action-button choose" data-tooltip-id="my-tooltip" data-tooltip-content="Choose" onClick={() => selectFrame(index)}>
                                                                                 <i className="fas fa-check"></i>
                                                                             </button>
-                                                                            <button className="action-button edit" data-tooltip-id="my-tooltip" data-tooltip-content="Edit">
+                                                                            <button className="action-button edit" data-tooltip-id="my-tooltip" data-tooltip-content="Edit" onClick={() => editFrame(index)}>
                                                                                 <i className="fas fa-pencil-alt"></i>
                                                                             </button>
-                                                                            <button className="action-button remove" data-tooltip-id="my-tooltip" data-tooltip-content="Remove">
+                                                                            <button className="action-button remove" data-tooltip-id="my-tooltip" data-tooltip-content="Remove" onClick={() => removeFrame(index)}>
                                                                                 <i className="fas fa-trash-alt"></i>
                                                                             </button>
                                                                         </div>
@@ -287,12 +352,14 @@ const YouTubeScriptAssistantFraming = () => {
                                                                 ))}
                                                             </div>
 
-                                                            <button className="more-button">More</button>
+                                                            <button className="btn-default btn-small round more-button" onClick={() => generateFraming(true)}>
+                                                                <i className="fas fa-plus"></i> Generate More Questions
+                                                            </button>
                                                         </div>
 
 
                                                         <div className="framing-footer" style={{ textAlign: "right" }}>
-                                                            <button type="button" className="btn-default btn-small round" onClick={goToNextStep("framing")}>
+                                                            <button type="button" className="btn-default btn-small round" onClick={() => goToNextStep("research")}>
                                                                 Framing <i className="fas fa-arrow-right ml--10"></i>
                                                             </button>
                                                         </div>

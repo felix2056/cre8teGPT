@@ -14,11 +14,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import axios from "axios";
 
-const YouTubeScriptAssistantSummary = () => {
+const YouTubeScriptAssistantTitle = () => {
     const { data: session } = useSession();
     const router = useRouter();
 
     const [isLoading, setIsLoading] = useState(false);
+    const [isGenerating, setIsGenerating] = useState(false);
     const [isDBSaved, setIsDBSaved] = useState(false);
 
     const [topic, setTopic] = useState("");
@@ -31,6 +32,8 @@ const YouTubeScriptAssistantSummary = () => {
     const [format, setFormat] = useState("Other");
     const [research, setResearch] = useState("basic");
     const [links, setLinks] = useState([]);
+
+    const [titles, setTitles] = useState([]);
 
     useEffect(() => {
         // Apply class to body
@@ -56,7 +59,7 @@ const YouTubeScriptAssistantSummary = () => {
                     name: "Summary",
                     url: `/tools/assistants/youtube-script-assistant/summary/${router.query.script_id}`,
                     icon: "fa fa-list-alt",
-                    active: true,
+                    active: false,
                 },
                 {
                     name: "Framing",
@@ -74,8 +77,7 @@ const YouTubeScriptAssistantSummary = () => {
                     name: "Title",
                     url: `/tools/assistants/youtube-script-assistant/title/${router.query.script_id}`,
                     icon: "fa fa-heading",
-                    active: false,
-
+                    active: true,
                 },
                 {
                     name: "Thumbnail",
@@ -103,29 +105,36 @@ const YouTubeScriptAssistantSummary = () => {
                 },
             ]);
 
-            getFromDatabase(router.query.script_id);
+            getFromDatabase();
         }
     }, [router.query.script_id]);
 
-    const getFromDatabase = async (scriptId) => {
+    useEffect(() => {
+        if (topic && angle && audience && goal && format) {
+            getTitlesFromDatabase();
+        }
+    }, [topic, angle, audience, goal, format]);
+
+    const getFromDatabase = async () => {
         setIsLoading(true);
 
         try {
+            const scriptId = router.query.script_id;
             const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/tools/assistants/youtube-script-assistant/${scriptId}/show`);
 
             if (!response || !response.data) {
                 throw new Error("No response from the server");
             }
 
-            await setTopic(response.data.topic);
-            await setAngle(response.data.angle);
-            await setAudience(response.data.audience);
-            await setGoal(response.data.goal);
-            await setScriptNumber(response.data.scriptNumber);
-            await setLanguage(response.data.language);
-            await setLength(response.data.length);
-            await setFormat(response.data.format);
-            await setResearch(response.data.research);
+            setTopic(response.data.topic);
+            setAngle(response.data.angle);
+            setAudience(response.data.audience);
+            setGoal(response.data.goal);
+            setScriptNumber(response.data.scriptNumber);
+            setLanguage(response.data.language);
+            setLength(response.data.length);
+            setFormat(response.data.format);
+            setResearch(response.data.research);
 
             setIsDBSaved(true);
             setIsLoading(false);
@@ -144,12 +153,141 @@ const YouTubeScriptAssistantSummary = () => {
             setIsLoading(false);
         }
     };
+    
+    const getTitlesFromDatabase = async () => {
+        setIsLoading(true);
+
+        try {
+            const scriptId = router.query.script_id;
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/tools/assistants/youtube-script-assistant/${scriptId}/titles`);
+
+            if (!response || !response.data) {
+                throw new Error("No response from the server");
+            }
+
+            setIsLoading(false);
+
+            if (!response.data.titles || response.data.titles.length === 0) await generateTitles();
+            else setTitles(response.data.titles);
+        } catch (error) {
+            console.error(error);
+            toast.error(error.message, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            setIsLoading(false);
+        }
+    };
+
+    const generateTitles = async (more = false) => {
+        setIsGenerating(true);
+
+        if (!topic || !angle || !audience || !goal || !format) {
+            toast.error("Please fill out the required fields first.", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+
+        try {
+            const response = await axios.post("/api/tools/assistants/youtube-script-assistant-titles", {
+                topic,
+                angle,
+                audience,
+                goal,
+                format,
+            });
+
+            if (!response || !response.data) {
+                throw new Error("No response from the server");
+            }
+
+            if (more) await setTitles([...titles, ...response.data.titles]);
+            else await setTitles(response.data.titles);
+            setIsGenerating(false);
+
+            await saveToDatabase(response.data.titles);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const saveToDatabase = async (titles) => {
+        setIsLoading(true);
+
+        try {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/tools/assistants/youtube-script-assistant/${router.query.script_id}/titles`, {
+                titles
+            });
+
+            if (!response || !response.data) {
+                throw new Error("No response from the server");
+            }
+
+            setIsLoading(false);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const selectTitle = (index) => {
+        if (titles.filter(title => title.selected).length >= 1 && !titles[index].selected) {
+            toast.error("You can only select one title at a time.", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            return;
+        }
+
+        const newTitles = [...titles];
+        newTitles[index].selected = !newTitles[index].selected;
+        setTitles(newTitles);
+        saveToDatabase(newTitles);
+    };
+
+    const editTitle = (index) => {
+        const newTitle = prompt("Edit the title:", titles[index].value);
+        if (newTitle) {
+            const newTitles = [...titles];
+            newTitles[index].value = newTitle;
+            setTitles(newTitles);
+            saveToDatabase(newTitles);
+        }
+    };
+
+    const removeTitle = (index) => {
+        if (confirm("Are you sure you want to remove this title?")) {
+            const newTitles = [...titles];
+            newTitles.splice(index, 1);
+            setTitles(newTitles);
+            saveToDatabase(newTitles);
+        }
+    };
 
     const goToNextStep = (step) => () => {
         if (router.query.script_id) {
-            router.push(`/tools/assistants/youtube-script-assistant/${step}/${router.query.script_id}`);
+            router.push(`/tools/assistants/youtube-script-assistant/${router.query.script_id}/${step}`);
         }
-    }
+    };
 
     return (
         <>
@@ -184,45 +322,44 @@ const YouTubeScriptAssistantSummary = () => {
                                                     </div>
 
                                                     <div className="card-body">
-                                                        <div className="summary-container">
-                                                            <div className="summary-header">
-                                                                <h3 className="title">Summary</h3>
-                                                                <button className="btn-default btn-small round edit-button">
-                                                                    <i className="fas fa-edit"></i>
+                                                        <div className="framing-container">
+                                                            <div className="framing-header">
+                                                                <h2 className="title">Title</h2>
+                                                                {/* <p className="disk">Refine your topic by choosing which viewer questions the script should answer. For best results choose 3-5 questions per 10 minutes of video.</p> */}
+                                                                <button className="btn-default btn-small round refresh-button">
+                                                                    <i className="fas fa-sync-alt"></i>
                                                                 </button>
                                                             </div>
 
-                                                            <div className="summary-content">
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Topic</div>
-                                                                    <div className="summary-value">{topic}</div>
-                                                                </div>
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Unique Angle</div>
-                                                                    <div className="summary-value">{angle}</div>
-                                                                </div>
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Audience</div>
-                                                                    <div className="summary-value">{audience}</div>
-                                                                </div>
-
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Language</div>
-                                                                    <div className="summary-value">{language}</div>
-                                                                </div>
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Length</div>
-                                                                    <div className="summary-value">{length} words</div>
-                                                                </div>
-                                                                <div className="summary-row">
-                                                                    <div className="summary-label">Format</div>
-                                                                    <div className="summary-value">{format}</div>
-                                                                </div>
+                                                            <div className="framing-content">
+                                                                {titles.map((title, index) => (
+                                                                    <div className={`question-row ${title.selected ? "selected" : ``}`} key={index}>
+                                                                        <div className="question-number">{index + 1}</div>
+                                                                        <div className="question-text">{title.value}</div>
+                                                                        <div className="question-actions">
+                                                                            <Tooltip id="my-tooltip" className="custom-tooltip tooltip-inner" />
+                                                                            <button type="button" className="action-button choose" data-tooltip-id="my-tooltip" data-tooltip-content="Choose" onClick={() => selectTitle(index)}>
+                                                                                <i className="fas fa-check"></i>
+                                                                            </button>
+                                                                            <button type="button" className="action-button edit" data-tooltip-id="my-tooltip" data-tooltip-content="Edit" onClick={() => editTitle(index)}>
+                                                                                <i className="fas fa-pencil-alt"></i>
+                                                                            </button>
+                                                                            <button type="button" className="action-button remove" data-tooltip-id="my-tooltip" data-tooltip-content="Remove" onClick={() => removeTitle(index)}>
+                                                                                <i className="fas fa-trash-alt"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
                                                             </div>
+
+                                                            <button className="btn-default btn-small round more-button" onClick={() => generateTitles(true)}>
+                                                                <i className="fas fa-plus"></i> Generate More Titles
+                                                            </button>
                                                         </div>
 
-                                                        <div className="summary-footer" style={{ textAlign: "right" }}>
-                                                            <button type="button" className="btn-default btn-small round" onClick={goToNextStep("framing")}>
+
+                                                        <div className="framing-footer" style={{ textAlign: "right" }}>
+                                                            <button type="button" className="btn-default btn-small round" onClick={() => goToNextStep("summary")}>
                                                                 Framing <i className="fas fa-arrow-right ml--10"></i>
                                                             </button>
                                                         </div>
@@ -391,4 +528,4 @@ const YouTubeScriptAssistantSummary = () => {
     );
 };
 
-export default YouTubeScriptAssistantSummary;
+export default YouTubeScriptAssistantTitle;

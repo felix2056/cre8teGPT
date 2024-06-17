@@ -17,8 +17,9 @@ export default async function handler(req, res) {
 }
 
 async function getTitles(topic, angle, audience, goal, format) {
-    let prompt = `Based on the following inputs, generate a list of comma-separated titles for a YouTube video script that resonates with the target audience. Your job is not to write the script but to simply generate the titles needed. Only use commas to separate the titles, DO NOT include commas within the titles themselves.`;
-    prompt += `\n\nTopic: ${topic}`;
+    let prompt = `Using the below inputs provided, create a list of youtube video titles separated by commas that will engage the target audience and should be addressed by the YouTube video script. Your task is solely to generate the titles, not to write the script. Only use commas to separate the titles, avoid using commas within the titles themselves and do not number them.`;
+    prompt += `\n\nInputs:`;
+    prompt += `\nTopic: ${topic}`;
     prompt += `\nUnique Angle: ${angle}`;
     prompt += `\nAudience: ${audience}`;
     prompt += `\nAudience Goal: ${goal}`;
@@ -27,7 +28,7 @@ async function getTitles(topic, angle, audience, goal, format) {
     const response = await openai.chat.completions.create({
         model: "gpt-4o",
         messages: [
-            { role: "system", content: "You are a YouTube script assistant. Your aim is to generate titles for YouTube video scripts that resonates with the target audience and align with the given inputs. Your response should be concise, informative, accurate, and appealing to the target audience." },
+            { role: "system", content: "You are a YouTube script assistant. Your aim is to generate titles that will engage the target audience and should be addressed by the YouTube video script. Your response should be concise, informative, and provide insights into the script writing process." },
             { role: "user", content: prompt }
         ]
     });
@@ -39,5 +40,10 @@ async function getTitles(topic, angle, audience, goal, format) {
     const completion = response.choices[0].message.content;
 
     let titles = completion.split(",").map(title => title.trim());
+
+    for (let i = 0; i < titles.length; i++) {
+        titles[i] = { value: titles[i], selected: false };
+    }
+
     return titles;
 }
