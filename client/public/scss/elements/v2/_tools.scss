@@ -12,10 +12,6 @@
     }
 }
 
-.bg_faq{
-    background: #F6F6F6;
-}
-
 .steps-main-content-three{
     text-align: left;
     span{
@@ -132,12 +128,18 @@
             align-items: center;
             justify-content: space-between;
             gap: 13px;
+            img{
+                width: 50px;
+                height: 50px;
+                border-radius: 50% !important;
+            }
             .info-content{
                 .title{
                     margin-bottom: -5px;
                     font-weight: 500;
                     font-size: 22px;
                     line-height: 32px;
+                    color: #083A5E;
                 }
                 span.deg{
                     font-weight: 500;
@@ -155,6 +157,14 @@
                 color: #083A5E;
                 font-size: 14px;
             }
+        }
+    }
+    .body{
+        p{
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 26px;
+            color: #497696;
         }
     }
 }

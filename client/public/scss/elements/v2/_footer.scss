@@ -444,6 +444,12 @@
             gap: 50px;
             margin-top: 50px;
             justify-content: center;
+            i {
+                font-size: 70px;
+                @media #{$smlg-device} {
+                    font-size: 50px;
+                }
+            }
             @media #{$smlg-device} {
                 flex-wrap: wrap;
                 justify-content: center;

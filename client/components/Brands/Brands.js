@@ -48,98 +48,18 @@ const Brands = () => {
           </div>
           <div className="row">
             <div className="col-lg-12 mt--10">
-              <ul className="brand-list brand-style-2">
-                <li>
-                  <a href="#">
-                    <Image
-                      src={admedia}
-                      width={148}
-                      height={70}
-                      alt="Brand Image"
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <Image
-                      src={amd}
-                      width={148}
-                      height={70}
-                      alt="Brand Image"
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <Image
-                      src={newmark}
-                      width={148}
-                      height={70}
-                      alt="Brand Image"
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <Image
-                      src={zooplus}
-                      width={148}
-                      height={70}
-                      alt="Brand Image"
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <Image
-                      src={paloalto}
-                      width={148}
-                      height={70}
-                      alt="Brand Image"
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <Image
-                      src={unwomen}
-                      width={148}
-                      height={70}
-                      alt="Brand Image"
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <Image
-                      src={deloitte}
-                      width={148}
-                      height={70}
-                      alt="Brand Image"
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <Image
-                      src={square}
-                      width={148}
-                      height={70}
-                      alt="Brand Image"
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <Image
-                      src={plivo}
-                      width={148}
-                      height={70}
-                      alt="Brand Image"
-                    />
-                  </a>
-                </li>
-              </ul>
+              <div className="brand-list">
+                  <i class="fa-brands fa-dev"></i>
+                  <i class="fa-brands fa-teamspeak"></i>
+                  <i class="fa-brands fa-product-hunt"></i>
+                  <i class="fa-brands fa-free-code-camp"></i>
+                  <i class="fa-brands fa-npm"></i>
+                  <i class="fa-brands fa-yarn"></i>
+                  <i class="fa-brands fa-webflow"></i>
+                  <i class="fa-brands fa-codepen"></i>
+                  <i class="fa-brands fa-researchgate"></i>
+                  <i class="fa-brands fa-foursquare"></i>
+              </div>
             </div>
           </div>
         </div>

@@ -31,7 +31,7 @@ const Nav = () => {
         )}
         
         <li>
-          <Link href="/tools">100+ AI Tools</Link>
+          <Link href="/tools">50+ AI Tools</Link>
         </li>
 
         {session?.user && (

@@ -57,6 +57,7 @@
       "price": 0,
       "text": "",
       "subTitle": "Forever",
+      "desc": "Get started with Cre8teGPT for free and enjoy a range of basic tools and features to kickstart your creative journey.",
       "isActive": false,
       "subItem": [
         {
@@ -94,6 +95,7 @@
       "price": 14.99,
       "text": "",
       "subTitle": "USD Per Month",
+      "desc": "Upgrade to the Starter plan for more Cre8dits, languages, and advanced tools to enhance your content creation experience.",
       "isActive": true,
       "subItem": [
         {
@@ -131,6 +133,7 @@
       "price": 29.99,
       "text": "",
       "subTitle": "USD Per Month",
+      "desc": "Unlock the Cre8tor plan for even more Cre8dits, languages, and advanced tools to supercharge your content creation capabilities.",
       "isActive": false,
       "subItem": [
         {
@@ -168,6 +171,7 @@
       "price": 49.99,
       "text": "",
       "subTitle": "USD Per Month",
+      "desc": "Upgrade to the Business plan to maximize your creativity with even more Cre8dits, languages, and advanced tools to take your content creation to the next level.",
       "isActive": false,
       "subItem": [
         {
@@ -205,6 +209,7 @@
       "price": 40,
       "text": "Let's Talk",
       "subTitle": "Forever",
+      "desc": "Contact us to discuss custom pricing and features for the Enterprise plan tailored to your organization's unique needs.",
       "isActive": false,
       "subItem": [
         {

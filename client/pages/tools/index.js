@@ -18,7 +18,7 @@ import PageHead from "../Head";
 const ToolsPage = () => {
   return (
     <>
-      <PageHead title="Home" />
+      <PageHead title="50+ AI Tools for Cre8tors - Cre8teGPT" />
 
       <main className="page-wrapper">
         <Context>

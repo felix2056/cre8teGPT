@@ -1,8 +1,11 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import sal from "sal.js";
 
 const SinglePrice = ({ data, increasePrice, parentClass }) => {
+  const router = useRouter();
+
   const [price, setPrice] = React.useState(data.price);
   const [quantity, setQuantity] = React.useState(1);
   const [tax, setTax] = React.useState(0);
@@ -33,7 +36,6 @@ const SinglePrice = ({ data, increasePrice, parentClass }) => {
 
   const choosePlan = () => {
     try {
-      // update price
       data.price = price;
       data.quantity = quantity;
       data.tax = tax;
@@ -42,7 +44,7 @@ const SinglePrice = ({ data, increasePrice, parentClass }) => {
       localStorage.setItem("plan", JSON.stringify(data));
 
       // redirect to checkout page
-      window.location.href = "/checkout";
+      router.push("/checkout");
     } catch (error) {
       console.log("error", error);
     }
@@ -78,13 +80,6 @@ const SinglePrice = ({ data, increasePrice, parentClass }) => {
                       <span className="price">
                         {price}
                       </span>
-                      // <span className="price">
-                      //   {increasePrice
-                      //     ? data.price <= 50
-                      //       ? data.price + 250
-                      //       : data.price + 400
-                      //     : data.price}
-                      // </span>
                     )}
                   </div>
                   <span className="subtitle">{data.subTitle}</span>

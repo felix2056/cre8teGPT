@@ -34,7 +34,7 @@ const Home = () => {
                                     </h1>
 
                                     <p className="disc">
-                                        Your <strong>All-in-One AI-Powered Game Changer</strong> designed to empower content creators, marketers, students and businesses of all sizes. <br /><strong>Discover 100+ AI Tools In 1 Place!</strong>
+                                        Your <strong>All-in-One AI-Powered Game Changer</strong> designed to empower content creators, marketers, students and businesses of all sizes. <br /><strong>Discover 50+ AI Tools In 1 Place!</strong>
                                     </p>
 
                                     <div className="button-group">

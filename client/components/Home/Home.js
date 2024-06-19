@@ -31,11 +31,11 @@ const Home = () => {
                   <br />
                   <span className="theme-gradient">Cre8teGPT AI</span>
                   {/* <br />
-                  <span className="color-off">Discover 100+ AI Tools In 1 Place!</span> */}
+                  <span className="color-off">Discover 50+ AI Tools In 1 Place!</span> */}
                 </h1>
 
                 <p className="b1 desc-text">
-                  Your <strong>All-in-One AI-Powered Game Changer</strong> designed to empower content creators, marketers, students and businesses of all sizes. <br /> <span className="theme-gradient"><strong>Discover 100+ AI Tools In 1 Place!</strong></span>
+                  Your <strong>All-in-One AI-Powered Game Changer</strong> designed to empower content creators, marketers, students and businesses of all sizes. <br /> <span className="theme-gradient"><strong>Discover 50+ AI Tools In 1 Place!</strong></span>
                 </p>
 
                 <div className="button-group">

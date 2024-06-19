@@ -37,6 +37,23 @@
     }
 }
 
+.brand-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    i {
+        font-size: 100px;
+        margin-right: 15px;
+        margin-left: 15px;
+        @media #{$sm-layout} {
+            font-size: 40px;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+    }
+}
+
 
 .brand-style-1 {
     padding: 0;

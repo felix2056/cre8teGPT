@@ -624,9 +624,9 @@ const ArticleGenerator = () => {
                                                 <strong>Imagine this:</strong> Instead of staring at a blank page, frustrated and unproductive, you simply enter a few keywords or a brief concept.  In seconds, Cre8teGPT's powerful AI starts your journey to a polished, professional article that's tailored to your specific needs and ready to publish.  No more writer's block, no more wasted time. Just high-quality content that engages your audience and boosts your SEO rankings.
                                             </p>
                                             <div className="button-group mt--50 text-center">
-                                                <button className="btn-default btn-large" onClick={() => router.push("/tools/article-generator")}>
-                                                    Get Started
-                                                    <i className="fa-solid fa-arrow-right ml--10"></i>
+                                                <button className="btn-default" onClick={() => router.push("/tools/article-generator")}>
+                                                    Try Article Generator
+                                                    <i className="fa-solid fa-arrow-up ml--10"></i>
                                                 </button>
                                             </div>
                                         </div>

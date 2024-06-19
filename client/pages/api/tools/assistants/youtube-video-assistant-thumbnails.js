@@ -46,7 +46,7 @@ async function generateThumbnailVariants(thumbnail_url) {
     const variants = [];
     for (let i = 0; i < 5; i++) {
         const response = await openai.images.createVariation({
-            model: "dall-e-2",
+            model: "dall-e-3",
             image: thumbnail_url,
             n: 1,
             size: "1024x1024",

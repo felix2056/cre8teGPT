@@ -31,7 +31,7 @@ const AIToolsItem = ({ AIToolsItem }) => {
           <li key={index}>
             <Link
               href={data.slug}
-              className="genarator-card bg-flashlight-static center-align"
+              className={`genarator-card bg-flashlight-static center-align ${data.badge == "coming" ? "disabled" : ""}`}
             >
               <div className="inner">
                 <div className="left-align">
