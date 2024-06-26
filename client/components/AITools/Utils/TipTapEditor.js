@@ -1,5 +1,6 @@
 import React from 'react';
-import { useEditor, EditorContent } from '@tiptap/react'
+import { BubbleMenu, useEditor, EditorContent } from '@tiptap/react'
+import FloatingMenu from '@tiptap/extension-floating-menu'
 import StarterKit from '@tiptap/starter-kit'
 import Highlight from '@tiptap/extension-highlight'
 import Typography from '@tiptap/extension-typography'
@@ -14,6 +15,9 @@ import ListItem from '@tiptap/extension-list-item';
 import Blockquote from '@tiptap/extension-blockquote';
 import Heading from '@tiptap/extension-heading';
 import CodeBlock from '@tiptap/extension-code-block';
+import CharacterCount from '@tiptap/extension-character-count';
+
+const limit = 280
 
 const MenuBar = ({ editor }) => {
     if (!editor) {
@@ -90,7 +94,6 @@ const MenuBar = ({ editor }) => {
     );
 };
 
-
 const TipTapEditor = ({ content, setContent }) => {
     const editor = useEditor({
         extensions: [
@@ -108,6 +111,9 @@ const TipTapEditor = ({ content, setContent }) => {
             Blockquote,
             Heading,
             CodeBlock,
+            CharacterCount.configure({
+                limit: 280,
+            })
         ],
         content: content,
         onUpdate({ editor }) {
@@ -115,10 +121,97 @@ const TipTapEditor = ({ content, setContent }) => {
         },
     })
 
+    const percentage = editor
+        ? Math.round((100 / limit) * editor.storage.characterCount.characters())
+        : 0;
+
     return (
         <div className="tip-tap-editor">
             <MenuBar editor={editor} />
             {editor && <EditorContent editor={editor} />}
+
+            {editor && <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
+                <div className="bubble-menu">
+                    <button
+                        onClick={() => editor.chain().focus().toggleBold().run()}
+                        className={editor.isActive('bold') ? 'is-active' : ''}
+                    >
+                        Bold
+                    </button>
+                    <button
+                        onClick={() => editor.chain().focus().toggleItalic().run()}
+                        className={editor.isActive('italic') ? 'is-active' : ''}
+                    >
+                        Italic
+                    </button>
+                    <button
+                        onClick={() => editor.chain().focus().toggleStrike().run()}
+                        className={editor.isActive('strike') ? 'is-active' : ''}
+                    >
+                        Strike
+                    </button>
+                </div>
+            </BubbleMenu>}
+
+            {editor && <FloatingMenu editor={editor} tippyOptions={{ duration: 100 }}>
+                <div className="floating-menu">
+                    <button
+                        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+                        className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
+                    >
+                        H1
+                    </button>
+                    <button
+                        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+                        className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
+                    >
+                        H2
+                    </button>
+                    <button
+                        onClick={() => editor.chain().focus().toggleBulletList().run()}
+                        className={editor.isActive('bulletList') ? 'is-active' : ''}
+                    >
+                        Bullet list
+                    </button>
+                </div>
+            </FloatingMenu>}
+
+            {editor && (
+                <div className={`character-count ${editor.storage.characterCount.characters() === limit ? 'character-count--warning' : ''}`}>
+                    <svg
+                        height="20"
+                        width="20"
+                        viewBox="0 0 20 20"
+                    >
+                        <circle
+                            r="10"
+                            cx="10"
+                            cy="10"
+                            fill="#e9ecef"
+                        />
+                        <circle
+                            r="5"
+                            cx="10"
+                            cy="10"
+                            fill="transparent"
+                            stroke="currentColor"
+                            strokeWidth="10"
+                            strokeDasharray={`calc(${percentage} * 31.4 / 100) 31.4`}
+                            transform="rotate(-90) translate(-20)"
+                        />
+                        <circle
+                            r="6"
+                            cx="10"
+                            cy="10"
+                            fill="white"
+                        />
+                    </svg>
+
+                    {editor.storage.characterCount.characters()} / {limit} characters
+                    <br />
+                    {editor.storage.characterCount.words()} words
+                </div>
+            )}
         </div>
     )
 }

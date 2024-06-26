@@ -611,7 +611,6 @@ const ArticleGenerator = () => {
                         )}
 
                         <Separator top={true} />
-
                         <div className="feature-area-start rts-section-gapTop rts-section-gapBottom bg-smooth-2 bg-tools">
                             <div className="container">
                                 <div className="row">
@@ -634,7 +633,6 @@ const ArticleGenerator = () => {
                                 </div>
                             </div>
                         </div>
-
                         <Separator top={false} />
 
                         <div className="rts-easy-steps-area rts-section-gapTop bg-tools">

@@ -13,6 +13,14 @@ import "slick-carousel/slick/slick-theme.css";
 import "react-tooltip/dist/react-tooltip.css";
 // ========= Plugins CSS END =========
 
+// ========= TipTap CSS START =========
+// import '@/public/css/tiptap/index.css'
+// import '@/public/css/tiptap/globals.css'
+
+import '@/public/css/tiptap/index-raw.css'
+import '@/public/css/tiptap/editor-raw.css'
+// ========= TipTap CSS END =========
+
 import "../public/scss/style.scss";
 import Loading from "@/components/Loading/Loading";
 

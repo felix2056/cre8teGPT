@@ -139,7 +139,6 @@ input[disabled] {
     }
 }
 
-
 .article-generator-tags {
     .tag-input-container {
         width: 100%;
@@ -383,4 +382,53 @@ input[disabled] {
             }
         }
     }
+}
+
+.writing-assistant-paraphraser {
+    .container.ai-tip-tap-editor {
+        .row {
+            .tab-button-area {
+                background-color: #ffffff;
+                padding: 20px;
+
+                .nav {
+                    &.flex-column {
+                        .nav-tabs {
+                            .tabs {
+                                display: flex;
+                                flex-direction: column;
+
+                                .yt-tabs-div {
+                                    padding: 10px 20px;
+                                    margin-bottom: 5px;
+                                    border: 1px solid #ddd;
+                                    border-radius: 5px;
+                                    cursor: pointer;
+                                    transition: background-color 0.3s ease;
+
+                                    &:hover {
+                                        background-color: #f0f0f0;
+                                    }
+
+                                    &.yt-tabs-active {
+                                        background-color: #007bff;
+                                        color: #ffffff;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .col-lg-6 {
+                margin-top: 20px;
+
+                &:first-child {
+                    border-right: 1px solid #ddd;
+                }
+            }
+        }
+    }
+
 }

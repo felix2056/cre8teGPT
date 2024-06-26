@@ -33,7 +33,7 @@ const AITools = () => {
         {
             name: "Image Generator V2",
             description: "Create stunning images for your website, social media, or marketing campaigns with our AI-powered image generator.",
-            slug: "/tools/generators/image-generator-v2",
+            slug: "/tools/generators/image-generator",
             icon: "/images/generator-icon/photo_line.png",
             badge: "new",
         },
@@ -77,7 +77,7 @@ const AITools = () => {
             description: "Create a professional website in minutes with our AI-powered website generator. No coding or design skills required.",
             slug: "/tools/generators/website-generator",
             icon: "/images/generator-icon/website-design_line.png",
-            badge: "",
+            badge: "coming",
         },
         {
             name: "Logo Generator",
@@ -162,6 +162,13 @@ const AITools = () => {
     ];
 
     const assistants = [
+        {
+            name: "Research Assistant",
+            description: "Get help with your research projects, papers, or articles with our AI-powered research assistant.",
+            slug: "/tools/assistants/research-assistant",
+            icon: "/images/assistant-icon/research-assistant_line.png",
+            badge: "coming",
+        },
         {
             name: "Writing Assistant",
             description: "Improve your writing with our AI-powered writing assistant. Get suggestions for grammar, style, and more.",
