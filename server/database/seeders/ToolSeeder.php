@@ -36,10 +36,10 @@ class ToolSeeder extends Seeder
                 'icon' => '/images/generator-icon/video-camera_line.png',
             ],
             [
-                'name' => 'HTML Generator',
-                'description' => 'Generate HTML code for your website or project.',
-                'slug' => 'html-generator',
-                'icon' => '/images/generator-icon/code-editor_line.png',
+                'name' => 'Article Generator',
+                'description' => 'Stop staring at a blank page. Generate high-quality, SEO-friendly articles from keywords, domains, or URLs.',
+                'slug' => 'article-generator',
+                'icon' => '/images/generator-icon/article_line.png',
             ],
             [
                 'name' => 'Lyrics Generator',
@@ -90,16 +90,28 @@ class ToolSeeder extends Seeder
                 'icon' => '/images/generator-icon/youtube-summarizer_line.png',
             ],
             [
+                'name' => 'YouTube Channel Analyzer',
+                'description' => 'Analyze YouTube channels and videos to help you understand your audience and improve your content.',
+                'slug' => 'youtube-channel-analyzer',
+                'icon' => '/images/generator-icon/youtube-channel-analyzer_line.png',
+            ],
+            [
                 'name' => 'YouTube Thumbnail Generator',
                 'description' => 'Generate high quality thumbnails for your YouTube videos.',
                 'slug' => 'youtube-thumbnail-generator',
                 'icon' => '/images/generator-icon/youtube-thumbnail-generator_line.png',
             ],
             [
-                'name' => 'YouTube Assistant',
+                'name' => 'YouTube Video Assistant',
                 'description' => 'Optimize your YouTube videos with algorithm-friendly titles, descriptions, tags, thumbnails and more. Simply paste the URL of your video, and let our AI do the rest!',
-                'slug' => 'youtube-assistant',
+                'slug' => 'youtube-video-assistant',
                 'icon' => '/images/assistant-icon/youtube-assistant_line.png',
+            ],
+            [
+                'name' => 'YouTube Script Assistant',
+                'description' => 'Generate high quality, SEO-friendly scripts for your YouTube videos in seconds.',
+                'slug' => 'youtube-script-assistant',
+                'icon' => '/images/assistant-icon/youtube-script-assistant_line.png',
             ],
             [
                 'name' => 'Email Writer',

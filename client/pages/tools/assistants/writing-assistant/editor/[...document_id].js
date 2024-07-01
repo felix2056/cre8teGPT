@@ -5,7 +5,7 @@ import WritingAssistantEditor from "@/components/AITools/Assistants/WritingAssis
 
 import Service from "@/components/Service/Service";
 import Context from "@/context/Context";
-import Separator from "../../../separator";
+import Separator from "@/pages/separator";
 import Timeline from "@/components/Timeline/Timeline";
 import Split from "@/components/Split/Split";
 import Pricing from "@/components/Pricing/Pricing";
@@ -14,7 +14,8 @@ import Brands from "@/components/Brands/Brands";
 import CallToAction from "@/components/CallToAction/CallToAction";
 import Footer from "@/components/Footer/Footer";
 import Copyright from "@/components/Footer/Copyright";
-import PageHead from "../../../Head";
+import PageHead from "@/pages/Head";
+import WritingAssistantEditorModals from "@/components/AITools/Assistants/WritingAssistant/Editor/Modals";
 
 const WritingAssistantEditorPage = () => {
   return (
@@ -31,6 +32,7 @@ const WritingAssistantEditorPage = () => {
             btnClass="btn-small round"
           />
           <PopupMobileMenu />
+          <WritingAssistantEditorModals />
 
           <WritingAssistantEditor />
           <Separator top={false} />

@@ -18,6 +18,11 @@ class YoutubeScriptAssistant extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getFramingAttribute($value)
+    {
+        return json_decode($value);
+    }
+
     public function getTitlesAttribute($value)
     {
         return json_decode($value);

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('length')->default(800);
             $table->string('format');
             $table->enum('research', ['basic', 'intermediate', 'comprehensive', 'exhaustive'])->default('basic');
+            $table->json('framing')->nullable();
             $table->json('titles')->nullable();
             $table->timestamps();
 

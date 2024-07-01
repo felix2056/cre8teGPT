@@ -15,6 +15,7 @@ import { TextMenu } from './components/menus/TextMenu'
 import { ContentItemMenu } from './components/menus/ContentItemMenu'
 
 export const BlockEditor = ({ ydoc, provider }: TiptapProps) => {
+
   const menuContainerRef = useRef(null)
   const editorRef = useRef<PureEditorContent | null>(null)
 
@@ -32,7 +33,7 @@ export const BlockEditor = ({ ydoc, provider }: TiptapProps) => {
 
   return (
     <EditorContext.Provider value={providerValue}>
-      <div className="flex h-full" ref={menuContainerRef}>
+      <div className="main-editor flex h-100vh" ref={menuContainerRef}>
         <Sidebar isOpen={leftSidebar.isOpen} onClose={leftSidebar.close} editor={editor} />
         <div className="relative flex flex-col flex-1 h-full overflow-hidden">
           <EditorHeader

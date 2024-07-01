@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useLayoutEffect, useMemo } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSearchParams } from "next/navigation";
 import { Tooltip } from "react-tooltip";
@@ -14,6 +14,7 @@ import sal from "sal.js";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 import Separator from "@/pages/separator";
 
 import axios from "axios";
@@ -28,22 +29,24 @@ import { Surface } from '@/components/AITools/Utils/Writing-Assistant/components
 import { Toolbar } from '@/components/AITools/Utils/Writing-Assistant/components/ui/Toolbar'
 import { Icon } from '@/components/AITools/Utils/Writing-Assistant/components/ui/Icon'
 
+import WritingAssistantSidebar from "./Sidebar";
+
 const useDarkmode = () => {
     const [isDarkMode, setIsDarkMode] = useState(
         typeof window !== 'undefined' ? window.matchMedia('(prefers-color-scheme: dark)').matches : false,
-    )
+    );
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
         const handleChange = () => setIsDarkMode(mediaQuery.matches)
         mediaQuery.addEventListener('change', handleChange)
         return () => mediaQuery.removeEventListener('change', handleChange)
-    }, [])
+    }, []);
 
     useEffect(() => {
         document.documentElement.classList.toggle('dark', isDarkMode)
         document.querySelector('.ai-tip-tap-editor')?.classList.toggle('dark', isDarkMode)
-    }, [isDarkMode])
+    }, [isDarkMode]);
 
     const toggleDarkMode = useCallback(() => setIsDarkMode(isDark => !isDark), [])
     const lightMode = useCallback(() => setIsDarkMode(false), [])
@@ -58,11 +61,12 @@ const useDarkmode = () => {
 }
 
 const WritingAssistantEditor = () => {
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const router = useRouter();
 
     const [isLoading, setIsLoading] = useState(false);
 
+    const [documents, setDocuments] = useState([]);
     const [content, setContent] = useState("");
 
     const { isDarkMode, darkMode, lightMode } = useDarkmode()
@@ -109,6 +113,26 @@ const WritingAssistantEditor = () => {
 
         dataFetch()
     }, [])
+
+    useEffect(() => {
+        if (status !== "authenticated") return;
+        getDocuments();
+      }, [status]);
+
+    const getDocuments = async () => {
+        const headers = {
+            "Authorization": `Bearer ${session?.accessToken}`,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        };
+
+        await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/tools/assistants/writing-assistant/documents`, { headers }).
+        then((response) => {
+            setDocuments(response.data.documents);
+        }).catch((error) => {
+            toast.error(error.message);
+        });
+    }
 
     const ydoc = useMemo(() => new YDoc(), [])
 
@@ -178,11 +202,19 @@ const WritingAssistantEditor = () => {
                     <div className="writing-assistant-editor feature-area-start rts-section-gapBottom bg-smooth-2">
                         <div className="container-fluid ai-tip-tap-editor">
                             <div className="row">
-                                <div className="col-12">
+                                <div className="col-lg-2 col-md-4 d-none d-md-block">
+                                    <div className="rbt-dashboard-sidebar">
+                                        <div className="writing-assistant-sidebar">
+                                            <WritingAssistantSidebar documents={documents} />
+                                        </div>
+                                    </div>
+                                </div>
+                                                        
+                                <div className="col-lg-10 col-md-8">
                                     <div className="rbt-dashboard-content">
                                         <div className="profile-details-box top-flashlight light-xl leftside overflow-hidden">
                                             {DarkModeSwitcher}
-                                            <BlockEditor hasCollab={hasCollab} ydoc={ydoc} provider={provider} />
+                                            <BlockEditor hasCollab={hasCollab} ydoc={ydoc} provider={provider} content />
                                         </div>
                                     </div>
                                 </div>

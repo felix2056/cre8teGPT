@@ -8,6 +8,29 @@ use Illuminate\Http\Request;
 
 class YoutubeChannelAnalyzerController extends Controller
 {
+    public function index(Request $request)
+    {
+        $youtubeChannelAnalyzer = YoutubeChannelAnalyzer::inRandomOrder()->get();
+
+        if ($request->has('limit')) {
+            $youtubeChannelAnalyzer = YoutubeChannelAnalyzer::inRandomOrder()->limit($request->limit)->get();
+        }
+
+        foreach ($youtubeChannelAnalyzer as $key => $value) {
+            $youtubeChannelAnalyzer[$key]->channel_details = json_decode($value->channel_details);
+            $youtubeChannelAnalyzer[$key]->video_titles = json_decode($value->video_titles);
+            $youtubeChannelAnalyzer[$key]->estimated_revenue = json_decode($value->estimated_revenue);
+            $youtubeChannelAnalyzer[$key]->demographics = json_decode($value->demographics);
+            $youtubeChannelAnalyzer[$key]->psychographics = json_decode($value->psychographics);
+            $youtubeChannelAnalyzer[$key]->online_behaviors = json_decode($value->online_behaviors);
+            $youtubeChannelAnalyzer[$key]->offline_behaviors = json_decode($value->offline_behaviors);
+        }
+
+        return response()->json([
+            'channels' => $youtubeChannelAnalyzer,
+        ]);
+    }
+
     public function show($channel_id)
     {
         $channel_id = str_replace('@', '', $channel_id);
@@ -20,7 +43,6 @@ class YoutubeChannelAnalyzerController extends Controller
         }
 
         return response()->json([
-            'message' => 'Youtube channel analyzer found',
             'channel_username' => $youtubeChannelAnalyzer->channel_username,
             'channel' => $youtubeChannelAnalyzer->channel_details,
             'videoTitles' => $youtubeChannelAnalyzer->video_titles,

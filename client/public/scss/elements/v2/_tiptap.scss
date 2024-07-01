@@ -124,20 +124,20 @@
     background-color: var(--color-white);
     padding: 0.1rem;
     border-radius: 0.5rem;
-  
+
     button {
       background-color: unset;
       padding: 0.275rem 0.425rem;
       border-radius: 0.3rem;
-  
+
       &:hover {
         background-color: var(--color-gray);
       }
-  
+
       &.is-active {
         background-color: var(--color-primary);
         color: var(--purple);
-  
+
         &:hover {
           color: var(--color-white);
         }
@@ -268,7 +268,115 @@
 }
 
 .ai-tip-tap-editor {
-  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, address, p, pre, blockquote, menu, ol, ul, table, hr {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6,
+  address,
+  p,
+  pre,
+  blockquote,
+  menu,
+  ol,
+  ul,
+  table,
+  hr {
     margin-bottom: unset;
+  }
+
+  .editor-left-side-panel {
+    background: var(--color-dark);
+    height: 100vh;
+    position: sticky;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    right: 0;
+    top: 80px;
+    border-left: 1px solid var(--color-border);
+
+    @media #{$smlg-device} {
+      z-index: 999;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .left-side-top {
+      padding: 20px;
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      background: var(--color-dark);
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 10px 20px;
+        position: relative;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 14px;
+        border-radius: 5px;
+        position: relative;
+        cursor: pointer;
+
+        span {
+          font-size: var(--font-size-b3);
+          line-height: var(--line-height-b3);
+        }
+
+        .icon {
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .left-side-bottom {
+      padding: 20px;
+
+      .title {
+        padding: 0 12px;
+        margin-bottom: 10px;
+      }
+    }
+
+    .dropdown-menu {
+      border-radius: var(--radius);
+      padding: 10px;
+      background-color: var(--color-blackest);
+      box-shadow: 2px 6px 20px 10px rgba(0, 0, 0, .5);
+      z-index: 9999;
+
+      .dropdown-item {
+        font-weight: 500;
+        padding: 5px 20px;
+        align-items: center;
+        color: var(--color-body);
+        border-radius: 3px;
+
+        &:hover {
+          background-color: var(--color-dark);
+          color: var(--color-primary);
+        }
+      }
+    }
+
+    .dropdown-toggle::after {
+      content: none;
+    }
   }
 }

@@ -1,4 +1,21 @@
 /* Application */
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--color-primary);
+}
+
+*::-webkit-scrollbar-thumb {
+    background: var(--color-secondary);
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-alt);
+}
+
 button[disabled],
 input[disabled] {
     cursor: not-allowed !important;
@@ -10,6 +27,18 @@ input[disabled] {
 
 .h-70vh {
     height: 70vh;
+}
+
+.h-80vh {
+    height: 80vh;
+}
+
+.h-90vh {
+    height: 90vh;
+}
+
+.h-100vh {
+    height: 100vh;
 }
 
 .h-450px {

@@ -20,12 +20,16 @@ const TextGenerator = () => {
   const { data: session, status } = useSession();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState(null)
 
   const [assistant, setAssistant] = useState([]);
   const [thread, setThread] = useState([]);
   const [messages, setMessages] = useState([]);
+
+  const [prompt, setPrompt] = useState("");
+  const [file, setFile] = useState(null);
   
   useEffect(() => {
     const cards = document.querySelectorAll(".bg-flashlight");
@@ -39,7 +43,14 @@ const TextGenerator = () => {
         bgflashlight.style.setProperty("--y", y + "px");
       };
     });
+
+    sal();
   }, []);
+
+  useEffect(() => {
+    const query = router.query.q;
+    if (query && prompt.trim() === "") setPrompt(query.replace(/\+/g, " "));
+  }, [router.query.q]);
 
   useEffect(() => {
     if (status !== "authenticated") return;
@@ -68,7 +79,7 @@ const TextGenerator = () => {
     } catch (error) {
       toast.error(error.message);
     }
-  }
+  };
 
   const getThread = async () => {
     try {
@@ -91,7 +102,7 @@ const TextGenerator = () => {
       setIsLoading(false);
       toast.error(error.message);
     }
-  }
+  };
 
   const createAssistant = async () => {
     const parameters = {
@@ -108,7 +119,7 @@ const TextGenerator = () => {
     } catch (error) {
       toast.error(error.message);
     }
-  }
+  };
 
   const saveAssistant = async (data) => {
     // save assistant and thread in database
@@ -127,32 +138,51 @@ const TextGenerator = () => {
     }).catch((error) => {
         toast.error(error.message);
     });
-  }
+  };
+
+  const recordVoice = () => {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 5;
+    recognition.continuous = false;
+
+    recognition.start();
+    setIsRecording(true);
+
+    const audio = new Audio("/audio/blip.mp3");
+    audio.play();
+
+    recognition.onresult = (event) => {
+      const speechToText = event.results[0][0].transcript;
+      setPrompt(speechToText);
+    };
+
+    recognition.onspeechend = () => {
+      recognition.stop();
+      setIsRecording(false);
+
+      const audio = new Audio("/audio/stop.mp3");
+      audio.play();
+    };
+
+    recognition.onerror = (event) => {
+      setIsRecording(false);
+      console.error("Speech recognition error detected: " + event.error);
+
+      const audio = new Audio("/audio/stop.mp3");
+      audio.play();
+    };
+  };
 
   const onSubmit = async (event) => {
     event.preventDefault();
     
-    const thread_id = router.query.thread_id;
-    if (!thread_id) {
-      toast.error("Something went wrong. We could not validate this thread.", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      return;
-    }
-    
-    const formData = new FormData(event.target);
     const data = {
-      thread_id: thread_id,
+      thread_id: router.query.thread_id || null,
       assistant: "Text Generator",
-      message: formData.get("message"),
-      file: formData.get("file"),
+      message: prompt,
+      file: file,
     };
 
     try {
@@ -204,7 +234,8 @@ const TextGenerator = () => {
       }
 
       // empty the form
-      event.target.reset();
+      setPrompt("");
+      setFile(null);
 
       // push the message to the chat
       setMessages((prevMessages) => [
@@ -239,28 +270,40 @@ const TextGenerator = () => {
       if (response.data) {
         // push the assistant response
         setMessages((prevMessages) => {
-          const newMessages = [...prevMessages];
           newMessages.pop();
+          const newMessages = [...prevMessages];
           newMessages.pop();
           newMessages.push(response.data.messages.data[0]);
           return newMessages;
         });
-
         setIsGenerating(false)
 
+
         setTimeout(() => {
-          sal();
           scrollToBottom();
+          sal();
         }, 1000);
-        
-        console.log(response.data);
+
+        // save thread to db if needed
+        if (response.data.save_thread) {
+          const headers = {
+            "Authorization": `Bearer ${session?.accessToken}`,
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          };
+
+          await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/threads/create`, { assistant_id: response.data.assistant.id, thread_id: response.data.thread.id, title: data.message }, { headers });
+
+          // redirect to thread
+          router.push(`/dashboard/chat/${response.data.thread.id}`, null, { shallow: true });
+        }
       }
     } catch (error) {
       setIsGenerating(false)
       setError(error.message)
       console.error(error)
     }
-  }
+  };
 
   const convertMessageToHTML = (message) => {
     const lines = message.split("\n\n"); // Split text by double newlines
@@ -300,10 +343,12 @@ const TextGenerator = () => {
     }, 1000);
 
     return html;
-  }
+  };
 
   return (
     <>
+      <ToastContainer />
+
       <div className="rbt-dashboard-content">
         <div className="content-page">
           {isLoading && <TextSkeleton number={5} />}
@@ -402,7 +447,21 @@ const TextGenerator = () => {
         <div className="rbt-static-bar">
           <Tooltip id="my-tooltip" className="custom-tooltip tooltip-inner" />
           <form onSubmit={onSubmit} className="new-chat-form border-gradient">
-            <textarea name="message" rows="1" placeholder="Send a message..." onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { onSubmit(e) } }}></textarea>
+            <textarea 
+              name="message" 
+              rows="1" 
+              placeholder="Send a message..."
+              defaultValue={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              onKeyDown={(e) => { 
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onSubmit(e);
+                } 
+              }}
+            ></textarea>
+
             <div className="left-icons">
               <div title="Cre8teGPT" className="form-icon icon-gpt">
                 <i className="feather-aperture"></i>
@@ -415,16 +474,30 @@ const TextGenerator = () => {
                 data-tooltip-id="my-tooltip"
                 data-tooltip-content="Choose File"
               >
-                <input type="file" className="input-file" name="file" multiple />
+                <input type="file" className="input-file" name="file" onChange={(e) => setFile(e.target.files[0])} />
                 <i className="feather-plus-circle"></i>
               </div>
+              
+              {isRecording ? (
+              <div
+                className="form-icon icon-mic"
+                data-tooltip-id="my-tooltip"
+                data-tooltip-content="Recording..."
+              >
+                <i className="feather-mic"></i>
+              </div>
+              ) : (
               <a
+                href="javascript:void(0)"
                 className="form-icon icon-mic"
                 data-tooltip-id="my-tooltip"
                 data-tooltip-content="Voice Search"
+                onClick={() => recordVoice()}
               >
                 <i className="feather-mic"></i>
               </a>
+              )}
+
               <button
                 type="submit"
                 className="form-icon icon-send"

@@ -35,6 +35,38 @@ class YoutubeScriptAssistantController extends Controller
     {
         if ($request->isMethod('post')) {
             $request->validate([
+                'framing' => 'required|array',
+            ]);
+
+            $youtubeScriptAssistant = YoutubeScriptAssistant::find($id);
+            if (!$youtubeScriptAssistant) return response()->json([
+                'message' => 'Youtube script assistant not found'
+            ], 404);
+
+            $youtubeScriptAssistant->update([
+                'framing' => json_encode($request->framing),
+            ]);
+
+            return response()->json([
+                'message' => 'Youtube script assistant updated',
+                'youtubeScriptAssistant' => $youtubeScriptAssistant,
+            ]);
+        }
+        
+        $youtubeScriptAssistant = YoutubeScriptAssistant::find($id);
+        if (!$youtubeScriptAssistant) return response()->json([
+            'message' => 'Youtube script assistant not found'
+        ], 404);
+
+        return response()->json([
+            'framing' => $youtubeScriptAssistant->framing ?? [],
+        ]);
+    }
+
+    public function titles(Request $request, $id)
+    {
+        if ($request->isMethod('post')) {
+            $request->validate([
                 'titles' => 'required|array',
             ]);
 
@@ -44,7 +76,7 @@ class YoutubeScriptAssistantController extends Controller
             ], 404);
 
             $youtubeScriptAssistant->update([
-                'titles' => json_encode($request->titles),
+                'titles' => $request->titles,
             ]);
 
             return response()->json([

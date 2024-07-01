@@ -741,7 +741,7 @@
 }
 
 .ProseMirror>* {
-    margin-left: auto;
+    margin-left: 10rem;
     margin-right: auto;
     max-width: 55em
 }

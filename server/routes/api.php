@@ -37,10 +37,28 @@ Route::prefix('tools')->group(function () {
     });
 
     Route::prefix('assistants')->group(function () {
+        Route::prefix('writing-assistant')->group(function () {
+            Route::group(['middleware' => 'auth:sanctum'], function () {
+                Route::get('documents', 'Assistants\WritingAssistantController@documents');
+                Route::get('documents/{document_id}/show', 'Assistants\WritingAssistantController@showDocument');
+                Route::post('documents/create', 'Assistants\WritingAssistantController@storeDocument');
+
+                Route::put('documents/{document_id}/update', 'Assistants\WritingAssistantController@updateDocument');
+                Route::put('documents/{document_id}/rename', 'Assistants\WritingAssistantController@updateDocumentTitle');
+                Route::put('documents/{document_id}/content', 'Assistants\WritingAssistantController@updateDocumentContent');
+                Route::put('documents/{document_id}/visibility', 'Assistants\WritingAssistantController@updateDocumentVisibility');
+                Route::put('documents/{document_id}/password', 'Assistants\WritingAssistantController@updateDocumentPassword');
+                Route::put('documents/{document_id}/pin', 'Assistants\WritingAssistantController@pinDocument');
+
+                Route::delete('documents/{document_id}/delete', 'Assistants\WritingAssistantController@destroyDocument');
+            });
+        });
+
         Route::prefix('youtube-script-assistant')->group(function () {
             Route::get('', 'Assistants\YoutubeScriptAssistantController@index');
             Route::get('{script_id}/show', 'Assistants\YoutubeScriptAssistantController@show');
             Route::match(['get', 'post'], '{script_id}/framing', 'Assistants\YoutubeScriptAssistantController@framing');
+            Route::match(['get', 'post'], '{script_id}/titles', 'Assistants\YoutubeScriptAssistantController@titles');
 
             Route::group(['middleware' => 'auth:sanctum'], function () {
                 Route::post('save', 'Assistants\YoutubeScriptAssistantController@store');

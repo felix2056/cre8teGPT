@@ -14,12 +14,12 @@ import AIToolsItem from "./AIToolsItem";
 
 const AITools = () => {
     let [categories, setCategories] = useState([]);
-    
+
     const generators = [
         {
             name: "AI Chat",
             description: "Running GPT-4o, our AI chat tool can help you generate human-like text responses to any prompt or question you provide.",
-            slug: "/dashboard/chat",
+            slug: "/tools/generators/ai-chat",
             icon: "/images/generator-icon/text_line.png",
             badge: "",
         },
@@ -36,13 +36,6 @@ const AITools = () => {
             slug: "/tools/generators/image-generator",
             icon: "/images/generator-icon/photo_line.png",
             badge: "new",
-        },
-        {
-            name: "Video Generator",
-            description: "Quickly create engaging videos for your business, blog, or social media with our AI-powered video generator.",
-            slug: "/dashboard/video-generator",
-            icon: "/images/generator-icon/video-camera_line.png",
-            badge: "coming",
         },
         {
             name: "Article Generator",
@@ -73,39 +66,11 @@ const AITools = () => {
             badge: "",
         },
         {
-            name: "Website Generator",
-            description: "Create a professional website in minutes with our AI-powered website generator. No coding or design skills required.",
-            slug: "/tools/generators/website-generator",
-            icon: "/images/generator-icon/website-design_line.png",
-            badge: "coming",
-        },
-        {
-            name: "Logo Generator",
-            description: "Design a unique logo for your brand or business with our AI-powered logo generator.",
-            slug: "/tools/generators/logo-generator",
-            icon: "/images/logo/favicon.png",
-            badge: "coming",
-        },
-        {
             name: "Recipe Generator",
             description: "Our recipe generator suggests delicious dishes based on your available ingredients, helping you cook with what you have at home.",
             slug: "/tools/generators/recipe-generator",
             icon: "/images/generator-icon/recipe_line.png",
             badge: "",
-        },
-        {
-            name: "Code Generator",
-            description: "Generate code snippets, scripts, or templates for your programming projects with our AI-powered code generator.",
-            slug: "/tools/generators/code-generator",
-            icon: "/images/generator-icon/code-editor_line.png",
-            badge: "coming",
-        },
-        {
-            name: "XML Sitemap Generator",
-            description: "Create an XML sitemap for your website to improve search engine optimization (SEO) with our AI-powered sitemap generator.",
-            slug: "/tools/generators/xml-sitemap-generator",
-            icon: "/images/generator-icon/xml-sitemap_line.png",
-            badge: "coming",
         },
         {
             name: "Text to speech",
@@ -141,7 +106,42 @@ const AITools = () => {
             slug: "/tools/generators/youtube-thumbnail-generator",
             icon: "/images/generator-icon/youtube-thumbnail-generator_line.png",
             badge: "coming",
-        }
+        },
+        {
+            name: "Code Generator",
+            description: "Generate code snippets, scripts, or templates for your programming projects with our AI-powered code generator.",
+            slug: "/tools/generators/code-generator",
+            icon: "/images/generator-icon/code-editor_line.png",
+            badge: "coming",
+        },
+        {
+            name: "Website Generator",
+            description: "Create a professional website in minutes with our AI-powered website generator. No coding or design skills required.",
+            slug: "/tools/generators/website-generator",
+            icon: "/images/generator-icon/website-design_line.png",
+            badge: "coming",
+        },
+        {
+            name: "XML Sitemap Generator",
+            description: "Create an XML sitemap for your website to improve search engine optimization (SEO) with our AI-powered sitemap generator.",
+            slug: "/tools/generators/xml-sitemap-generator",
+            icon: "/images/generator-icon/xml-sitemap_line.png",
+            badge: "coming",
+        },
+        {
+            name: "Logo Generator",
+            description: "Design a unique logo for your brand or business with our AI-powered logo generator.",
+            slug: "/tools/generators/logo-generator",
+            icon: "/images/logo/favicon.png",
+            badge: "coming",
+        },
+        {
+            name: "Video Generator",
+            description: "Quickly create engaging videos for your business, blog, or social media with our AI-powered video generator.",
+            slug: "/dashboard/video-generator",
+            icon: "/images/generator-icon/video-camera_line.png",
+            badge: "coming",
+        },
     ];
 
     const editors = [
@@ -163,18 +163,11 @@ const AITools = () => {
 
     const assistants = [
         {
-            name: "Research Assistant",
-            description: "Get help with your research projects, papers, or articles with our AI-powered research assistant.",
-            slug: "/tools/assistants/research-assistant",
-            icon: "/images/assistant-icon/research-assistant_line.png",
-            badge: "coming",
-        },
-        {
             name: "Writing Assistant",
             description: "Improve your writing with our AI-powered writing assistant. Get suggestions for grammar, style, and more.",
             slug: "/tools/assistants/writing-assistant",
             icon: "/images/assistant-icon/writing-assistant_line.png",
-            badge: "coming",
+            badge: "",
         },
         {
             name: "YouTube Video Assistant",
@@ -189,7 +182,14 @@ const AITools = () => {
             slug: "/tools/assistants/youtube-script-assistant",
             icon: "/images/assistant-icon/youtube-script_line.png",
             badge: "",
-        }
+        },
+        {
+            name: "Research Assistant",
+            description: "Get help with your research projects, papers, or articles with our AI-powered research assistant.",
+            slug: "/tools/assistants/research-assistant",
+            icon: "/images/assistant-icon/research-assistant_line.png",
+            badge: "coming",
+        },
     ];
 
     useEffect(() => {
@@ -260,39 +260,39 @@ const AITools = () => {
                         <div className="container rts-section-gap">
                             <h3 className="title text-capitalize w-600 mb--20">Content Generators</h3>
                             <span className="theme-gradient">These tools generate various types of content, such as text, images, videos, and more, based on user input or predefined parameters. They are designed to assist users in quickly creating high-quality and relevant content for a variety of purposes, including marketing, communication, and creative projects.</span>
-                            
+
                             <div className="separator-animated animated-true mt--50 mb--50"></div>
-                            
+
                             {[...Array(Math.ceil(generators.length / 4))].map((_, index) => (
-                            <div className="genarator-section mb-4" key={index}>
-                                <AIToolsItem key={index} AIToolsItem={generators.slice(index * 4, (index + 1) * 4)} />
-                            </div>
+                                <div className="genarator-section mb-4" key={index}>
+                                    <AIToolsItem key={index} AIToolsItem={generators.slice(index * 4, (index + 1) * 4)} />
+                                </div>
                             ))}
                         </div>
 
                         <div className="container rts-section-gap">
                             <h3 className="title text-capitalize w-600 mb--20">Content Editors</h3>
                             <span className="theme-gradient">These tools allow users to modify and enhance existing content, such as photos, videos, and artworks. They provide features like cropping, resizing, color correction, and special effects to help users achieve the desired aesthetic and visual impact.</span>
-                            
+
                             <div className="separator-animated animated-true mt--50 mb--50"></div>
-                            
+
                             {[...Array(Math.ceil(editors.length / 4))].map((_, index) => (
-                            <div className="genarator-section mb-4" key={index}>
-                                <AIToolsItem key={index} AIToolsItem={editors.slice(index * 4, (index + 1) * 4)} />
-                            </div>
+                                <div className="genarator-section mb-4" key={index}>
+                                    <AIToolsItem key={index} AIToolsItem={editors.slice(index * 4, (index + 1) * 4)} />
+                                </div>
                             ))}
                         </div>
 
                         <div className="container rts-section-gap">
                             <h3 className="title text-capitalize w-600 mb--20">Content Assistants</h3>
                             <span className="theme-gradient">These tools provide suggestions, recommendations, and guidance to help users create better content. They may include features like grammar and spell checkers, keyword suggestions, and content templates. By offering assistance and feedback, these tools help users improve the quality and effectiveness of their content.</span>
-                            
+
                             <div className="separator-animated animated-true mt--50 mb--50"></div>
-                            
+
                             {[...Array(Math.ceil(assistants.length / 4))].map((_, index) => (
-                            <div className="genarator-section mb-4" key={index}>
-                                <AIToolsItem key={index} AIToolsItem={assistants.slice(index * 4, (index + 1) * 4)} />
-                            </div>
+                                <div className="genarator-section mb-4" key={index}>
+                                    <AIToolsItem key={index} AIToolsItem={assistants.slice(index * 4, (index + 1) * 4)} />
+                                </div>
                             ))}
                         </div>
                     </div>
